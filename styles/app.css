@@ -604,6 +604,7 @@ shop-pay-button {
       .in_list_title{
         width: 15% !important;
         font-size: 14px !important;
+        line-height: 14px !important;
       }
       .in_list input,
       .in_list textarea,
@@ -793,16 +794,13 @@ shop-pay-button {
     align-items: center;
     padding: 8px 0;
   }
-  .information_in .in_list:nth-child(10){
-    margin: -2px 0;
-    padding: 0;
-  }
   .font_weight_b{
     font-weight: bold;
   }
   .in_list .in_list_title{
     width: 20%;
     font-size: 12px;
+    line-height: 12px;
   }
   .in_list .in_list_title i{
     font-style: normal;
