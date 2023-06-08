@@ -526,6 +526,7 @@ export default function Product() {
                   dangerouslySetInnerHTML={{ __html: descriptionHtml }}
                 />
               )}
+              <img src={`https://platform.antdiy.vip/static/image/${LText.deliveryProcess}`} />
               {/* <div className="grid gap-4 py-4">
                 {descriptionHtml && (
                   <ProductDetail

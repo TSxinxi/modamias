@@ -3,7 +3,7 @@ import { useRef, useMemo, useEffect, useState } from 'react';
 import { Money } from '@shopify/hydrogen';
 import { Text } from '~/components';
 import fetch from '~/fetch/axios';
-import { getShopAddress, getLanguage,getDirection } from '~/lib/P_Variable';
+import { getShopAddress, getLanguage, getDirection } from '~/lib/P_Variable';
 const LText = getLanguage()
 const addressList = LText.addressList
 
@@ -145,15 +145,17 @@ export function Information({ product }) {
             <span>*City</span>
             <p>{LText.city}</p>
           </div>
-          <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
-            {
-              addressList.filter(i => i.value === state)[0].children.map((item, index) => {
-                return (
-                  <option value={item.value} key={index}>- - {item.value ? item.value + '/' : ''}{item.name}- -</option>
-                )
-              })
-            }
-          </select>
+          {
+            LText.type === 'SA' ? <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              {
+                addressList.filter(i => i.value === state)[0].children.map((item, index) => {
+                  return (
+                    <option value={item.value} key={index}>- - {item.value ? item.value + '/' : ''}{item.name}- -</option>
+                  )
+                })
+              }
+            </select> : <input type="text" placeholder={LText.city} value={city} onChange={(e) => { setCity(e.target.value) }} />
+          }
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
@@ -212,7 +214,7 @@ export function Information({ product }) {
                 email: email,
                 phone: phone,
                 whatsapp: whatsapp,
-                country: 'Saudi Arabia',
+                country: LText.country,
                 state: state,
                 city: city,
                 area: area,

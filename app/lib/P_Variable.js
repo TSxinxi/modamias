@@ -33,6 +33,8 @@ export function getLanguage() {
   let language = {
     EN: {
       type: 'EN',
+      country: 'EN',
+      deliveryProcess: 'deliveryProcess1.jpg',
       buy: 'Buy now',
       comTit: 'Customer Reviews',
       write: 'Write a review',
@@ -939,6 +941,8 @@ export function getLanguage() {
     },
     SA: {
       type: 'SA',
+      country: 'Saudi Arabia',
+      deliveryProcess: 'deliveryProcess2.png',
       buy: 'اشتر الآن',
       comTit: 'تقييمات العملاء',
       write: 'إلغاء التقييم',
@@ -1848,6 +1852,8 @@ export function getLanguage() {
     },
     RO: {
       type: 'RO',
+      country: 'Romania',
+      deliveryProcess: 'deliveryProcess1.jpg',
       buy: 'cumpără acum',
       comTit: 'Opinii clienți',
       write: 'anulează evaluarea',
@@ -1933,826 +1939,132 @@ export function getLanguage() {
       validnum: 'Introduceți un număr de telefon valid',
       addressList: [
         {
-          name: '(province) select',
-          value: '',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-          ],
-        },
-        {
-          name: 'Al-Baha',
-          value: 'Al Baha Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'Adham',
-              value: 'Adham',
-            },
-            {
-              name: 'agate',
-              value: 'Al-Aqiq',
-            },
-            {
-              name: 'table',
-              value: 'Atawleh',
-            },
-            {
-              name: 'Al-Baha',
-              value: 'Albahah',
-            },
-            {
-              name: 'Baljurashi',
-              value: 'Baljurashi',
-            },
-            {
-              name: 'Qilwa',
-              value: 'Qilwah',
-            },
-            {
-              name: 'Almandaq',
-              value: 'Al Mandaq',
-            },
-            {
-              name: 'Makhwah',
-              value: 'Almakhwah',
-            },
-            {
-              name: 'Al Muzaylif',
-              value: 'Almuzaylif',
-            },
-          ],
-        },
-        {
-          name: 'Madinah',
-          value: 'Madinah Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'Badr',
-              value: 'Badr',
-            },
-            {
-              name: 'Hanakia',
-              value: 'Al Henakiyah',
-            },
-            {
-              name: 'Khaybar',
-              value: 'Khaybar',
-            },
-            {
-              name: 'City',
-              value: 'Madinah',
-            },
-            {
-              name: 'cradle of gold',
-              value: 'Mahd adh Dhahab',
-            },
-            {
-              name: 'Al-Ula',
-              value: 'Al Ula',
-            },
-            {
-              name: 'Yanbu',
-              value: 'Yanbu',
-            },
-          ],
-        },
-        {
-          name: 'Riyadh',
-          value: 'Riyadh Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'afif',
-              value: 'Afif',
-            },
-            {
-              name: 'Aflaj',
-              value: 'AlAflaj',
-            },
-            {
-              name: 'Al Ghat',
-              value: 'Al Ghat',
-            },
-            {
-              name: 'Muzahimiyah',
-              value: 'Al Muzahimiyah',
-            },
-            {
-              name: 'artawiyah',
-              value: 'Al Artawiyah',
-            },
-            {
-              name: 'Dawadmi',
-              value: 'Dawadmi',
-            },
-            {
-              name: 'Diriyah',
-              value: 'Ad Diriyah',
-            },
-            {
-              name: 'Dharma',
-              value: 'Dhurma',
-            },
-            {
-              name: 'Al Dilam',
-              value: 'AdDilam',
-            },
-            {
-              name: 'fire',
-              value: 'Al Hariq',
-            },
-            {
-              name: 'Hotat Bani Tamim',
-              value: 'Howtat Bani Tamim',
-            },
-            {
-              name: 'Huraymila',
-              value: 'Huraymila',
-            },
-            {
-              name: 'Hotat Sudair',
-              value: 'Hautat Sudair',
-            },
-            {
-              name: 'Jingle',
-              value: 'Jalajil',
-            },
-            {
-              name: 'output',
-              value: 'Kharj',
-            },
-            {
-              name: 'bundled',
-              value: 'Al Majmaah',
-            },
-            {
-              name: 'times',
-              value: 'Marat',
-            },
-            {
-              name: 'eyelet',
-              value: 'Al Uyaynah',
-            },
-            {
-              name: 'reed',
-              value: 'Al Qasab',
-            },
-            {
-              name: 'Quway',
-              value: 'Al Quwaiiyah',
-            },
-            {
-              name: 'Ramah',
-              value: 'Ruma',
-            },
-            {
-              name: 'Riyadh',
-              value: 'Riyadh',
-            },
-            {
-              name: 'Rawda Sudair',
-              value: 'Raudat Sudair',
-            },
-            {
-              name: 'Sajer',
-              value: 'Sajir',
-            },
-            {
-              name: 'Salboukh',
-              value: 'Salbukh',
-            },
-            {
-              name: 'blonde',
-              value: 'Shaqra',
-            },
-            {
-              name: 'descendent',
-              value: 'As Sulayyil',
-            },
-            {
-              name: 'Tadq',
-              value: 'Thadiq',
-            },
-            {
-              name: 'Tamir',
-              value: 'Tumair',
-            },
-            {
-              name: 'Wadi Al-Dawasir',
-              value: 'Wadi adDawasir',
-            },
-            {
-              name: 'Al Zulfi',
-              value: 'Az Zulfi',
-            },
-          ],
-        },
-        {
-          name: 'Eastern',
-          value: 'Eastern Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'Abqaiq',
-              value: 'Buqayq',
-            },
-            {
-              name: 'Ain Dar',
-              value: 'New Ain Dar',
-            },
-            {
-              name: 'Al Ahsa',
-              value: 'Hassa',
-            },
-            {
-              name: 'about you',
-              value: 'Anak',
-            },
-            {
-              name: 'Batha',
-              value: 'Al Batha',
-            },
-            {
-              name: 'Dammam',
-              value: 'Dammam',
-            },
-            {
-              name: 'Dhahran',
-              value: 'Dahran',
-            },
-            {
-              name: 'Hafar Al-Batin',
-              value: 'Hafar Al Batin',
-            },
-            {
-              name: 'harad',
-              value: 'Haradh',
-            },
-            {
-              name: 'Hawiyah',
-              value: 'Hawiya',
-            },
-            {
-              name: 'Al Hofuf',
-              value: 'Hofuf',
-            },
-            {
-              name: 'Jubail',
-              value: 'Jubail',
-            },
-            {
-              name: 'Al-Khafji',
-              value: 'Khafji',
-            },
-            {
-              name: 'news',
-              value: 'Khobar',
-            },
-            {
-              name: 'Mubaraz',
-              value: 'Al Mubarraz',
-            },
-            {
-              name: 'Miliga',
-              value: 'Mulayjah',
-            },
-            {
-              name: 'Nairyah',
-              value: 'Nairyah',
-            },
-            {
-              name: 'Ottoman',
-              value: 'Uthmaniyah',
-            },
-            {
-              name: 'continent',
-              value: 'Al Qarah',
-            },
-            {
-              name: 'Upper Village',
-              value: 'Qaryat Al Ulya',
-            },
-            {
-              name: 'Qatif',
-              value: 'Qatif',
-            },
-            {
-              name: 'Qaisumah',
-              value: 'Al Qaisumah',
-            },
-            {
-              name: 'Ras Al-Khair',
-              value: 'Ras Al Khair',
-            },
-            {
-              name: 'Ras Tanura',
-              value: 'Ras Tanura',
-            },
-            {
-              name: 'Safaniya',
-              value: 'As Saffaniyah',
-            },
-            {
-              name: 'Safwa',
-              value: 'Safwa',
-            },
-            {
-              name: 'Salwa',
-              value: 'Salwa',
-            },
-            {
-              name: 'Assarar',
-              value: 'As Sarrar',
-            },
-            {
-              name: 'Sayhat',
-              value: 'Saihat',
-            },
-            {
-              name: 'Tarot',
-              value: 'Tarout',
-            },
-            {
-              name: 'Udhailiyah',
-              value: 'Udhailiyah',
-            },
-            {
-              name: 'eyes',
-              value: 'Al Uyun',
-            },
-          ],
-        },
-        {
-          name: 'Hail',
-          value: 'Hail Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'wall',
-              value: 'Al Hait',
-            },
-            {
-              name: 'shamli',
-              value: 'Ash Shamli',
-            },
-            {
-              name: 'spot',
-              value: 'Baqaa',
-            },
-            {
-              name: 'Hail',
-              value: 'Hail',
-            },
-          ],
-        },
-        {
-          name: 'Makkah',
-          value: 'Makkah Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'Alhada',
-              value: 'Alhada',
-            },
-            {
-              name: 'depth',
-              value: 'amaq',
-            },
-            {
-              name: 'Asfan',
-              value: 'Asfan',
-            },
-            {
-              name: 'Bahra',
-              value: 'Bahrah',
-            },
-            {
-              name: 'Ponds',
-              value: 'Al Birk',
-            },
-            {
-              name: 'Dhaban',
-              value: 'Dahban',
-            },
-            {
-              name: 'scarab',
-              value: "Al Ju'ranah",
-            },
-            {
-              name: 'Jeddah',
-              value: 'Jeddah',
-            },
-            {
-              name: 'Jumum',
-              value: 'Al Jumum',
-            },
-            {
-              name: 'Khalis',
-              value: 'Khulais',
-            },
-            {
-              name: 'The Khurma',
-              value: 'Al Khurma',
-            },
-            {
-              name: 'allith',
-              value: 'Al Lith',
-            },
-            {
-              name: 'Makkah',
-              value: 'Makkah',
-            },
-            {
-              name: 'Mastoura',
-              value: 'Mastorah',
-            },
-            {
-              name: 'Nimran',
-              value: 'Nimran',
-            },
-            {
-              name: 'Al Qunfudhah',
-              value: 'Al Qunfudhah',
-            },
-            {
-              name: 'Rabigh',
-              value: 'Rabigh',
-            },
-            {
-              name: 'ranya',
-              value: 'Raniah',
-            },
-            {
-              name: 'Taif',
-              value: 'Taif',
-            },
-            {
-              name: 'thul',
-              value: 'Thuwal',
-            },
-            {
-              name: 'soil',
-              value: 'Turbah',
-            },
-            {
-              name: 'Nuwariya',
-              value: 'An Nawwariyyah',
-            },
-          ],
-        },
-        {
-          name: 'Qassim',
-          value: 'Al Qassim Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'Dulaimi',
-              value: 'Al Dulaymiyah',
-            },
-            {
-              name: 'Al-Rass',
-              value: 'Ar Rass',
-            },
-            {
-              name: 'Ain Ibn Fuhaid',
-              value: 'Ayn Ibn Fuhayd',
-            },
-            {
-              name: 'Badi',
-              value: 'Al Badaya',
-            },
-            {
-              name: 'Bukayriyah',
-              value: 'Al Bukayriyah',
-            },
-            {
-              name: 'Buraydah',
-              value: 'Buraydah',
-            },
-            {
-              name: 'Dhariya',
-              value: 'Dariyah',
-            },
-            {
-              name: 'guilty',
-              value: 'Al Mithnab',
-            },
-            {
-              name: 'Unayzah',
-              value: 'Unayzah',
-            },
-            {
-              name: 'Riyad Al-Khubra',
-              value: 'Riyadh Al Khabra',
-            },
-            {
-              name: 'Tannomah',
-              value: 'Tanumah',
-            },
-            {
-              name: 'Uqlat Al-Suqur',
-              value: 'Uglat Asugour',
-            },
-          ],
-        },
-        {
-          name: 'The Hollow',
-          value: 'Al Jouf Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'Abu Ajram',
-              value: 'Abu Ajram',
-            },
-            {
-              name: 'The Hollow',
-              value: 'Al Jouf',
-            },
-            {
-              name: 'Dumat al-Jandal',
-              value: 'Dumah Al Jandal',
-            },
-            {
-              name: 'modern',
-              value: 'Al Hadithah',
-            },
-            {
-              name: "Amar's case",
-              value: 'Halat Ammar',
-            },
-            {
-              name: 'Qurayyat',
-              value: 'Al Qurayyat',
-            },
-            {
-              name: 'Sakaka',
-              value: 'Sakaka',
-            },
-            {
-              name: 'Tabarjal',
-              value: 'Tabarjal',
-            },
-          ],
-        },
-        {
-          name: 'Asir',
-          value: 'Asir Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'Abha',
-              value: 'Abha',
-            },
-            {
-              name: 'Ahad Rufaida',
-              value: 'Ahad Rafidah',
-            },
-            {
-              name: 'Bilsamar',
-              value: 'Billasmar',
-            },
-            {
-              name: 'Bariq',
-              value: 'Bariq',
-            },
-            {
-              name: 'Bishah',
-              value: 'Bisha',
-            },
-            {
-              name: 'Dhahran al-Janoub',
-              value: 'Dahran Al Janub',
-            },
-            {
-              name: 'critical',
-              value: 'Harajah',
-            },
-            {
-              name: 'Khamis Mushait',
-              value: 'Khamis Mushait',
-            },
-            {
-              name: 'Almajardah',
-              value: 'Almajaridah',
-            },
-            {
-              name: 'Muhayil Aseer',
-              value: 'Muhayil',
-            },
-            {
-              name: 'Al-Namas',
-              value: 'Al Namas',
-            },
-            {
-              name: 'Brightest Men',
-              value: 'Ragal Almaa',
-            },
-            {
-              name: 'Sabbath of the High',
-              value: 'Sabt Al Alayah',
-            },
-            {
-              name: 'Sarat Obeida',
-              value: 'Sarat Abidah',
-            },
-            {
-              name: 'Tanuma',
-              value: 'Tanomah',
-            },
-            {
-              name: 'triangulate',
-              value: 'Tathleeth',
-            },
-            {
-              name: 'The Two Valleys',
-              value: 'Al-Wadeen',
-            },
-            {
-              name: 'Wadi Ibn Hashbel',
-              value: 'Wadi Ibn Hashbal',
-            },
-          ],
-        },
-        {
-          name: 'Jazan',
-          value: 'Jizan Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'Abu Arish',
-              value: 'Abu Arish',
-            },
-            {
-              name: 'Aldayer',
-              value: 'Addayer',
-            },
-            {
-              name: 'Sun Theater',
-              value: 'Ahad Al Masarihah',
-            },
-            {
-              name: 'Keel',
-              value: 'Al-Aridah',
-            },
-            {
-              name: 'bish',
-              value: 'Baish',
-            },
-            {
-              name: 'ligature',
-              value: 'Damad',
-            },
-            {
-              name: 'The Trail',
-              value: 'Ad Darb',
-            },
-            {
-              name: 'Knights',
-              value: 'Farasan',
-            },
-            {
-              name: 'Jazan',
-              value: 'Jizan',
-            },
-            {
-              name: 'corpus',
-              value: 'Al Karbus',
-            },
-            {
-              name: 'boy',
-              value: 'Sabya',
-            },
-            {
-              name: 'Samta',
-              value: 'Samtah',
-            },
-          ],
-        },
-        {
-          name: 'Najran',
-          value: 'Najran Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'Najran',
-              value: 'Najran',
-            },
-            {
-              name: 'sharurah',
-              value: 'Sharorah',
-            },
-            {
-              name: 'Love Us',
-              value: 'Hubuna',
-            },
-            {
-              name: 'Thar',
-              value: 'Thar',
-            },
-            {
-              name: 'Yedma',
-              value: 'Yadamah',
-            },
-          ],
-        },
-        {
-          name: 'Northern Border',
-          value: 'Northern Border Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'arar',
-              value: 'Arar',
-            },
-            {
-              name: 'Rafha',
-              value: 'Rafah',
-            },
-            {
-              name: 'Tarif',
-              value: 'Turaif',
-            },
-          ],
-        },
-        {
-          name: 'Tabuk',
-          value: 'Tabuk Province',
-          children: [
-            {
-              name: '（City）select',
-              value: '',
-            },
-            {
-              name: 'Al-Bida',
-              value: 'Al Bad',
-            },
-            {
-              name: 'Daba',
-              value: 'Duba',
-            },
-            {
-              name: 'field',
-              value: 'Haql',
-            },
-            {
-              name: 'Tabuk',
-              value: 'Tabuk',
-            },
-            {
-              name: 'Taima',
-              value: 'Tayma',
-            },
-            {
-              name: 'trowel',
-              value: 'Umluj',
-            },
-            {
-              name: 'face',
-              value: 'Al-Wajh',
-            },
-          ],
-        },
-      ]
+          name: "Alba",
+          value: "AB"
+        }, {
+          name: "Arad",
+          value: "AR"
+        }, {
+          name: "Argeș",
+          value: "AG"
+        }, {
+          name: "Bacău",
+          value: "BC"
+        }, {
+          name: "Bihor",
+          value: "BH"
+        }, {
+          name: "Bistrița-Năsăud",
+          value: "BN"
+        }, {
+          name: "Botoșani",
+          value: "BT"
+        }, {
+          name: "Brăila",
+          value: "BR"
+        }, {
+          name: "Brașov",
+          value: "BV"
+        }, {
+          name: "București",
+          value: "B"
+        }, {
+          name: "Buzău",
+          value: "BZ"
+        }, {
+          name: "Caraș-Severin",
+          value: "CS"
+        }, {
+          name: "Cluj",
+          value: "CJ"
+        }, {
+          name: "Constanța",
+          value: "CT"
+        }, {
+          name: "Covasna",
+          value: "CV"
+        }, {
+          name: "Călărași",
+          value: "CL"
+        }, {
+          name: "Dolj",
+          value: "DJ"
+        }, {
+          name: "Dâmbovița",
+          value: "DB"
+        }, {
+          name: "Galați",
+          value: "GL"
+        }, {
+          name: "Giurgiu",
+          value: "GR"
+        }, {
+          name: "Gorj",
+          value: "GJ"
+        }, {
+          name: "Harghita",
+          value: "HR"
+        }, {
+          name: "Hunedoara",
+          value: "HD"
+        }, {
+          name: "Ialomița",
+          value: "IL"
+        }, {
+          name: "Iași",
+          value: "IS"
+        }, {
+          name: "Ilfov",
+          value: "IF"
+        }, {
+          name: "Maramureș",
+          value: "MM"
+        }, {
+          name: "Mehedinți",
+          value: "MH"
+        }, {
+          name: "Mureș",
+          value: "MS"
+        }, {
+          name: "Neamț",
+          value: "NT"
+        }, {
+          name: "Olt",
+          value: "OT"
+        }, {
+          name: "Prahova",
+          value: "PH"
+        }, {
+          name: "Sălaj",
+          value: "SJ"
+        }, {
+          name: "Satu Mare",
+          value: "SM"
+        }, {
+          name: "Sibiu",
+          value: "SB"
+        }, {
+          name: "Suceava",
+          value: "SV"
+        }, {
+          name: "Teleorman",
+          value: "TR"
+        }, {
+          name: "Timiș",
+          value: "TM"
+        }, {
+          name: "Tulcea",
+          value: "TL"
+        }, {
+          name: "Vâlcea",
+          value: "VL"
+        }, {
+          name: "Vaslui",
+          value: "VS"
+        }, {
+          name: "Vrancea",
+          value: "VN"
+        }]
     }
   }
   return language[LType];
