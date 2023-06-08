@@ -1923,7 +1923,7 @@ export function getLanguage() {
       district: 'Vă rugăm să selectați districtul dvs.',
       city: 'Oraș',
       selectCity: 'Vă rugăm să vă selectați orașul',
-      zone: 'Zonă',
+      zone: 'Regiune',
       zonePle: 'Exemplu: Olaya, Riyadh',
       building: 'Cladire',
       buildingPle: 'exemplu: vila 2 etaj 3',

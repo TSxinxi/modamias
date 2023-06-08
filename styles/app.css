@@ -837,9 +837,9 @@ shop-pay-button {
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     font-size: 12px;
   }
-  .payment_method{
+  /* .payment_method{
     padding: 0 10px;
-  }
+  } */
   .settle_accounts .order_tips{
     padding: 0 10px;
     display: flex;
