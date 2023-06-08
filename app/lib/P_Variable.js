@@ -1945,6 +1945,10 @@ export function getLanguage() {
       validnum: 'Introduceți un număr de telefon valid',
       addressList: [
         {
+          name: "Province",
+          value: ""
+        },
+        {
           name: "Alba",
           value: "AB"
         }, {

@@ -132,7 +132,7 @@ export function Information({ product }) {
             <span>{LText.governor} <i>*</i></span>
             <p></p>
           </div>
-          <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); setCity('') }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
+          <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
             {
               addressList.map((item, index) => {
                 return (
