@@ -45,7 +45,7 @@ export const links = () => {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
-    { rel: 'icon', href: '//cdn.shopify.com/s/files/1/0617/7793/6534/files/logo.png?crop=center&height=32&v=1676515760&width=32' },
+    { rel: 'icon', href: '//modamias.com/cdn/shop/files/3111.png?crop=center&height=32&v=1682331063&width=32' },
   ];
 };
 

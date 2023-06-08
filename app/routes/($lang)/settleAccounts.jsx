@@ -33,7 +33,7 @@ export default function settleAccounts() {
     <div className='settle_accounts'>
       <div className='settle_accounts_title shadow_box'>
         <div>
-          <span onClick={() => { window.history.back() }} className='prev'>{'〈'}</span>
+          <span onClick={() => { window.history.back() }} className='prev'><img src="https://platform.antdiy.vip/static/image/xiangzuo.svg" /></span>
           <span>{LText.confirRequest}</span>
           <i></i>
         </div>
@@ -66,6 +66,7 @@ export function ProductBox({ product }) {
             /> : null
           } */}
           <Money
+            className='font_weight_b'
             withoutTrailingZeros
             data={product.price}
             as="span"
@@ -99,36 +100,36 @@ export function Information({ product }) {
       <div className='information_in_list'>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>*Name</span>
-            <p>{LText.yourName}</p>
+            <span>{LText.yourName} <i>*</i></span>
+            <p></p>
           </div>
           <input type="text" placeholder={LText.fullName} value={name} onChange={(e) => { setName(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>*Email</span>
-            <p>{LText.semail}</p>
+            <span>{LText.semail} <i>*</i></span>
+            <p></p>
           </div>
           <input name="email" type="text" placeholder={LText.semail} value={email} onChange={(e) => { setEmail(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>*966</span>
+            <span>{LText.telephone} <i>*</i></span>
             <p></p>
           </div>
           <input type="text" placeholder={LText.phonepl1} value={phone} onChange={(e) => { setPhone(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>*966</span>
+            <span></span>
             <p></p>
           </div>
           <input type="text" placeholder={LText.phonepl2} value={whatsapp} onChange={(e) => { setWhatsapp(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>*State</span>
-            <p>{LText.governor}</p>
+            <span>{LText.governor} <i>*</i></span>
+            <p></p>
           </div>
           <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); setCity('') }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
             {
@@ -142,8 +143,8 @@ export function Information({ product }) {
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>*City</span>
-            <p>{LText.city}</p>
+            <span>{LText.city} <i>*</i></span>
+            <p></p>
           </div>
           {
             LText.type === 'SA' ? <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
@@ -159,36 +160,36 @@ export function Information({ product }) {
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>*Area</span>
-            <p>{LText.zone}</p>
+            <span>{LText.zone} <i>*</i></span>
+            <p></p>
           </div>
           <input type="text" placeholder={LText.zonePle} value={area} onChange={(e) => { setArea(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>*Building</span>
-            <p>{LText.building}</p>
+            <span>{LText.building} <i>*</i></span>
+            <p></p>
           </div>
           <input type="text" placeholder={LText.buildingPle} value={building} onChange={(e) => { setBuilding(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>*Street</span>
-            <p>{LText.street}</p>
+            <span>{LText.street} <i>*</i></span>
+            <p></p>
           </div>
           <input type="text" placeholder={LText.streetPle} value={street} onChange={(e) => { setStreet(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>*Nearest landmark</span>
-            <p>{LText.closest}</p>
+            <span>{LText.closest} <i>*</i></span>
+            <p></p>
           </div>
           <input type="text" placeholder={LText.closestPle} value={nearest} onChange={(e) => { setNearest(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>Message</span>
-            <p>{LText.comments}</p>
+            <span>{LText.comments} <i>*</i></span>
+            <p></p>
           </div>
           <textarea type="text" placeholder='' value={message} onChange={(e) => { setMessage(e.target.value) }} />
         </div>
@@ -201,6 +202,7 @@ export function Information({ product }) {
             style={{ margin: '0 20px' }}
           >
             <Money
+              className='font_weight_b'
               withoutTrailingZeros
               data={product.price}
               as="span"
@@ -228,7 +230,7 @@ export function Information({ product }) {
           }}>
             <Text
               as="span"
-              className="flex items-center justify-center gap-2 py-3 px-6"
+              className="flex items-center justify-center gap-2 py-3 px-6 font_weight_b"
             >
               <span>{LText.apply}</span>
             </Text>

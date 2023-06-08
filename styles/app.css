@@ -139,6 +139,9 @@ shop-pay-button {
     background: #fff;
     padding: 0 0 4rem 0 !important;
   }
+  .left_product img{
+    width: 100%;
+  }
   .sticky_img .swimlane{
     width: 100%;
     padding: 0.3rem;
@@ -645,6 +648,9 @@ shop-pay-button {
   .settle_accounts_title .prev{
     cursor: pointer;
   }
+  .settle_accounts_title .prev img{
+    width: 20px;
+  }
   .settle_accounts .product_box{
     width: 100%;
     max-width: 640px;
@@ -778,22 +784,35 @@ shop-pay-button {
     height: 40px;
     margin: 10px 0;
     line-height: 40px;
-    padding: 0 10px;
   }
-  .information_in_list{
+  /* .information_in_list{
     padding: 0 10px;
-  }
+  } */
   .information_in .in_list{
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    padding: 8px 0;
+  }
+  .information_in .in_list:nth-child(10){
+    margin: -2px 0;
+    padding: 0;
+  }
+  .font_weight_b{
+    font-weight: bold;
   }
   .in_list .in_list_title{
     width: 20%;
     font-size: 12px;
   }
+  .in_list .in_list_title i{
+    font-style: normal;
+    color: #c70505;
+    font-weight: 600;
+    font-size: 16px;
+  }
   .in_list_title span{
-    color: #007d4a;
+    /* color: #007d4a; */
+    color: #333;
     font-weight: 600;
   }
   .in_list_title p{
@@ -848,7 +867,7 @@ shop-pay-button {
     align-items: center;
   }
   .payment_method_check p{
-    margin-right: 10px;
+    margin: 0 10px;
   }
   .payment_method_check img{
     width: 50px;
@@ -856,7 +875,6 @@ shop-pay-button {
   .description{
     color: #999;
     padding-bottom: 8px;
-    padding-left: 35px;
     font-size: 12px;
   }
   select {
