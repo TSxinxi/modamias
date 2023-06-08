@@ -91,6 +91,7 @@ export function Information({ product }) {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [errorText, setErrorText] = useState('');
+  const [postcode, setPostcode] = useState('');
   if (errorText) {
     timer(setErrorText)
   }
@@ -107,24 +108,24 @@ export function Information({ product }) {
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>{LText.semail} <i>*</i></span>
-            <p></p>
-          </div>
-          <input name="email" type="text" placeholder={LText.semail} value={email} onChange={(e) => { setEmail(e.target.value) }} />
-        </div>
-        <div className='in_list'>
-          <div className='in_list_title'>
             <span>{LText.telephone} <i>*</i></span>
             <p></p>
           </div>
           <input type="text" placeholder={LText.phonepl1} value={phone} onChange={(e) => { setPhone(e.target.value) }} />
         </div>
-        <div className='in_list'>
+        {/* <div className='in_list'>
           <div className='in_list_title'>
             <span></span>
             <p></p>
           </div>
           <input type="text" placeholder={LText.phonepl2} value={whatsapp} onChange={(e) => { setWhatsapp(e.target.value) }} />
+        </div> */}
+        <div className='in_list'>
+          <div className='in_list_title'>
+            <span>Adresă <i>*</i></span>
+            <p></p>
+          </div>
+          <input type="text" placeholder='Adresă' value={area} onChange={(e) => { setArea(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
@@ -135,7 +136,7 @@ export function Information({ product }) {
             {
               addressList.map((item, index) => {
                 return (
-                  <option value={item.value} key={index}>- - {item.value ? item.value + '/' : ''}{item.name}- -</option>
+                  <option value={item.value} key={index}>{item.name}</option>
                 )
               })
             }
@@ -160,11 +161,19 @@ export function Information({ product }) {
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
-            <span>{LText.zone} <i>*</i></span>
+            <span>Cod postal</span>
             <p></p>
           </div>
-          <input type="text" placeholder={LText.zonePle} value={area} onChange={(e) => { setArea(e.target.value) }} />
+          <input type="text" placeholder='Cod postal' value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
         </div>
+        <div className='in_list'>
+          <div className='in_list_title'>
+            <span>{LText.semail}</span>
+            <p></p>
+          </div>
+          <input name="email" type="text" placeholder={LText.semail} value={email} onChange={(e) => { setEmail(e.target.value) }} />
+        </div>
+        {/*
         <div className='in_list'>
           <div className='in_list_title'>
             <span>{LText.building} <i>*</i></span>
@@ -192,7 +201,7 @@ export function Information({ product }) {
             <p></p>
           </div>
           <textarea type="text" placeholder='' value={message} onChange={(e) => { setMessage(e.target.value) }} />
-        </div>
+        </div> */}
       </div>
       <div className='settle_accounts_foot'>
         <div>
@@ -215,15 +224,16 @@ export function Information({ product }) {
                 name: name,
                 email: email,
                 phone: phone,
-                whatsapp: whatsapp,
+                // whatsapp: whatsapp,
                 country: LText.country,
                 state: state,
                 city: city,
                 area: area,
-                building: building,
-                street: street,
-                nearest_land_mark: nearest,
-                message: message,
+                postcode: postcode,
+                // building: building,
+                // street: street,
+                // nearest_land_mark: nearest,
+                // message: message,
               },
               setErrorText
             )
@@ -280,13 +290,13 @@ export function PaymentMethod() {
 }
 
 function SettleAccounts(product, params, setErrorText) {
-  if (!params.name || !params.phone || !params.whatsapp || !params.state || !params.city || !params.area || !params.building || !params.street || !params.nearest_land_mark || !params.email) {
+  if (!params.name || !params.phone || !params.state || !params.city || !params.area) {
     return setErrorText(LText.empty)
   }
-  var emailRegExp = /^[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;
-  if (!emailRegExp.test(params.email)) {
-    return setErrorText(LText.correct)
-  }
+  // var emailRegExp = /^[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;
+  // if (!emailRegExp.test(params.email)) {
+  //   return setErrorText(LText.correct)
+  // }
   // var regex = new RegExp(/^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/);
   // console.log(regex.test('0501234567'))
   // if(params.phone && !(regex.test(params.phone))){
@@ -307,7 +317,7 @@ function SettleAccounts(product, params, setErrorText) {
       if (res.data.success && res.data.data && res.data.data.oid) {
         window.open(`/thank_you?id=${res.data.data.oid}`, '_self')
       } else {
-        return setErrorText(res && res.data.msg)
+        return setErrorText(res && res.data.msg || 'Comanda a eșuat')
       }
     }
   })
