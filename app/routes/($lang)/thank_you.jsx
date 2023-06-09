@@ -89,7 +89,7 @@ export function OrderBox({ orderData }) {
         <div className='order_list'>
           <div className='order_list_title'>{LText.customer}</div>
           <div className='customer_info'>
-            <div className='info_li'>
+            {/* <div className='info_li'>
               <div className='info_li_title'>{LText.contactInfo}</div>
               <div className='info_li_text'>{orderData.customer.email}</div>
             </div>
@@ -104,7 +104,7 @@ export function OrderBox({ orderData }) {
                 <p>{orderData.shippingAddress.address1}</p>
                 <p>{orderData.shippingAddress.address2}</p>
               </div> : null}
-            </div>
+            </div> */}
             <div className='info_li'>
               <div className='info_li_title'>{LText.payment}</div>
               <div className='info_li_text'>{LText.payReceipt}</div>
