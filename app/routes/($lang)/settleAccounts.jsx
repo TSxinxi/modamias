@@ -236,6 +236,7 @@ export function Information({ product }) {
                   phone: phone,
                   // whatsapp: whatsapp,
                   country: LText.country,
+                  country_code: 'RO',
                   state: state,
                   city: city,
                   area: area,
@@ -302,6 +303,7 @@ export function PaymentMethod() {
 }
 
 function SettleAccounts(product, params, setErrorText, setIsSubmit) {
+  console.log(params)
   if (!params.name || !params.phone || !params.state || !params.city || !params.area) {
     return setErrorText(LText.empty)
   }
