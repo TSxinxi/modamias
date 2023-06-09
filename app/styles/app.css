@@ -1161,19 +1161,26 @@ select{
   }
 .sticky_img .swimlane{
     width: 100%;
-    padding: 0.3rem;
+    padding: 0.3rem 0;
     grid-gap: .5rem;
     gap: .5rem;
     flex-wrap: wrap;
+    justify-content: space-between;
   }
 @media (min-width: 48em) {
   .sticky_img .swimlane{
       display: flex
   }
+      .sticky_img .swimlane .empty_img{
+        display: block !important;
+      }
     }
 .sticky_img .swimlane .list_img{
     width: 7.4rem;
     border: 1px solid rgba(0,0,0,0);
+  }
+.sticky_img .swimlane .empty_img{
+    display: none;
   }
 .sticky_img .swimlane .active{
     border-color: #0e1b4d;
@@ -1190,8 +1197,8 @@ select{
     z-index: 10;
   }
 .stick_service img{
-    float: left;
-    margin-left: 10px;
+    float: right;
+    margin-right: 10px;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -1364,6 +1371,10 @@ select{
     position: sticky;
     bottom: 0;
     z-index: 10;
+  }
+.fontS{
+    font-size: 1.6rem;
+    font-weight: bold;
   }
 .jq_slow {
     display: none;
@@ -1638,6 +1649,9 @@ select{
       .settle_accounts .in_list select{
         font-size: 14px !important;
       }
+      .settle_accounts .in_list .tele span{
+        font-size: 14px !important;
+      }
     }
 .settle_accounts_title{
     width: 100%;
@@ -1716,10 +1730,31 @@ select{
 .information_in{
     margin-top: 167px;
   }
+.padding16{
+    padding: 0 16px;
+  }
 @keyframes myfirst {
     0%   {opacity: 0.5;}
     10%  {opacity: 0.8;}
     30%  {opacity: 1;}
+  }
+.submit_btn{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+.submit_btn .loading_box{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+  }
+.submit_btn img{
+    width: 20px;
   }
 .error_box{
     width: 100%;
@@ -1728,7 +1763,7 @@ select{
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 13;
+    z-index: 101;
   }
 .error_box span{
     width: auto;
@@ -1777,7 +1812,7 @@ select{
 .order_box .section__header img{
     width: 48px;
     height: 48px;
-    margin-left: 10px;
+    margin: 0 10px;
   }
 .order_box .section__header .header__heading h2{
     font-size: 20px;
@@ -1827,14 +1862,15 @@ select{
   }
 .in_list .in_list_title{
     width: 20%;
-    font-size: 12px;
-    line-height: 12px;
+    font-size: 1rem;
+    line-height: 1rem;
+    margin-right: 5px;
   }
 .in_list .in_list_title i{
     font-style: normal;
     color: #c70505;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 1rem;
   }
 .in_list_title span{
     /* color: #007d4a; */
@@ -1858,20 +1894,48 @@ select{
     flex: 1;
     height: calc(1.5em + 0.75rem + 10px);
     font-weight: 400;
-    line-height: 1.5;
+    line-height: calc(1.5em + 0.75rem + 10px);
     color: #495057;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    font-size: 12px;
+    font-size: 16px;
   }
+.information_in .in_list .tele{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: 16px;
+    color: #495057;
+  }
+.information_in .in_list .tele span{
+    height: calc(1.5em + 0.75rem + 10px);
+    line-height: calc(1.5em + 0.75rem + 10px);
+    padding: 0 10px;
+  }
+.information_in .in_list .tele input{
+    outline: none !important;
+    padding: 0 !important;
+  }
+.information_in .in_list .tele input{
+    border: none;
+  }
+/* .information_in .in_list .tele input:focus{
+    outline: none !important;
+    border: none !important;
+  }
+  .information_in .in_list .tele input:focus-visible{
+    outline: none !important;
+    border: none !important;
+  } */
 /* .payment_method{
     padding: 0 10px;
   } */
 .settle_accounts .order_tips{
-    padding: 0 10px;
     display: flex;
     flex-direction: column;
     align-items: center;

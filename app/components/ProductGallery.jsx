@@ -34,82 +34,83 @@ export function ProductGallery({ media, product, className }) {
         onClick={() => { setPreviewImg(true) }}
         style={{ cursor: 'pointer' }}
       />
-      <div
-        className={`swimlane md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-2 ${className}`}
-      >
-        {media.map((med, i) => {
-          let mediaProps = {};
-          const isFirst = i === 0;
-          const isFourth = i === 3;
-          const isFullWidth = i % 3 === 0;
+      <div className='padding16'>
+        <div
+          className={`swimlane md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-2 ${className}`}
+        >
+          {media.map((med, i) => {
+            let mediaProps = {};
+            const isFirst = i === 0;
+            const isFourth = i === 3;
+            const isFullWidth = i % 3 === 0;
 
-          const data = {
-            ...med,
-            image: {
-              // @ts-ignore
-              ...med.image,
-              altText: med.alt || 'Product image',
-            },
-          };
+            const data = {
+              ...med,
+              image: {
+                // @ts-ignore
+                ...med.image,
+                altText: med.alt || 'Product image',
+              },
+            };
 
-          switch (med.mediaContentType) {
-            case 'IMAGE':
-              mediaProps = {
-                width: 800,
-                widths: [400, 800, 1200, 1600, 2000, 2400],
-              };
-              break;
-            case 'VIDEO':
-              mediaProps = {
-                width: '100%',
-                autoPlay: true,
-                controls: false,
-                muted: true,
-                loop: true,
-                preload: 'auto',
-              };
-              break;
-            case 'EXTERNAL_VIDEO':
-              mediaProps = { width: '100%' };
-              break;
-            case 'MODEL_3D':
-              mediaProps = {
-                width: '100%',
-                interactionPromptThreshold: '0',
-                ar: true,
-                loading: ATTR_LOADING_EAGER,
-                disableZoom: true,
-              };
-              break;
-          }
+            switch (med.mediaContentType) {
+              case 'IMAGE':
+                mediaProps = {
+                  width: 800,
+                  widths: [400, 800, 1200, 1600, 2000, 2400],
+                };
+                break;
+              case 'VIDEO':
+                mediaProps = {
+                  width: '100%',
+                  autoPlay: true,
+                  controls: false,
+                  muted: true,
+                  loop: true,
+                  preload: 'auto',
+                };
+                break;
+              case 'EXTERNAL_VIDEO':
+                mediaProps = { width: '100%' };
+                break;
+              case 'MODEL_3D':
+                mediaProps = {
+                  width: '100%',
+                  interactionPromptThreshold: '0',
+                  ar: true,
+                  loading: ATTR_LOADING_EAGER,
+                  disableZoom: true,
+                };
+                break;
+            }
 
-          if (i === 0 && med.mediaContentType === 'IMAGE') {
-            mediaProps.loading = ATTR_LOADING_EAGER;
-          }
+            if (i === 0 && med.mediaContentType === 'IMAGE') {
+              mediaProps.loading = ATTR_LOADING_EAGER;
+            }
 
-          const style = [
-            isFullWidth ? 'md:col-span-2' : 'md:col-span-1',
-            isFirst || isFourth ? '' : 'md:aspect-[4/5]',
-            'aspect-square snap-center card-image bg-white dark:bg-contrast/10 w-mobileGallery md:w-full',
-          ].join(' ');
+            const style = [
+              isFullWidth ? 'md:col-span-2' : 'md:col-span-1',
+              isFirst || isFourth ? '' : 'md:aspect-[4/5]',
+              'aspect-square snap-center card-image bg-white dark:bg-contrast/10 w-mobileGallery md:w-full',
+            ].join(' ');
 
-          return (
-            <div
-              className={`${image_url.url == data.image.url ? 'active' : ''} list_img ${style}`}
-              // @ts-ignore
-              // MasterImg({image_url:med.image})
-              key={med.id || med.image.id}
-              onClick={() => { setImgUrl(med.image) }}
-            >
-              {/* TODO: Replace with MediaFile when it's available */}
-              {med.image && (
-                <img
-                  src={data.image.url}
-                  alt={data.image.altText}
-                  className="w-full h-full aspect-square fadeIn object-cover"
-                />
-              )}
-              {/* <MediaFile
+            return (
+              <div
+                className={`${image_url.url == data.image.url ? 'active' : ''} list_img ${style}`}
+                // @ts-ignore
+                // MasterImg({image_url:med.image})
+                key={med.id || med.image.id}
+                onClick={() => { setImgUrl(med.image) }}
+              >
+                {/* TODO: Replace with MediaFile when it's available */}
+                {med.image && (
+                  <img
+                    src={data.image.url}
+                    alt={data.image.altText}
+                    className="w-full h-full aspect-square fadeIn object-cover"
+                  />
+                )}
+                {/* <MediaFile
                     tabIndex="0"
                     className={`w-full h-full aspect-square fadeIn object-cover`}
                     data={data}
@@ -125,9 +126,17 @@ export function ProductGallery({ media, product, className }) {
                     }}
                     {...mediaProps}
                   /> */}
-            </div>
-          );
-        })}
+              </div>
+            );
+          })}
+
+          <div className='list_img empty_img'></div>
+          <div className='list_img empty_img'></div>
+          <div className='list_img empty_img'></div>
+          <div className='list_img empty_img'></div>
+          <div className='list_img empty_img'></div>
+          <div className='list_img empty_img'></div>
+        </div>
       </div>
     </div>
   );

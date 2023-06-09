@@ -1911,7 +1911,7 @@ export function getLanguage() {
       payment: 'Metoda de plată',
       payReceipt: 'Plată la primire',
       invoice: 'Factură',
-      keeyshop: 'continuați cumpărăturile',
+      keeyshop: 'Continuați Cumpărăturile',
       confirRequest: 'Confirmare cerere',
       recipientInfo: 'Informații despre destinatar',
       yourName: 'Numele complet',

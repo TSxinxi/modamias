@@ -508,7 +508,7 @@ export default function Product() {
             product={product}
             className="w-screen md:w-full lg:col-span-2"
           />
-          <div className="left_product sticky md:-mb-nav md:top-nav md:-translate-y-nav md:pt-nav hiddenScroll">
+          <div className="left_product sticky md:-mb-nav md:top-nav md:-translate-y-nav md:pt-nav hiddenScroll padding16">
             <section className="flex flex-col w-full gap-8 md:mx-auto md:max-w-sm md:px-0" style={{ color: '#141414E6' }}>
               <div className="grid gap-2">
                 <Heading as="h1" className="whitespace-normal">
@@ -552,7 +552,7 @@ export default function Product() {
             </section>
           </div>
         </div>
-        <div>
+        <div className='padding16'>
           <div className='comment_box'>
             <div className='comment_box_title'>{LText.comTit}</div>
             {commentHeader ? <div
@@ -783,6 +783,12 @@ export function ProductForm() {
           as="span"
           className="flex items-center gap-2"
         >
+          <Money
+            withoutTrailingZeros
+            data={selectedVariant?.price}
+            as="span"
+            className='fontS'
+          />
           {isOnSale && (
             <Money
               withoutTrailingZeros
@@ -791,11 +797,6 @@ export function ProductForm() {
               className="opacity-50 strike"
             />
           )}
-          <Money
-            withoutTrailingZeros
-            data={selectedVariant?.price}
-            as="span"
-          />
         </Text>
         <ProductOptions
           options={product.options}

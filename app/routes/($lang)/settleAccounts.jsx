@@ -92,13 +92,14 @@ export function Information({ product }) {
   const [message, setMessage] = useState('');
   const [errorText, setErrorText] = useState('');
   const [postcode, setPostcode] = useState('');
+  const [isSubmit, setIsSubmit] = useState(false);
   if (errorText) {
     timer(setErrorText)
   }
   return (
     <div className='information_in'>
-      <div className='information_in_title'>{LText.recipientInfo}</div>
-      <div className='information_in_list'>
+      <div className='information_in_title padding16'>{LText.recipientInfo}</div>
+      <div className='information_in_list padding16'>
         <div className='in_list'>
           <div className='in_list_title'>
             <span>{LText.yourName} <i>*</i></span>
@@ -111,7 +112,10 @@ export function Information({ product }) {
             <span>{LText.telephone} <i>*</i></span>
             <p></p>
           </div>
-          <input type="text" placeholder={LText.phonepl1} value={phone} onChange={(e) => { setPhone(e.target.value) }} />
+          {/* <div className='tele'>
+            <span>+40</span> */}
+          <input type="text" placeholder={LText.telephone} value={phone} onChange={(e) => { setPhone(e.target.value) }} />
+          {/* </div> */}
         </div>
         {/* <div className='in_list'>
           <div className='in_list_title'>
@@ -217,34 +221,42 @@ export function Information({ product }) {
               as="span"
             />
           </Text>
-          <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast' onClick={() => {
-            SettleAccounts(
-              product,
-              {
-                name: name,
-                email: email,
-                phone: phone,
-                // whatsapp: whatsapp,
-                country: LText.country,
-                state: state,
-                city: city,
-                area: area,
-                postcode: postcode,
-                // building: building,
-                // street: street,
-                // nearest_land_mark: nearest,
-                // message: message,
-              },
-              setErrorText
-            )
-          }}>
-            <Text
-              as="span"
-              className="flex items-center justify-center gap-2 py-3 px-6 font_weight_b"
-            >
-              <span>{LText.apply}</span>
-            </Text>
-          </button>
+          <div className='submit_btn'>
+            {
+              isSubmit ? <div className='loading_box'>
+                <img src="https://platform.antdiy.vip/static/image/hydrogen_loading.gif" />
+              </div> : null
+            }
+            <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast' onClick={() => {
+              SettleAccounts(
+                product,
+                {
+                  name: name,
+                  email: email,
+                  phone: phone,
+                  // whatsapp: whatsapp,
+                  country: LText.country,
+                  state: state,
+                  city: city,
+                  area: area,
+                  postcode: postcode,
+                  // building: building,
+                  // street: street,
+                  // nearest_land_mark: nearest,
+                  // message: message,
+                },
+                setErrorText,
+                setIsSubmit
+              )
+            }}>
+              <Text
+                as="span"
+                className="flex items-center justify-center gap-2 py-3 px-6 font_weight_b"
+              >
+                <span>{LText.apply}</span>
+              </Text>
+            </button>
+          </div>
         </div>
       </div>
       {errorText ? <div className='error_box'>
@@ -267,7 +279,7 @@ function timer(setErrorText) {
 
 export function PaymentMethod() {
   return (
-    <div>
+    <div className='padding16'>
       <div className='payment_method'>
         <div className='information_in_title'>{LText.method}</div>
         <div>
@@ -289,7 +301,7 @@ export function PaymentMethod() {
   )
 }
 
-function SettleAccounts(product, params, setErrorText) {
+function SettleAccounts(product, params, setErrorText, setIsSubmit) {
   if (!params.name || !params.phone || !params.state || !params.city || !params.area) {
     return setErrorText(LText.empty)
   }
@@ -299,6 +311,11 @@ function SettleAccounts(product, params, setErrorText) {
   // }
   // var regex = new RegExp(/^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/);
   // console.log(regex.test('0501234567'))
+  // params.phone = '+40' + params.phone
+  // var pattern = /^\+\d{1,3}\d{1,14}$/;
+  // if (!pattern.test(params.phone)) {
+  //   return setErrorText(LText.validnum)
+  // }
   // if(params.phone && !(regex.test(params.phone))){
   if (params.phone.length < 4 || params.phone.length > 15) {
     return setErrorText(LText.validnum)
@@ -308,17 +325,23 @@ function SettleAccounts(product, params, setErrorText) {
     quantity: 1,
     variant_id: setSplit(product.id),
   }]
+  let source_name = window.localStorage.getItem('sourceName')
   params.line_items = line_items
   params.count = 1
   params.shop = getShopAddress()
+  params.source = source_name ? source_name : null
+  setIsSubmit(true)
 
   fetch.post(`https://gateway.antdiy.vip/account-service/media_orders/create/pass`, params).then(res => {
     if (res && res.data) {
       if (res.data.success && res.data.data && res.data.data.oid) {
         window.open(`/thank_you?id=${res.data.data.oid}`, '_self')
       } else {
+        setIsSubmit(false)
         return setErrorText(res && res.data.msg || 'Comanda a eșuat')
       }
+    } else {
+      setIsSubmit(false)
     }
   })
 }
