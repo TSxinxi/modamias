@@ -11,7 +11,7 @@ export function getShopAddress() {
 
 export function openWhatsApp() {
   const whatsApp = {
-    phone: '8615157989453',
+    phone: '8618267116473',
     isOpen: true,
   }
   return whatsApp;
