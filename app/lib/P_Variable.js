@@ -1859,7 +1859,7 @@ export function getLanguage() {
       country: 'Romania',
       deliveryProcess: 'deliveryProcess1.jpg',
       whatsAppText: 'Vă rugăm să faceți clic pe trimite direct, nu ștergeți linkul de mai jos, veți primi cele mai precise răspunsuri de la serviciul nostru pentru clienți',
-      buy: 'CUMPǍRǍ ACUM',
+      buy: 'Cumpărați cu Ramburs la Livrare',
       comTit: 'Opinii clienți',
       write: 'anulează evaluarea',
       sold: 'vândut',

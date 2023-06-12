@@ -798,6 +798,7 @@ export function ProductForm() {
             />
           )}
         </Text>
+        <img className="variant_img" src={selectedVariant?.image?.url} />
         <ProductOptions
           options={product.options}
           searchParamsWithDefaults={searchParamsWithDefaults}
@@ -863,7 +864,7 @@ function ProductOptions({ options, searchParamsWithDefaults }) {
         .map((option) => (
           <div
             key={option.name}
-            className="flex flex-col flex-wrap mb-4 gap-y-2 last:mb-0"
+            className="flex flex-col flex-wrap gap-y-2 last:mb-0"
           >
             <Heading as="legend" size="lead" className="min-w-[4rem]">
               {option.name}

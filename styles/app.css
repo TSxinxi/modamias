@@ -201,6 +201,11 @@ shop-pay-button {
   .fixed_img img{
     max-height: 100%;
   }
+  .variant_img{
+    width: 8rem !important;
+    height: 8rem;
+    object-fit: cover;
+  }
   .product_details{
     justify-content: center;
     @media (min-width: 48em) {
