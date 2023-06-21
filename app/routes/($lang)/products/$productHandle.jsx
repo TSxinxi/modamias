@@ -50,6 +50,7 @@ const seo = ({ data }) => {
 };
 let productData = ''
 let productVariants = []
+let currencyCode = ''
 
 export const handle = {
   seo,
@@ -469,6 +470,13 @@ export default function Product() {
 
   var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.localStorage !== "undefined");
   if (canUseDOM) {
+    let href = window.location.href
+    if (href && href.indexOf('-huf') > -1) {
+      currencyCode = 'HUF'
+      localStorage.setItem('currencyCode', currencyCode)
+    } else {
+      localStorage.removeItem('currencyCode')
+    }
     let result = new URLSearchParams(window.location.search);
     let param = result.get('source');
     if (localStorage.getItem('refererName')) {
@@ -561,10 +569,10 @@ export default function Product() {
               onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}
             /> : <div className="jdgm-rev-widg__header comment_box_content">
               <div className="jdgm-rev-widg__summary">
-                <div className="jdgm-rev-widg__summary-text">Nici o părere</div>
+                <div className="jdgm-rev-widg__summary-text">{LText.noOpinion}</div>
               </div>
               <div className="jdgm-rev-widg__sort-wrapper">
-                <button className="add_comment" onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}>Scrieți o recenzie</button>
+                <button className="add_comment" onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}>{LText.writeReview}</button>
               </div>
             </div>}
             <div className='jq_slow'>
@@ -716,6 +724,9 @@ export default function Product() {
 function goSettleAccounts() {
   const firstVariant = productData.variants.nodes[0];
   const selectedVariant = productData.selectedVariant ?? firstVariant;
+  if (currencyCode) {
+    selectedVariant.price.currencyCode = currencyCode
+  }
   localStorage.removeItem('selectedVariant')
   localStorage.setItem('selectedVariant', JSON.stringify(selectedVariant))
   window.open(`/settleAccounts?id=${productData.id}`, '_self')
@@ -775,6 +786,14 @@ export function ProductForm() {
     ...analytics.products[0],
     quantity: 1,
   };
+  const [currency, setCurrency] = useState('');
+  useEffect(() => {
+    if (currencyCode) {
+      setCurrency(currencyCode)
+    } else {
+      setCurrency(selectedVariant?.price?.currencyCode)
+    }
+  }, []);
 
   return (
     <div className="grid gap-10">
@@ -783,19 +802,25 @@ export function ProductForm() {
           as="span"
           className="flex items-center gap-2"
         >
-          <Money
+          {/* <Money
             withoutTrailingZeros
             data={selectedVariant?.price}
             as="span"
             className='fontS'
-          />
+          /> */}
+          <span className='current_price current_price_new'>
+            <i>{currency} </i>{parseFloat(selectedVariant?.price?.amount)}
+          </span>
           {isOnSale && (
-            <Money
-              withoutTrailingZeros
-              data={selectedVariant?.compareAtPrice}
-              as="span"
-              className="opacity-50 strike"
-            />
+            // <Money
+            //   withoutTrailingZeros
+            //   data={selectedVariant?.compareAtPrice}
+            //   as="span"
+            //   className="opacity-50 strike"
+            // />
+            <span className='current_price current_price_old'>
+              <i>{currency} </i>{parseFloat(selectedVariant?.compareAtPrice?.amount)}
+            </span>
           )}
         </Text>
         <img className="variant_img" src={selectedVariant?.image?.url} />

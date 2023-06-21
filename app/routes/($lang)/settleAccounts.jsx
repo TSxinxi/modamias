@@ -48,7 +48,7 @@ export default function settleAccounts() {
 export function ProductBox({ product }) {
   return (
     <div className='product_box shadow_box' >
-      <img src={product.image.url} />
+      {product.image ? <img src={product.image.url} /> : null}
       <div className='product_title'>
         <span>{product.product.title}</span>
         <span>{product.title}</span>
@@ -65,12 +65,13 @@ export function ProductBox({ product }) {
               className="opacity-50 strike"
             /> : null
           } */}
-          <Money
+          {/* <Money
             className='font_weight_b'
             withoutTrailingZeros
             data={product.price}
             as="span"
-          />
+          /> */}
+          <span className='font_weight_b'>{product.price.currencyCode}{parseFloat(product?.price?.amount)}</span>
         </Text>
       </div>
     </div >
@@ -87,6 +88,7 @@ export function Information({ product }) {
   const [area, setArea] = useState('');
   const [building, setBuilding] = useState('');
   const [street, setStreet] = useState('');
+  const [streetList, setStreetList] = useState([{ name: 'Utca', value: '' }]);
   const [nearest, setNearest] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -95,6 +97,25 @@ export function Information({ product }) {
   const [isSubmit, setIsSubmit] = useState(false);
   if (errorText) {
     timer(setErrorText)
+  }
+  let province = []
+  if (LText.type === 'HUF' && addressList) {
+    for (var i in addressList) {
+      let obj = {
+        name: i,
+        value: i === 'Megye' ? '' : i,
+        children: [{ name: 'Település/Kerület', value: '' }]
+      }
+      if (addressList[i]) {
+        for (var j in addressList[i]) {
+          obj.children.push({
+            name: j,
+            value: j,
+          })
+        }
+      }
+      province.push(obj)
+    }
   }
   return (
     <div className='information_in'>
@@ -124,52 +145,111 @@ export function Information({ product }) {
           </div>
           <input type="text" placeholder={LText.phonepl2} value={whatsapp} onChange={(e) => { setWhatsapp(e.target.value) }} />
         </div> */}
-        <div className='in_list'>
-          <div className='in_list_title'>
-            <span>Adresă <i>*</i></span>
-            <p></p>
-          </div>
-          <input type="text" placeholder='Adresă' value={area} onChange={(e) => { setArea(e.target.value) }} />
-        </div>
-        <div className='in_list'>
-          <div className='in_list_title'>
-            <span>{LText.governor} <i>*</i></span>
-            <p></p>
-          </div>
-          <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
-            {
-              addressList.map((item, index) => {
-                return (
-                  <option value={item.value} key={index}>{item.name}</option>
-                )
-              })
-            }
-          </select>
-        </div>
-        <div className='in_list'>
-          <div className='in_list_title'>
-            <span>{LText.city} <i>*</i></span>
-            <p></p>
-          </div>
-          {
-            LText.type === 'SA' ? <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+        {
+          LText.type === 'RO' ? <>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.address} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.address} value={area} onChange={(e) => { setArea(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.governor} <i>*</i></span>
+                <p></p>
+              </div>
+              <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
+                {
+                  addressList.map((item, index) => {
+                    return (
+                      <option value={item.value} key={index}>{item.name}</option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.city} <i>*</i></span>
+                <p></p>
+              </div>
               {
-                addressList.filter(i => i.value === state)[0].children.map((item, index) => {
-                  return (
-                    <option value={item.value} key={index}>- - {item.value ? item.value + '/' : ''}{item.name}- -</option>
-                  )
-                })
+                LText.type === 'SA' ? <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+                  {
+                    addressList.filter(i => i.value === state)[0].children.map((item, index) => {
+                      return (
+                        <option value={item.value} key={index}>- - {item.value ? item.value + '/' : ''}{item.name}- -</option>
+                      )
+                    })
+                  }
+                </select> : <input type="text" placeholder={LText.city} value={city} onChange={(e) => { setCity(e.target.value) }} />
               }
-            </select> : <input type="text" placeholder={LText.city} value={city} onChange={(e) => { setCity(e.target.value) }} />
-          }
-        </div>
-        <div className='in_list'>
-          <div className='in_list_title'>
-            <span>Cod postal</span>
-            <p></p>
-          </div>
-          <input type="text" placeholder='Cod postal' value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
-        </div>
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.postalCode}</span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
+            </div>
+          </> : <>
+            {
+              province && province.length > 0 ? <div className='in_list'>
+                <div className='in_list_title'>
+                  <span>Megye <i>*</i></span>
+                  <p></p>
+                </div>
+                <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); setCity(""); setPostcode(""); }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
+                  {
+                    province.map((item, index) => {
+                      return (
+                        <option value={item.value} key={index}>{item.name}</option>
+                      )
+                    })
+                  }
+                </select>
+              </div> : null
+            }
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>Település/Kerület <i>*</i></span>
+                <p></p>
+              </div>
+              <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+                {
+                  province.filter(i => i.value === state)[0].children.map((item, index) => {
+                    return (
+                      <option value={item.value} key={index}>{item.name}</option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.address} <i>*</i></span>
+                <p></p>
+              </div>
+              <select name="city" value={area} onChange={(e) => { setArea(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+                {
+                  streetList.map((item, index) => {
+                    return (
+                      <option value={item.value} key={index}>{item.name}</option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.postalCode}</span>
+                <p></p>
+              </div>
+              <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
+            </div>
+          </>
+        }
         <div className='in_list'>
           <div className='in_list_title'>
             <span>{LText.semail}</span>
@@ -214,12 +294,13 @@ export function Information({ product }) {
             className="flex items-center gap-2"
             style={{ margin: '0 20px' }}
           >
-            <Money
+            {/* <Money
               className='font_weight_b'
               withoutTrailingZeros
               data={product.price}
               as="span"
-            />
+            /> */}
+            <span className='font_weight_b'>{product.price.currencyCode}{parseFloat(product?.price?.amount)}</span>
           </Text>
           <div className='submit_btn'>
             {
@@ -236,7 +317,7 @@ export function Information({ product }) {
                   phone: phone,
                   // whatsapp: whatsapp,
                   country: LText.country,
-                  country_code: 'RO',
+                  country_code: LText.type,
                   state: state,
                   city: city,
                   area: area,
@@ -265,6 +346,10 @@ export function Information({ product }) {
       </div> : null}
     </div>
   )
+}
+
+function changeCity(value, setStreetList, setPostcode) {
+  console.log(value)
 }
 
 function timer(setErrorText) {
@@ -318,9 +403,9 @@ function SettleAccounts(product, params, setErrorText, setIsSubmit) {
   //   return setErrorText(LText.validnum)
   // }
   // if(params.phone && !(regex.test(params.phone))){
-  if (params.phone.length < 4 || params.phone.length > 15) {
-    return setErrorText(LText.validnum)
-  }
+  // if (params.phone.length < 4 || params.phone.length > 15) {
+  //   return setErrorText(LText.validnum)
+  // }
   let line_items = [{
     product_id: setSplit(product.product_id),
     quantity: 1,
@@ -331,6 +416,9 @@ function SettleAccounts(product, params, setErrorText, setIsSubmit) {
   params.count = 1
   params.shop = getShopAddress()
   params.source = source_name ? source_name : null
+  if (LText.type === 'HUF') {
+    params.tags = LText.type
+  }
   setIsSubmit(true)
 
   fetch.post(`https://gateway.antdiy.vip/account-service/media_orders/create/pass`, params).then(res => {

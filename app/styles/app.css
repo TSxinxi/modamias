@@ -1384,6 +1384,19 @@ select{
     font-size: 1.6rem;
     font-weight: bold;
   }
+.current_price_new{
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+.current_price_old{
+    opacity: .5;
+    font-size: 1rem;
+    font-weight: 400;
+    text-decoration: line-through;
+  }
+.current_price i{
+    font-style: normal;
+  }
 .jq_slow {
     display: none;
     width: 100%;
@@ -1603,7 +1616,16 @@ select{
   }
 .write_review .write_review_btn{
     margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
   }
+@media (min-width: 48em) {
+  .write_review .write_review_btn{
+      flex-direction: row
+  }
+    }
 .write_review .write_review_btn .submit{
     padding: 8px 25px;
     font-size: 16px;
@@ -1729,7 +1751,7 @@ select{
     flex-direction: column;
     justify-content: space-between;
   }
-.product_box .product_title span{
+.product_box .product_title >span{
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1884,6 +1906,7 @@ select{
     /* color: #007d4a; */
     color: #333;
     font-weight: 600;
+    word-wrap: break-word;
   }
 .in_list_title p{
     color: #333;
@@ -1910,6 +1933,11 @@ select{
     border-radius: 0.25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     font-size: 16px;
+  }
+.in_list input:disabled{   
+    border: 1px solid #DDD;   
+    background-color: #F5F5F5;   
+    color:#ACA899;   
   }
 .information_in .in_list .tele{
     flex: 1;
