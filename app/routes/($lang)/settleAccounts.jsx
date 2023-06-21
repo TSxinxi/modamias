@@ -200,7 +200,7 @@ export function Information({ product }) {
                   <span>Megye <i>*</i></span>
                   <p></p>
                 </div>
-                <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); setCity(""); setPostcode(""); }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
+                <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); setStreetList([{ name: 'Utca', value: '' }]); setCity(""); setPostcode(""); }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
                   {
                     province.map((item, index) => {
                       return (
@@ -216,7 +216,7 @@ export function Information({ product }) {
                 <span>Település/Kerület <i>*</i></span>
                 <p></p>
               </div>
-              <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode, setArea); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   province.filter(i => i.value === state)[0].children.map((item, index) => {
                     return (
@@ -231,7 +231,7 @@ export function Information({ product }) {
                 <span>{LText.address} <i>*</i></span>
                 <p></p>
               </div>
-              <select name="city" value={area} onChange={(e) => { setArea(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              <select name="city" value={area} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setArea(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   streetList.map((item, index) => {
                     return (
@@ -348,8 +348,31 @@ export function Information({ product }) {
   )
 }
 
-function changeCity(value, setStreetList, setPostcode) {
-  console.log(value)
+function changeArea(value, streetList, setPostcode) {
+  let streetObj = streetList.filter(i => i.value === value)[0]
+  setPostcode(streetObj ? streetObj.code : streetList[0].code)
+
+}
+
+function changeCity(value, setStreetList, setPostcode, setArea) {
+  fetch.get(`https://gateway.antdiy.vip/account-service/media_orders/pass/street?value=${value}`).then(res => {
+    if (res && res.data && res.data.success && res.data[value]) {
+      let list = JSON.parse(res.data[value])
+      let streetData = []
+      for (var i in list) {
+        streetData.push({
+          name: i,
+          value: i,
+          code: list[i]
+        })
+      }
+      if (streetData && streetData.length > 0) {
+        setStreetList(streetData)
+        setPostcode(streetData[0].code)
+        setArea(streetData[0].value)
+      }
+    }
+  })
 }
 
 function timer(setErrorText) {
