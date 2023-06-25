@@ -452,6 +452,7 @@ export default function Product() {
   const strProductId = product.id.lastIndexOf("/");
   let product_id = strProductId ? product.id.slice(strProductId + 1) : '';
 
+  const [hasMounted, setHasMounted] = useState(false);
   const [commentHtml, setComment] = useState('');
   const [commentHeader, setCommentHeader] = useState('');
   const [reviewTitle, setReviewTitle] = useState('');
@@ -468,25 +469,25 @@ export default function Product() {
   const [sortBy, setSortBy] = useState('created_at');
   const [filtRat, setFiltRat] = useState('');
 
-  var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.localStorage !== "undefined");
-  if (canUseDOM) {
-    let href = window.location.href
-    if (href && href.indexOf('-huf') > -1) {
-      currencyCode = 'HUF'
-      localStorage.setItem('currencyCode', currencyCode)
-    } else {
-      localStorage.removeItem('currencyCode')
-    }
-    let result = new URLSearchParams(window.location.search);
-    let param = result.get('source');
-    if (localStorage.getItem('refererName')) {
-      localStorage.setItem('sourceProductId', product.id)
-    }
-    if (param) {
-      window.localStorage.setItem('sourceName', param)
-      window.localStorage.setItem('sourceProductId', product.id)
-    }
-    useEffect(() => {
+  useEffect(() => {
+    setHasMounted(true);
+    if (canUseDOM) {
+      let href = window.location.href
+      if (href && href.indexOf('-huf') > -1) {
+        currencyCode = 'HUF'
+        localStorage.setItem('currencyCode', currencyCode)
+      } else {
+        localStorage.removeItem('currencyCode')
+      }
+      let result = new URLSearchParams(window.location.search);
+      let param = result.get('source');
+      if (localStorage.getItem('refererName')) {
+        localStorage.setItem('sourceProductId', product.id)
+      }
+      if (param) {
+        window.localStorage.setItem('sourceName', param)
+        window.localStorage.setItem('sourceProductId', product.id)
+      }
       if (product_id && openComment()) {
         // 评论
         GetJudge(product_id, 1, sortBy).then(res => {
@@ -501,7 +502,10 @@ export default function Product() {
           }
         })
       }
-    }, []);
+    }
+  }, []);
+  if (!hasMounted) {
+    return null;
   }
   productData = product
   productVariants = product.variants.nodes
