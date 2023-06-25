@@ -679,7 +679,7 @@ export default function Product() {
           </div>
           {commentHtml && (
             <div className='comment_box'>
-              <div className='comment_screen'>
+              {/* <div className='comment_screen'>
                 <select value={sortBy} onChange={(e) => { setScreen(e.target.value, product_id, setComment, setSortBy, filtRat) }} >
                   <option value="created_at">{LText.screenCreate}</option>
                   <option value="desc">{LText.screenDesc}</option>
@@ -689,7 +689,7 @@ export default function Product() {
                   <option value="videos_first">{LText.screenVideo}</option>
                   <option value="most_helpful">{LText.screenMost}</option>
                 </select>
-              </div>
+              </div> */}
               <div
                 className="dark:prose-invert comment_list"
                 onClick={(e) => { changePage(e, product_id, setComment, sortBy, filtRat) }}

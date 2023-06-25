@@ -450,7 +450,7 @@ function SettleAccounts(product, params, setErrorText, setIsSubmit) {
         window.open(`/thank_you?id=${res.data.data.oid}`, '_self')
       } else {
         setIsSubmit(false)
-        return setErrorText(res && res.data.msg || 'Comanda a eșuat')
+        return setErrorText(res && res.data.msg || LText.orderError)
       }
     } else {
       setIsSubmit(false)

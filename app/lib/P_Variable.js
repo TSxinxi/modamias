@@ -37,6 +37,8 @@ export function getLanguage() {
       country: 'EN',
       deliveryProcess: 'deliveryProcess1.jpg',
       whatsAppText: 'Vă rugăm să faceți clic pe trimite direct, nu ștergeți linkul de mai jos, veți primi cele mai precise răspunsuri de la serviciul nostru pentru clienți',
+      notFoundTit: 'We’ve lost this page',
+      notFoundText: 'We couldn’t find the page you’re looking for.',
       buy: 'Buy now',
       comTit: 'Customer Reviews',
       write: 'Write a review',
@@ -119,6 +121,7 @@ export function getLanguage() {
       empty: 'Fields cannot be empty',
       correct: 'Please enter the correct form',
       validnum: 'Enter a valid phone number',
+      orderError: 'Failed purchase',
       addressList: [
         {
           name: '(province) select',
@@ -942,11 +945,14 @@ export function getLanguage() {
         },
       ]
     },
+    // 中东
     SA: {
       type: 'SA',
       country: 'Saudi Arabia',
       deliveryProcess: 'deliveryProcess2.png',
       whatsAppText: 'يرجى نقر الإرسال مباشرة، لا تحذف الرابط أدناه، ستحصل على  الإجابات الأكثر دقة من خدمة العملاء',
+      notFoundTit: 'لقد فقدنا هذه الصفحة',
+      notFoundText: 'لم نتمكن من العثور على الصفحة التي تبحث عنها.',
       buy: 'اشتر الآن',
       comTit: 'تقييمات العملاء',
       write: 'إلغاء التقييم',
@@ -1031,7 +1037,7 @@ export function getLanguage() {
       empty: 'الحقول لا يمكن أن تكون فارغة',
       correct: 'الرجاء إدخال النموذج الصحيح',
       validnum: 'أدخل رقم هاتف صالح',
-
+      orderError: 'الشراء الفاشل',
       addressList: [
         {
           name: '（المحافظة）إختر',
@@ -1855,11 +1861,14 @@ export function getLanguage() {
         },
       ]
     },
+    // 罗马尼亚
     RO: {
       type: 'RO',
       country: 'Romania',
       deliveryProcess: 'deliveryProcess1.jpg',
       whatsAppText: 'Vă rugăm să faceți clic pe trimite direct, nu ștergeți linkul de mai jos, veți primi cele mai precise răspunsuri de la serviciul nostru pentru clienți',
+      notFoundTit: 'Am pierdut această pagină',
+      notFoundText: 'Nu am putut găsi pagina pe care o căutați.',
       buy: 'Cumpărați cu Ramburs la Livrare',
       comTit: 'Opinii clienți',
       write: 'anulează evaluarea',
@@ -1948,6 +1957,7 @@ export function getLanguage() {
       writeReview: 'Scrieți o recenzie',
       address: 'Adresă',
       postalCode: 'Cod postal',
+      orderError: 'Achiziție eșuată',
       addressList: [
         {
           name: "Province",
@@ -2081,11 +2091,14 @@ export function getLanguage() {
           value: "VN"
         }]
     },
+    // 匈牙利
     HUF: {
       type: "HUF",
       country: "Magyarország",
       deliveryProcess: 'deliveryProcess3.jpg',
       whatsAppText: 'Kérjük, kattintson közvetlenül a küldés gombra, ne törölje az alábbi linket, ügyfélszolgálatunktól a legpontosabb válaszokat kapja',
+      notFoundTit: 'Ezt az oldalt elvesztettük',
+      notFoundText: 'Nem találtuk a keresett oldalt.',
       buy: "Vásárlás utánvéttel",
       comTit: "Vásárlói vélemények",
       write: 'minősítés törlése',
@@ -2174,6 +2187,7 @@ export function getLanguage() {
       writeReview: 'Írjon véleményt',
       address: "Utca",
       postalCode: 'Irányítószám',
+      orderError: 'Sikertelen vásárlás',
       addressList: {
         "Megye": "",
         "Bács-Kiskun": {
