@@ -243,10 +243,17 @@ export function Information({ product }) {
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
-                <span>{LText.postalCode}</span>
+                <span>{LText.postalCode} <i>*</i></span>
                 <p></p>
               </div>
               <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>házszám <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder='házszám' value={building} onChange={(e) => { setBuilding(e.target.value) }} />
             </div>
           </>
         }
@@ -322,7 +329,7 @@ export function Information({ product }) {
                   city: city,
                   area: area,
                   postcode: postcode,
-                  // building: building,
+                  building: building,
                   // street: street,
                   // nearest_land_mark: nearest,
                   // message: message,
@@ -414,6 +421,9 @@ function SettleAccounts(product, params, setErrorText, setIsSubmit) {
   if (!params.name || !params.phone || !params.state || !params.city || !params.area) {
     return setErrorText(LText.empty)
   }
+  if (LText.type === 'HUF' && !params.building) {
+    return setErrorText(LText.empty)
+  }
   // var emailRegExp = /^[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;
   // if (!emailRegExp.test(params.email)) {
   //   return setErrorText(LText.correct)
@@ -441,6 +451,7 @@ function SettleAccounts(product, params, setErrorText, setIsSubmit) {
   params.source = source_name ? source_name : null
   if (LText.type === 'HUF') {
     params.tags = LText.type
+    params.area = params.area + ' ' + params.building
   }
   setIsSubmit(true)
 
