@@ -10,6 +10,11 @@ export function getShopAddress() {
   return 'modafallonei.myshopify.com';
 }
 
+export function getDomain() {
+  return 'https://gateway.antdiy.vip';
+  // return 'https://gateway.di79.com';
+}
+
 export function openWhatsApp() {
   const whatsApp = {
     phone: '8618267116473',

@@ -3,7 +3,7 @@ import { useRef, useMemo, useEffect, useState } from 'react';
 import { Money } from '@shopify/hydrogen';
 import { Text } from '~/components';
 import fetch from '~/fetch/axios';
-import { getShopAddress, getLanguage, getDirection } from '~/lib/P_Variable';
+import { getShopAddress, getLanguage, getDirection, getDomain } from '~/lib/P_Variable';
 const LText = getLanguage()
 const addressList = LText.addressList
 
@@ -362,7 +362,7 @@ function changeArea(value, streetList, setPostcode) {
 }
 
 function changeCity(value, setStreetList, setPostcode, setArea) {
-  fetch.get(`https://gateway.antdiy.vip/account-service/media_orders/pass/street?value=${value}`).then(res => {
+  fetch.get(`${getDomain()}/account-service/media_orders/pass/street?value=${value}`).then(res => {
     if (res && res.data && res.data.success && res.data[value]) {
       let list = JSON.parse(res.data[value])
       let streetData = []
@@ -455,7 +455,7 @@ function SettleAccounts(product, params, setErrorText, setIsSubmit) {
   }
   setIsSubmit(true)
 
-  fetch.post(`https://gateway.antdiy.vip/account-service/media_orders/create/pass`, params).then(res => {
+  fetch.post(`${getDomain()}/account-service/media_orders/create/pass`, params).then(res => {
     if (res && res.data) {
       if (res.data.success && res.data.data && res.data.data.oid) {
         window.open(`/thank_you?id=${res.data.data.oid}`, '_self')
