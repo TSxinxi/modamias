@@ -1932,11 +1932,11 @@ export function getLanguage() {
       yourName: 'Numele complet',
       fullName: 'Numele complet',
       semail: 'E-mail',
-      governor: 'Province',
+      governor: 'Județ',
       telephone: 'Telefon',
 
       district: 'Vă rugăm să selectați districtul dvs.',
-      city: 'Oraș',
+      city: 'Localitate',
       selectCity: 'Vă rugăm să vă selectați orașul',
       zone: 'Regiune',
       zonePle: 'Exemplu: Olaya, Riyadh',
@@ -1965,136 +1965,178 @@ export function getLanguage() {
       orderError: 'Achiziție eșuată',
       addressList: [
         {
-          name: "Province",
-          value: ""
+          "name": "Județ",
+          "value": ""
         },
         {
-          name: "Alba",
-          value: "AB"
-        }, {
-          name: "Arad",
-          value: "AR"
-        }, {
-          name: "Argeș",
-          value: "AG"
-        }, {
-          name: "Bacău",
-          value: "BC"
-        }, {
-          name: "Bihor",
-          value: "BH"
-        }, {
-          name: "Bistrița-Năsăud",
-          value: "BN"
-        }, {
-          name: "Botoșani",
-          value: "BT"
-        }, {
-          name: "Brăila",
-          value: "BR"
-        }, {
-          name: "Brașov",
-          value: "BV"
-        }, {
-          name: "București",
-          value: "B"
-        }, {
-          name: "Buzău",
-          value: "BZ"
-        }, {
-          name: "Caraș-Severin",
-          value: "CS"
-        }, {
-          name: "Cluj",
-          value: "CJ"
-        }, {
-          name: "Constanța",
-          value: "CT"
-        }, {
-          name: "Covasna",
-          value: "CV"
-        }, {
-          name: "Călărași",
-          value: "CL"
-        }, {
-          name: "Dolj",
-          value: "DJ"
-        }, {
-          name: "Dâmbovița",
-          value: "DB"
-        }, {
-          name: "Galați",
-          value: "GL"
-        }, {
-          name: "Giurgiu",
-          value: "GR"
-        }, {
-          name: "Gorj",
-          value: "GJ"
-        }, {
-          name: "Harghita",
-          value: "HR"
-        }, {
-          name: "Hunedoara",
-          value: "HD"
-        }, {
-          name: "Ialomița",
-          value: "IL"
-        }, {
-          name: "Iași",
-          value: "IS"
-        }, {
-          name: "Ilfov",
-          value: "IF"
-        }, {
-          name: "Maramureș",
-          value: "MM"
-        }, {
-          name: "Mehedinți",
-          value: "MH"
-        }, {
-          name: "Mureș",
-          value: "MS"
-        }, {
-          name: "Neamț",
-          value: "NT"
-        }, {
-          name: "Olt",
-          value: "OT"
-        }, {
-          name: "Prahova",
-          value: "PH"
-        }, {
-          name: "Sălaj",
-          value: "SJ"
-        }, {
-          name: "Satu Mare",
-          value: "SM"
-        }, {
-          name: "Sibiu",
-          value: "SB"
-        }, {
-          name: "Suceava",
-          value: "SV"
-        }, {
-          name: "Teleorman",
-          value: "TR"
-        }, {
-          name: "Timiș",
-          value: "TM"
-        }, {
-          name: "Tulcea",
-          value: "TL"
-        }, {
-          name: "Vâlcea",
-          value: "VL"
-        }, {
-          name: "Vaslui",
-          value: "VS"
-        }, {
-          name: "Vrancea",
-          value: "VN"
-        }]
+          "name": "ALBA",
+          "value": "ALBA"
+        },
+        {
+          "name": "ARAD",
+          "value": "ARAD"
+        },
+        {
+          "name": "ARGES",
+          "value": "ARGES"
+        },
+        {
+          "name": "BACAU",
+          "value": "BACAU"
+        },
+        {
+          "name": "BIHOR",
+          "value": "BIHOR"
+        },
+        {
+          "name": "BISTRITA-NASAUD",
+          "value": "BISTRITA-NASAUD"
+        },
+        {
+          "name": "BOTOSANI",
+          "value": "BOTOSANI"
+        },
+        {
+          "name": "BRAILA",
+          "value": "BRAILA"
+        },
+        {
+          "name": "BRASOV",
+          "value": "BRASOV"
+        },
+        {
+          "name": "BUZAU",
+          "value": "BUZAU"
+        },
+        {
+          "name": "CALARASI",
+          "value": "CALARASI"
+        },
+        {
+          "name": "CARAS-SEVERIN",
+          "value": "CARAS-SEVERIN"
+        },
+        {
+          "name": "CLUJ",
+          "value": "CLUJ"
+        },
+        {
+          "name": "CONSTANTA",
+          "value": "CONSTANTA"
+        },
+        {
+          "name": "COVASNA",
+          "value": "COVASNA"
+        },
+        {
+          "name": "DAMBOVITA",
+          "value": "DAMBOVITA"
+        },
+        {
+          "name": "DOLJ",
+          "value": "DOLJ"
+        },
+        {
+          "name": "GALATI",
+          "value": "GALATI"
+        },
+        {
+          "name": "GIURGIU",
+          "value": "GIURGIU"
+        },
+        {
+          "name": "GORJ",
+          "value": "GORJ"
+        },
+        {
+          "name": "HARGHITA",
+          "value": "HARGHITA"
+        },
+        {
+          "name": "HUNEDOARA",
+          "value": "HUNEDOARA"
+        },
+        {
+          "name": "IALOMITA",
+          "value": "IALOMITA"
+        },
+        {
+          "name": "IASI",
+          "value": "IASI"
+        },
+        {
+          "name": "ILFOV",
+          "value": "ILFOV"
+        },
+        {
+          "name": "MARAMURES",
+          "value": "MARAMURES"
+        },
+        {
+          "name": "MEHEDINTI",
+          "value": "MEHEDINTI"
+        },
+        {
+          "name": "MURES",
+          "value": "MURES"
+        },
+        {
+          "name": "NEAMT",
+          "value": "NEAMT"
+        },
+        {
+          "name": "OLT",
+          "value": "OLT"
+        },
+        {
+          "name": "PRAHOVA",
+          "value": "PRAHOVA"
+        },
+        {
+          "name": "SALAJ",
+          "value": "SALAJ"
+        },
+        {
+          "name": "SATU MARE",
+          "value": "SATU MARE"
+        },
+        {
+          "name": "SIBIU",
+          "value": "SIBIU"
+        },
+        {
+          "name": "SUCEAVA",
+          "value": "SUCEAVA"
+        },
+        {
+          "name": "TELEORMAN",
+          "value": "TELEORMAN"
+        },
+        {
+          "name": "TIMIS",
+          "value": "TIMIS"
+        },
+        {
+          "name": "TULCEA",
+          "value": "TULCEA"
+        },
+        {
+          "name": "VALCEA",
+          "value": "VALCEA"
+        },
+        {
+          "name": "VASLUI",
+          "value": "VASLUI"
+        },
+        {
+          "name": "VRANCEA",
+          "value": "VRANCEA"
+        },
+        {
+          "name": "BUCURESTI",
+          "value": "BUCURESTI"
+        }
+      ]
     },
     // 匈牙利
     HUF: {

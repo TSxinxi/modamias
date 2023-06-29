@@ -62,7 +62,7 @@ export function ProductBox({ product }) {
         <div className='product_title'>
           <span>{product.title}</span>
           <span>{product.variantTitle}</span>
-          <span>{product.originalTotalSet.presentmentMoney.amount}{currency}</span>
+          <span>{currency} {parseFloat(product?.originalTotalSet?.presentmentMoney?.amount)}</span>
         </div>
       </div >
     );

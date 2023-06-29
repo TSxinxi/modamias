@@ -71,7 +71,7 @@ export function ProductBox({ product }) {
             data={product.price}
             as="span"
           /> */}
-          <span className='font_weight_b'>{product.price.currencyCode}{parseFloat(product?.price?.amount)}</span>
+          <span className='font_weight_b'>{product.price.currencyCode} {parseFloat(product?.price?.amount)}</span>
         </Text>
       </div>
     </div >
@@ -88,7 +88,7 @@ export function Information({ product }) {
   const [area, setArea] = useState('');
   const [building, setBuilding] = useState('');
   const [street, setStreet] = useState('');
-  const [streetList, setStreetList] = useState([{ name: 'Utca', value: '' }]);
+  const [streetList, setStreetList] = useState([{ name: LText.type === 'HUF' ? 'Utca' : '', value: '' }]);
   const [nearest, setNearest] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -149,17 +149,10 @@ export function Information({ product }) {
           LText.type === 'RO' ? <>
             <div className='in_list'>
               <div className='in_list_title'>
-                <span>{LText.address} <i>*</i></span>
-                <p></p>
-              </div>
-              <input type="text" placeholder={LText.address} value={area} onChange={(e) => { setArea(e.target.value) }} />
-            </div>
-            <div className='in_list'>
-              <div className='in_list_title'>
                 <span>{LText.governor} <i>*</i></span>
                 <p></p>
               </div>
-              <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
+              <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode, setCity); setState(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   addressList.map((item, index) => {
                     return (
@@ -174,24 +167,29 @@ export function Information({ product }) {
                 <span>{LText.city} <i>*</i></span>
                 <p></p>
               </div>
-              {
-                LText.type === 'SA' ? <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
-                  {
-                    addressList.filter(i => i.value === state)[0].children.map((item, index) => {
-                      return (
-                        <option value={item.value} key={index}>- - {item.value ? item.value + '/' : ''}{item.name}- -</option>
-                      )
-                    })
-                  }
-                </select> : <input type="text" placeholder={LText.city} value={city} onChange={(e) => { setCity(e.target.value) }} />
-              }
+              <select name="city" value={city} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+                {
+                  streetList.map((item, index) => {
+                    return (
+                      <option value={item.value} key={index}>{item.name}</option>
+                    )
+                  })
+                }
+              </select>
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
-                <span>{LText.postalCode}</span>
+                <span>{LText.postalCode} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
+              <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.address} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder='ex: Strada, numar, bloc, scara, etaj, apartament' value={area} onChange={(e) => { setArea(e.target.value) }} />
             </div>
           </> : <>
             {
@@ -307,7 +305,7 @@ export function Information({ product }) {
               data={product.price}
               as="span"
             /> */}
-            <span className='font_weight_b'>{product.price.currencyCode}{parseFloat(product?.price?.amount)}</span>
+            <span className='font_weight_b'>{product.price.currencyCode} {parseFloat(product?.price?.amount)}</span>
           </Text>
           <div className='submit_btn'>
             {
@@ -370,7 +368,7 @@ function changeCity(value, setStreetList, setPostcode, setArea) {
         streetData.push({
           name: i,
           value: i,
-          code: list[i]
+          code: list[i] instanceof Array ? list[i][0] : list[i]
         })
       }
       if (streetData && streetData.length > 0) {
