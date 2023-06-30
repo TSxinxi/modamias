@@ -251,7 +251,7 @@ export function Information({ product }) {
                 <span>házszám <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder='házszám' value={building} onChange={(e) => { setBuilding(e.target.value) }} />
+              <input type="text" placeholder='Utca+házszám: Például (KBocskai utca 18)' value={building} onChange={(e) => { setBuilding(e.target.value) }} />
             </div>
           </>
         }
