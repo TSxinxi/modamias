@@ -3,7 +3,7 @@ import { useRef, useMemo, useEffect, useState } from 'react';
 import { Listbox } from '@headlessui/react';
 import { defer } from '@shopify/remix-oxygen';
 import fetch from '../../../fetch/axios';
-import { getShopAddress, openComment, getLanguage } from '~/lib/P_Variable';
+import { getShopAddress, openComment, getLanguage, getDomain } from '~/lib/P_Variable';
 import $ from 'jquery'
 import {
   useLoaderData,
@@ -733,7 +733,19 @@ function goSettleAccounts() {
   }
   localStorage.removeItem('selectedVariant')
   localStorage.setItem('selectedVariant', JSON.stringify(selectedVariant))
-  window.open(`/settleAccounts?id=${productData.id}`, '_self')
+
+  let source_name = window.localStorage.getItem('sourceName')
+  if (source_name) {
+    let params = {
+      source: source_name,
+      url: window.location.href,
+    }
+    fetch.post(`${getDomain()}/account-service/media_orders/cart_creat/pass`, params).then(() => {
+      window.open(`/settleAccounts?id=${productData.id}`, '_self')
+    })
+  } else {
+    window.open(`/settleAccounts?id=${productData.id}`, '_self')
+  }
 }
 
 export function ProductForm() {
