@@ -1960,7 +1960,7 @@ export function getLanguage() {
       validnum: 'Introduceți un număr de telefon valid',
       noOpinion: 'Nici o părere',
       writeReview: 'Scrieți o recenzie',
-      address: 'Adresă',
+      address: 'Adresa exacta',
       postalCode: 'Cod postal',
       orderError: 'Achiziție eșuată',
       addressList: [
