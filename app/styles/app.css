@@ -2097,9 +2097,6 @@ select {
 .-m-4{
   margin: -1rem;
 }
-.m-4{
-  margin: 1rem;
-}
 .-mb-px{
   margin-bottom: -1px;
 }
@@ -2108,9 +2105,6 @@ select {
 }
 .mt-2{
   margin-top: 0.5rem;
-}
-.mt-6{
-  margin-top: 1.5rem;
 }
 .block{
   display: block;
@@ -2135,9 +2129,6 @@ select {
 }
 .aspect-square{
   aspect-ratio: 1 / 1;
-}
-.aspect-\[4\/5\]{
-  aspect-ratio: 4/5;
 }
 .h-10{
   height: 2.5rem;
@@ -2262,20 +2253,8 @@ select {
      -moz-appearance: none;
           appearance: none;
 }
-.auto-cols-auto{
-  grid-auto-columns: auto;
-}
-.grid-flow-row{
-  grid-auto-flow: row;
-}
-.grid-flow-col{
-  grid-auto-flow: column;
-}
 .grid-cols-1{
   grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-.grid-cols-2{
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .grid-rows-\[1fr_auto\]{
   grid-template-rows: 1fr auto;
@@ -2331,14 +2310,8 @@ select {
 .gap-8{
   gap: 2rem;
 }
-.gap-1{
-  gap: 0.25rem;
-}
 .gap-y-2{
   row-gap: 0.5rem;
-}
-.gap-y-6{
-  row-gap: 1.5rem;
 }
 .overflow-auto{
   overflow: auto;
@@ -2348,9 +2321,6 @@ select {
 }
 .overflow-y-scroll{
   overflow-y: scroll;
-}
-.text-ellipsis{
-  text-overflow: ellipsis;
 }
 .whitespace-normal{
   white-space: normal;
@@ -2521,9 +2491,6 @@ select {
 }
 .text-center{
   text-align: center;
-}
-.text-right{
-  text-align: right;
 }
 .align-middle{
   vertical-align: middle;
@@ -2967,10 +2934,6 @@ shop-pay-button {
     bottom: auto;
   }
 
-  .sm\:grid-cols-3{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .sm\:gap-6{
     gap: 1.5rem;
   }
@@ -3053,10 +3016,6 @@ shop-pay-button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .md\:grid-cols-3{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .md\:items-start{
     align-items: flex-start;
   }
@@ -3079,10 +3038,6 @@ shop-pay-button {
 
   .md\:gap-8{
     gap: 2rem;
-  }
-
-  .md\:gap-4{
-    gap: 1rem;
   }
 
   .md\:overflow-x-auto{
@@ -3177,16 +3132,8 @@ shop-pay-button {
     grid-column: span 2 / span 2;
   }
 
-  .lg\:grid-cols-4{
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
   .lg\:gap-12{
     gap: 3rem;
-  }
-
-  .lg\:gap-6{
-    gap: 1.5rem;
   }
 
   .lg\:p-12{
