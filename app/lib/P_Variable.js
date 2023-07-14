@@ -1,7 +1,13 @@
 var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.localStorage !== "undefined");
 var currencyCode = ''
-if (canUseDOM && localStorage.getItem('currencyCode')) {
-  currencyCode = localStorage.getItem('currencyCode')
+if (canUseDOM) {
+  let href = window.location.href
+  if (href && href.indexOf('-huf') > -1) {
+    currencyCode = 'HUF'
+  }
+  if (localStorage.getItem('currencyCode')) {
+    currencyCode = localStorage.getItem('currencyCode')
+  }
 }
 
 export function getShopAddress() {
@@ -9,6 +15,7 @@ export function getShopAddress() {
   // return 'newsmartdeal.myshopify.com';
   return 'modafallonei.myshopify.com';
   // return 'hz-ts-10-21-new-addev-01.myshopify.com';
+  // return 'shop-salesdish.myshopify.com';
 }
 
 export function getDomain() {
@@ -40,7 +47,8 @@ export function getLanguage() {
   let language = {
     EN: {
       type: 'EN',
-      country: 'EN',
+      country: 'United States',
+      country_code: 'USA',
       deliveryProcess: 'deliveryProcess1.jpg',
       whatsAppText: 'Vă rugăm să faceți clic pe trimite direct, nu ștergeți linkul de mai jos, veți primi cele mai precise răspunsuri de la serviciul nostru pentru clienți',
       notFoundTit: 'We’ve lost this page',
@@ -955,6 +963,7 @@ export function getLanguage() {
     SA: {
       type: 'SA',
       country: 'Saudi Arabia',
+      country_code: 'SAU',
       deliveryProcess: 'deliveryProcess2.png',
       whatsAppText: 'يرجى نقر الإرسال مباشرة، لا تحذف الرابط أدناه، ستحصل على  الإجابات الأكثر دقة من خدمة العملاء',
       notFoundTit: 'لقد فقدنا هذه الصفحة',
@@ -1871,6 +1880,7 @@ export function getLanguage() {
     RO: {
       type: 'RO',
       country: 'Romania',
+      country_code: 'ROU',
       deliveryProcess: 'deliveryProcess1.jpg',
       whatsAppText: 'Vă rugăm să faceți clic pe trimite direct, nu ștergeți linkul de mai jos, veți primi cele mai precise răspunsuri de la serviciul nostru pentru clienți',
       notFoundTit: 'Am pierdut această pagină',
@@ -2143,6 +2153,7 @@ export function getLanguage() {
     HUF: {
       type: "HUF",
       country: "Magyarország",
+      country_code: 'HUN',
       deliveryProcess: 'deliveryProcess3.jpg',
       whatsAppText: 'Kérjük, kattintson közvetlenül a küldés gombra, ne törölje az alábbi linket, ügyfélszolgálatunktól a legpontosabb válaszokat kapja',
       notFoundTit: 'Ezt az oldalt elvesztettük',
