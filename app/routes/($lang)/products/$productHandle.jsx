@@ -210,6 +210,7 @@ function GetCommentHeader() {
 
           if (averageWrapper) {
             averageWrapper.innerHTML = `<button class='add_comment'>${LText.addComment}</button>`
+            averageWrapper.style.display = 'none'
           }
           if (averageText) {
             if (averageText.innerHTML === 'Be the first to write a review') {
@@ -448,6 +449,10 @@ export default function Product() {
   const { shippingPolicy, refundPolicy } = shop;
   const firstVariant = product.variants.nodes[0];
   const selectedVariant = product.selectedVariant ?? firstVariant;
+  const isOnSale =
+    selectedVariant?.price?.amount &&
+    selectedVariant?.compareAtPrice?.amount &&
+    selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
   const isOutOfStock = !selectedVariant?.availableForSale;
   const strProductId = product.id.lastIndexOf("/");
   let product_id = strProductId ? product.id.slice(strProductId + 1) : '';
@@ -468,6 +473,7 @@ export default function Product() {
   const [reviewer_name_format, setFrmat] = useState('');
   const [sortBy, setSortBy] = useState('created_at');
   const [filtRat, setFiltRat] = useState('');
+  const [currency, setCurrency] = useState('');
 
   useEffect(() => {
     setHasMounted(true);
@@ -476,8 +482,10 @@ export default function Product() {
       if (href && href.indexOf('-huf') > -1) {
         currencyCode = 'HUF'
         localStorage.setItem('currencyCode', currencyCode)
+        setCurrency(currencyCode)
       } else {
         localStorage.removeItem('currencyCode')
+        setCurrency(selectedVariant?.price?.currencyCode)
       }
       let result = new URLSearchParams(window.location.search);
       let param = result.get('source');
@@ -531,6 +539,144 @@ export default function Product() {
                 )} */}
               </div>
               <ProductForm />
+              <div className='comment_product'>
+                <div className='comment_box'>
+                  <div className='comment_box_title'>{LText.comTit}</div>
+                  {commentHeader ? <div
+                    className="dark:prose-invert comment_box_content"
+                    dangerouslySetInnerHTML={{ __html: commentHeader }}
+                    onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}
+                  /> : <div className="jdgm-rev-widg__header comment_box_content">
+                    <div className="jdgm-rev-widg__summary">
+                      <div className="jdgm-rev-widg__summary-text">{LText.noOpinion}</div>
+                    </div>
+                    {/* <div className="jdgm-rev-widg__sort-wrapper">
+                <button className="add_comment" onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}>{LText.writeReview}</button>
+              </div> */}
+                  </div>}
+                  <div className='jq_slow'>
+                    <div className='write_review'>
+                      <div className='write_review_title'>{LText.addComment}</div>
+                      <div className='write_review_li'>
+                        <div className="write_review_name">{LText.rating}</div>
+                        <div className='star_score'>
+                          {
+                            ['', '', '', '', ''].map((item, index) => {
+                              return <div className='star_li'
+                                key={index}
+                                onMouseEnter={() => { setHhoverStar(index + 1) }}
+                                onMouseLeave={() => { setHhoverStar(starScore) }}
+                                onClick={() => { setStarScore(index + 1) }}
+                              ><img src={`https://platform.antdiy.vip/static/image/${hoverStar > index ? 'hydrogen_icon_star_quan' : 'hydrogen_icon_star_kongg'}.svg`} /> </div>
+                            })
+                          }
+                        </div>
+                      </div>
+                      <div className='write_review_li'>
+                        <div className="write_review_name">{LText.reviewTitle}</div>
+                        <input type="text" placeholder={LText.reviewTiPle} value={reviewTitle} onChange={(e) => { setReviewTitle(e.target.value) }} />
+                      </div>
+                      <div className='write_review_li'>
+                        <div className="write_review_name">{LText.review}</div>
+                        <textarea type="text" placeholder={LText.reviewPle} value={review} onChange={(e) => { setErrorText({ type: 1, content: e.target.value ? '' : LText.error }), setReview(e.target.value) }} />
+                        {
+                          errorText.type === 1 && errorText.content ? <div className='error_text'>{errorText.content}</div> : null
+                        }
+                      </div>
+                      <div className='write_review_li'>
+                        <div className="write_review_name">{LText.picture}</div>
+                        <div className="write_review_img">
+                          <div className='write_review_cont'>
+                            <span className='write_review_cont_icon'>
+                              <img src="https://platform.antdiy.vip/static/image/hydrogen_icon_upload.svg" />
+                            </span>
+                            <input type="file" name="media" multiple accept="image/gif,image/jpeg,image/jpg,image/png,image/webp" onChange={(e) => { changeImg(e, imgList, setImgList, imgKey, setImgKey) }} />
+                          </div>
+                          {
+                            imgList.map((item, index) => {
+                              return <div className='write_review_cont' key={index}>
+                                <img className='delete' onClick={() => { imgList.splice(index, 1); setImgList([...imgList]) }} src="https://platform.antdiy.vip/static/image/hydrogen_icon_delete.svg" />
+                                <img src={item.url} alt="" />
+                              </div>
+                            })
+                          }
+                        </div>
+                      </div>
+                      <div className='write_review_li'>
+                        <div className="write_review_name">
+                          <span>{LText.selectName}</span>
+                          <select className="write_review_select" value={reviewer_name_format} onChange={(e) => { setFrmat(e.target.value) }} >
+                            <option value="">John Smith</option>
+                            <option value="last_initial">John S.</option>
+                            <option value="all_initials">J.S.</option>
+                            <option value="anonymous">{LText.unknown}</option>
+                          </select>
+                          <span> )</span>
+                        </div>
+                        <input type="text" placeholder={LText.namePle} value={name} onChange={(e) => { setErrorText({ type: 2, content: e.target.value ? '' : LText.error }), setName(e.target.value) }} />
+                        {
+                          errorText.type === 2 && errorText.content ? <div className='error_text'>{errorText.content}</div> : null
+                        }
+                      </div>
+                      <div className='write_review_li'>
+                        <div className="write_review_name">{LText.emailN}</div>
+                        <input name="email" type="text" placeholder={LText.emailPle} value={email} onChange={(e) => { setErrorText({ type: 3, content: e.target.value ? '' : LText.error }), setEmail(e.target.value) }} />
+                        {
+                          errorText.type === 3 && errorText.content ? <div className='error_text'>{errorText.content}</div> : null
+                        }
+                      </div>
+                      <div className="write_review_btn">
+                        <button className='cancel' onClick={() => { WriteReview() }}>{LText.cancelRe}</button>
+                        <button className='submit' onClick={() => {
+                          submitReview(
+                            {
+                              url: getShopAddress(),
+                              shop_domain: getShopAddress(),
+                              platform: 'shopify',
+                              reviewer_name_format: reviewer_name_format,
+                              name: name,
+                              email: email,
+                              rating: starScore,
+                              title: reviewTitle,
+                              body: review,
+                              id: product_id,
+                            },
+                            imgList,
+                            setErrorText,
+                            setIsSuccess
+                          )
+                        }}>{LText.submitRe}</button>
+                      </div>
+                    </div>
+                  </div>
+                  {
+                    isSuccess ? <div className='review_submit'>
+                      <div className="review_submit_tit">{LText.subReview}</div>
+                      <div className="review_submit_content">{LText.subComtent}</div>
+                    </div> : null
+                  }
+                </div>
+                {commentHtml && (
+                  <div className='comment_box'>
+                    {/* <div className='comment_screen'>
+                <select value={sortBy} onChange={(e) => { setScreen(e.target.value, product_id, setComment, setSortBy, filtRat) }} >
+                  <option value="created_at">{LText.screenCreate}</option>
+                  <option value="desc">{LText.screenDesc}</option>
+                  <option value="asc">{LText.screenAsc}</option>
+                  <option value="with_pictures">{LText.screenWith}</option>
+                  <option value="pictures_first">{LText.screenPic}</option>
+                  <option value="videos_first">{LText.screenVideo}</option>
+                  <option value="most_helpful">{LText.screenMost}</option>
+                </select>
+              </div> */}
+                    <div
+                      className="dark:prose-invert comment_list"
+                      onClick={(e) => { changePage(e, product_id, setComment, sortBy, filtRat) }}
+                      dangerouslySetInnerHTML={{ __html: commentHtml }}
+                    />
+                  </div>
+                )}
+              </div>
               {descriptionHtml && (
                 <div
                   className="dark:prose-invert description_box"
@@ -564,160 +710,48 @@ export default function Product() {
             </section>
           </div>
         </div>
-        <div className='padding16'>
-          <div className='comment_box'>
-            <div className='comment_box_title'>{LText.comTit}</div>
-            {commentHeader ? <div
-              className="dark:prose-invert comment_box_content"
-              dangerouslySetInnerHTML={{ __html: commentHeader }}
-              onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}
-            /> : <div className="jdgm-rev-widg__header comment_box_content">
-              <div className="jdgm-rev-widg__summary">
-                <div className="jdgm-rev-widg__summary-text">{LText.noOpinion}</div>
-              </div>
-              <div className="jdgm-rev-widg__sort-wrapper">
-                <button className="add_comment" onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}>{LText.writeReview}</button>
-              </div>
-            </div>}
-            <div className='jq_slow'>
-              <div className='write_review'>
-                <div className='write_review_title'>{LText.addComment}</div>
-                <div className='write_review_li'>
-                  <div className="write_review_name">{LText.rating}</div>
-                  <div className='star_score'>
-                    {
-                      ['', '', '', '', ''].map((item, index) => {
-                        return <div className='star_li'
-                          key={index}
-                          onMouseEnter={() => { setHhoverStar(index + 1) }}
-                          onMouseLeave={() => { setHhoverStar(starScore) }}
-                          onClick={() => { setStarScore(index + 1) }}
-                        ><img src={`https://platform.antdiy.vip/static/image/${hoverStar > index ? 'hydrogen_icon_star_quan' : 'hydrogen_icon_star_kongg'}.svg`} /> </div>
-                      })
-                    }
-                  </div>
-                </div>
-                <div className='write_review_li'>
-                  <div className="write_review_name">{LText.reviewTitle}</div>
-                  <input type="text" placeholder={LText.reviewTiPle} value={reviewTitle} onChange={(e) => { setReviewTitle(e.target.value) }} />
-                </div>
-                <div className='write_review_li'>
-                  <div className="write_review_name">{LText.review}</div>
-                  <textarea type="text" placeholder={LText.reviewPle} value={review} onChange={(e) => { setErrorText({ type: 1, content: e.target.value ? '' : LText.error }), setReview(e.target.value) }} />
-                  {
-                    errorText.type === 1 && errorText.content ? <div className='error_text'>{errorText.content}</div> : null
-                  }
-                </div>
-                <div className='write_review_li'>
-                  <div className="write_review_name">{LText.picture}</div>
-                  <div className="write_review_img">
-                    <div className='write_review_cont'>
-                      <span className='write_review_cont_icon'>
-                        <img src="https://platform.antdiy.vip/static/image/hydrogen_icon_upload.svg" />
-                      </span>
-                      <input type="file" name="media" multiple accept="image/gif,image/jpeg,image/jpg,image/png,image/webp" onChange={(e) => { changeImg(e, imgList, setImgList, imgKey, setImgKey) }} />
-                    </div>
-                    {
-                      imgList.map((item, index) => {
-                        return <div className='write_review_cont' key={index}>
-                          <img className='delete' onClick={() => { imgList.splice(index, 1); setImgList([...imgList]) }} src="https://platform.antdiy.vip/static/image/hydrogen_icon_delete.svg" />
-                          <img src={item.url} alt="" />
-                        </div>
-                      })
-                    }
-                  </div>
-                </div>
-                <div className='write_review_li'>
-                  <div className="write_review_name">
-                    <span>{LText.selectName}</span>
-                    <select className="write_review_select" value={reviewer_name_format} onChange={(e) => { setFrmat(e.target.value) }} >
-                      <option value="">John Smith</option>
-                      <option value="last_initial">John S.</option>
-                      <option value="all_initials">J.S.</option>
-                      <option value="anonymous">{LText.unknown}</option>
-                    </select>
-                    <span> )</span>
-                  </div>
-                  <input type="text" placeholder={LText.namePle} value={name} onChange={(e) => { setErrorText({ type: 2, content: e.target.value ? '' : LText.error }), setName(e.target.value) }} />
-                  {
-                    errorText.type === 2 && errorText.content ? <div className='error_text'>{errorText.content}</div> : null
-                  }
-                </div>
-                <div className='write_review_li'>
-                  <div className="write_review_name">{LText.emailN}</div>
-                  <input name="email" type="text" placeholder={LText.emailPle} value={email} onChange={(e) => { setErrorText({ type: 3, content: e.target.value ? '' : LText.error }), setEmail(e.target.value) }} />
-                  {
-                    errorText.type === 3 && errorText.content ? <div className='error_text'>{errorText.content}</div> : null
-                  }
-                </div>
-                <div className="write_review_btn">
-                  <button className='cancel' onClick={() => { WriteReview() }}>{LText.cancelRe}</button>
-                  <button className='submit' onClick={() => {
-                    submitReview(
-                      {
-                        url: getShopAddress(),
-                        shop_domain: getShopAddress(),
-                        platform: 'shopify',
-                        reviewer_name_format: reviewer_name_format,
-                        name: name,
-                        email: email,
-                        rating: starScore,
-                        title: reviewTitle,
-                        body: review,
-                        id: product_id,
-                      },
-                      imgList,
-                      setErrorText,
-                      setIsSuccess
-                    )
-                  }}>{LText.submitRe}</button>
-                </div>
-              </div>
-            </div>
-            {
-              isSuccess ? <div className='review_submit'>
-                <div className="review_submit_tit">{LText.subReview}</div>
-                <div className="review_submit_content">{LText.subComtent}</div>
-              </div> : null
-            }
-          </div>
-          {commentHtml && (
-            <div className='comment_box'>
-              {/* <div className='comment_screen'>
-                <select value={sortBy} onChange={(e) => { setScreen(e.target.value, product_id, setComment, setSortBy, filtRat) }} >
-                  <option value="created_at">{LText.screenCreate}</option>
-                  <option value="desc">{LText.screenDesc}</option>
-                  <option value="asc">{LText.screenAsc}</option>
-                  <option value="with_pictures">{LText.screenWith}</option>
-                  <option value="pictures_first">{LText.screenPic}</option>
-                  <option value="videos_first">{LText.screenVideo}</option>
-                  <option value="most_helpful">{LText.screenMost}</option>
-                </select>
-              </div> */}
-              <div
-                className="dark:prose-invert comment_list"
-                onClick={(e) => { changePage(e, product_id, setComment, sortBy, filtRat) }}
-                dangerouslySetInnerHTML={{ __html: commentHtml }}
-              />
-            </div>
-          )}
-        </div>
         {selectedVariant && (
-          <div className="grid items-stretch gap-4 sticky_bottom">
-            <button className={`inline-block rounded font-medium text-center w-full ${isOutOfStock ? 'border border-primary/10 bg-contrast text-primary' : 'bg-primary text-contrast'}`}>
-              {isOutOfStock ? (
-                <Text className='py-3 px-6'>{LText.sold}</Text>//卖完了
-              ) : (
-                <Text //立即购买
-                  as="span"
-                  className="flex items-center justify-center gap-2 py-3 px-6"
-                  style={{ maxWidth: 'initial' }}
-                  onClick={() => { goSettleAccounts() }}
-                >
-                  <span>{LText.buy}</span>
-                </Text>
-              )}
-            </button>
+          // <div className="grid items-stretch gap-4 sticky_bottom">
+          //   <button className={`inline-block rounded font-medium text-center w-full ${isOutOfStock ? 'border border-primary/10 bg-contrast text-primary' : 'bg-primary text-contrast'}`}>
+          //     {isOutOfStock ? (
+          //       <Text className='py-3 px-6'>{LText.sold}</Text>//卖完了
+          //     ) : (
+          //       <Text //立即购买
+          //         as="span"
+          //         className="flex items-center justify-center gap-2 py-3 px-6"
+          //         style={{ maxWidth: 'initial' }}
+          //         onClick={() => { goSettleAccounts() }}
+          //       >
+          //         <span>{LText.buy}</span>
+          //       </Text>
+          //     )}
+          //   </button>
+          // </div>
+          <div className='settle_accounts_foot'>
+            <div>
+              <div className='buy_btn_price'>
+                <span className='btn_price btn_price_new'>
+                  <i>{currency} </i>{parseFloat(selectedVariant?.price?.amount)}
+                </span>
+                {isOnSale && (
+                  <span className='btn_price btn_price_old'>
+                    <i>{currency} </i>{parseFloat(selectedVariant?.compareAtPrice?.amount)}
+                  </span>
+                )}
+              </div>
+              <div className='submit_btn'>
+                <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast'>
+                  <Text //立即购买
+                    as="span"
+                    className="flex items-center justify-center gap-2 py-3 px-6"
+                    style={{ maxWidth: 'initial' }}
+                    onClick={() => { goSettleAccounts() }}
+                  >
+                    <span>{LText.buy}</span>
+                  </Text>
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </Section>
@@ -726,13 +760,15 @@ export default function Product() {
 }
 
 function goSettleAccounts() {
-  const firstVariant = productData.variants.nodes[0];
-  const selectedVariant = productData.selectedVariant ?? firstVariant;
-  if (currencyCode) {
-    selectedVariant.price.currencyCode = currencyCode
-  }
-  localStorage.removeItem('selectedVariant')
-  localStorage.setItem('selectedVariant', JSON.stringify(selectedVariant))
+  // const firstVariant = productData.variants.nodes[0];
+  // const selectedVariant = productData.selectedVariant ?? firstVariant;
+  // if (currencyCode) {
+  //   selectedVariant.price.currencyCode = currencyCode
+  // }
+  // localStorage.removeItem('selectedVariant')
+  // localStorage.setItem('selectedVariant', JSON.stringify(selectedVariant))
+  localStorage.removeItem('productVariant')
+  localStorage.setItem('productVariant', JSON.stringify(productData))
 
   let source_name = window.localStorage.getItem('sourceName')
   if (source_name) {
@@ -839,11 +875,11 @@ export function ProductForm() {
             </span>
           )}
         </Text>
-        <img className="variant_img" src={selectedVariant?.image?.url} />
-        <ProductOptions
+        {/* <img className="variant_img" src={selectedVariant?.image?.url} /> */}
+        {/* <ProductOptions
           options={product.options}
           searchParamsWithDefaults={searchParamsWithDefaults}
-        />
+        /> */}
         {/* {selectedVariant && (
           <div className="grid items-stretch gap-4">
             <button className={`inline-block rounded font-medium text-center w-full ${isOutOfStock ? 'border border-primary/10 bg-contrast text-primary' : 'bg-primary text-contrast'}`}>
