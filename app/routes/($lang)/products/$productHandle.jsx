@@ -529,7 +529,7 @@ export default function Product() {
             className="w-screen md:w-full lg:col-span-2"
           />
           <div className="left_product sticky md:-mb-nav md:top-nav md:-translate-y-nav md:pt-nav hiddenScroll padding16">
-            <section className="flex flex-col w-full gap-8 md:mx-auto md:max-w-sm md:px-0" style={{ color: '#141414E6' }}>
+            <section className="flex flex-col w-full md:mx-auto md:max-w-sm md:px-0" style={{ color: '#141414E6' }}>
               <div className="grid gap-2">
                 <Heading as="h1" className="whitespace-normal">
                   {title}
@@ -740,10 +740,10 @@ export default function Product() {
                 )}
               </div>
               <div className='submit_btn'>
-                <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast'>
+                <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast paddingT5'>
                   <Text //立即购买
                     as="span"
-                    className="flex items-center justify-center gap-2 py-3 px-6"
+                    className="flex items-center justify-center gap-2 py-3 px-6 buy_text"
                     style={{ maxWidth: 'initial' }}
                     onClick={() => { goSettleAccounts() }}
                   >
@@ -848,11 +848,11 @@ export function ProductForm() {
   }, []);
 
   return (
-    <div className="grid gap-10">
+    <div className="grid gap-10 pricex_box">
       <div className="grid gap-4">
         <Text
           as="span"
-          className="flex items-center gap-2"
+          className="flex items-center"
         >
           {/* <Money
             withoutTrailingZeros

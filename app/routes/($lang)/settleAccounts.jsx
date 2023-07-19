@@ -405,19 +405,13 @@ export function Information({ selectedVar }) {
       </div>
       <div className='settle_accounts_foot'>
         <div>
-          <Text
+          {/* <Text
             as="span"
             className="flex items-center gap-2"
             style={{ margin: '0 20px' }}
           >
-            {/* <Money
-              className='font_weight_b'
-              withoutTrailingZeros
-              data={selectedVar.price}
-              as="span"
-            /> */}
             <span className='font_weight_b'>{selectedVar.price.currencyCode} {parseFloat(selectedVar?.price?.amount)}</span>
-          </Text>
+          </Text> */}
           {
             selectedVar.availableForSale ? <div className='submit_btn'>
             {
@@ -425,7 +419,7 @@ export function Information({ selectedVar }) {
                 <img src="https://platform.antdiy.vip/static/image/hydrogen_loading.gif" />
               </div> : null
             }
-            <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast' onClick={() => {
+            <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast paddingT5' onClick={() => {
               SettleAccounts(
                 selectedVar,
                 {
@@ -450,7 +444,7 @@ export function Information({ selectedVar }) {
             }}>
               <Text
                 as="span"
-                className="flex items-center justify-center gap-2 py-3 px-6 font_weight_b"
+                className="flex items-center justify-center gap-2 py-3 px-6 font_weight_b buy_text"
               >
                 <span>{LText.apply}</span>
               </Text>

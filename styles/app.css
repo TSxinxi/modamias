@@ -371,6 +371,10 @@ shop-pay-button {
     font-size: 1rem;
     font-weight: 400;
     text-decoration: line-through;
+    margin: 0 10px;
+  }
+  .pricex_box{
+    margin: 2rem 0;
   }
   .current_price i{
     font-style: normal;
@@ -684,6 +688,12 @@ shop-pay-button {
     font-size: 1rem;
     box-shadow: 0 0 3px rgb(0 0 0 / 30%);
   }
+  .paddingT5{
+    padding: 5px 0;
+  }
+  /* .buy_text{
+    font-size: 1.2rem !important;
+  } */
   .settle_accounts_title >div,
   .settle_accounts_foot > div{
     display: flex;
@@ -1000,7 +1010,7 @@ shop-pay-button {
     flex-direction: column;
     align-items: center;
     font-size: 14px;
-    margin-top: 20px;
+    margin: 20px 0;
   }
   .settle_accounts .order_tips span{
     color: #212529;
