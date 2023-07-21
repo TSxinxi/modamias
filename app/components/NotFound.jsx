@@ -9,7 +9,7 @@ export function NotFound({ type = 'page' }) {
   useEffect(() => {
     var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.localStorage !== "undefined");
     if (canUseDOM) {
-      if (LText.type === 'RO') {
+      if (LText.type === 'RON') {
         window.open('https://' + getShopAddress(), '_self')
       } else {
         setHeading(LText.notFoundTit)

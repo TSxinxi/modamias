@@ -43,7 +43,7 @@ export function getDirection() {
 export function getLanguage() {
   // let LType = 'EN'
   // let LType = 'SA'
-  let LType = currencyCode || 'RO'
+  let LType = currencyCode || 'RON'
   let language = {
     EN: {
       type: 'EN',
@@ -1877,8 +1877,8 @@ export function getLanguage() {
       ]
     },
     // 罗马尼亚
-    RO: {
-      type: 'RO',
+    RON: {
+      type: 'RON',
       country: 'Romania',
       country_code: 'ROU',
       deliveryProcess: 'deliveryProcess1.jpg',

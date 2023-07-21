@@ -53,8 +53,8 @@ export default function thank_you() {
 }
 
 export function ProductBox({ product }) {
-  let selectedVariant = JSON.parse(window.localStorage.getItem('selectedVariant'))
-  let currency = selectedVariant.price.currencyCode
+  // let selectedVariant = JSON.parse(window.localStorage.getItem('selectedVariant'))
+  // let currency = selectedVariant.price.currencyCode
   if (product) {
     return (
       <div className='product_box thank_product_box' >
@@ -62,7 +62,7 @@ export function ProductBox({ product }) {
         <div className='product_title'>
           <span>{product.title}</span>
           <span>{product.variantTitle}</span>
-          <span>{currency} {parseFloat(product?.originalTotalSet?.presentmentMoney?.amount)}</span>
+          <span>{LText.type} {parseFloat(product?.originalTotalSet?.presentmentMoney?.amount)}</span>
         </div>
       </div >
     );
@@ -126,7 +126,7 @@ export function OrderBox({ orderData }) {
           </div>
         </div>
         {
-          LText.type === 'RO' ? <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast' style={{ marginTop: '20px' }} onClick={() => { window.open('https://' + getShopAddress(), '_self') }}>
+          LText.type === 'RON' ? <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast' style={{ marginTop: '20px' }} onClick={() => { window.open('https://' + getShopAddress(), '_self') }}>
             <Text
               as="span"
               className="flex items-center justify-center gap-2 py-3 px-6"

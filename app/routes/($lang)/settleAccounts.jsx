@@ -257,7 +257,7 @@ export function Information({ selectedVar }) {
           <input type="text" placeholder={LText.phonepl2} value={whatsapp} onChange={(e) => { setWhatsapp(e.target.value) }} />
         </div> */}
         {
-          LText.type === 'RO' ? <>
+          LText.type === 'RON' ? <>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>{LText.governor} <i>*</i></span>
