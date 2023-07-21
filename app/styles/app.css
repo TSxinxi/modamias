@@ -1830,7 +1830,7 @@ select{
     -webkit-box-orient: vertical;
   }
 .comment_product{
-    margin-top: 1rem;
+    margin: 1rem 0;
   }
 .order_content{
     margin-top: 185px;
