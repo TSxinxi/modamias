@@ -325,7 +325,8 @@ export function Information({ selectedVar }) {
                 <span>Település/Kerület <i>*</i></span>
                 <p></p>
               </div>
-              <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode, setArea); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              {/* changeCity(e.target.value, setStreetList, setPostcode, setArea);  */}
+              <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   province.filter(i => i.value === state)[0].children.map((item, index) => {
                     return (
@@ -340,7 +341,7 @@ export function Information({ selectedVar }) {
                 <span>{LText.address} <i>*</i></span>
                 <p></p>
               </div>
-              <select name="city" value={area} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setArea(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              {/* <select name="city" value={area} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setArea(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   streetList.map((item, index) => {
                     return (
@@ -348,14 +349,20 @@ export function Information({ selectedVar }) {
                     )
                   })
                 }
-              </select>
+              </select> */}
+              <input type="text" placeholder={LText.address} value={area} onChange={(e) => { setArea(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
-                <span>{LText.postalCode} <i>*</i></span>
+                <span>{LText.postalCode}</span>
                 <p></p>
               </div>
-              <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
+              {/* <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} /> */}
+              <input type="number" placeholder={LText.postalCode} value={postcode} onChange={(e) => {
+                if (e.target.value.length > 4) {
+                  setPostcode(e.target.value.slice(0, 4))
+                } else { setPostcode(e.target.value) }
+              }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
