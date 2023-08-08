@@ -692,9 +692,10 @@ shop-pay-button {
   .paddingT5{
     padding: 5px 0;
   }
-  /* .buy_text{
-    font-size: 1.2rem !important;
-  } */
+  .buy_text{
+    /* font-size: 1.2rem !important; */
+    max-width: none !important;
+  }
   .settle_accounts_title >div,
   .settle_accounts_foot > div{
     display: flex;
