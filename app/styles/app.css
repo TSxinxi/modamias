@@ -1390,6 +1390,7 @@ select{
 .current_price_new{
     font-size: 1.6rem;
     font-weight: bold;
+    color: #ff2020;
   }
 .current_price_old{
     opacity: .5;
@@ -1752,6 +1753,7 @@ select{
     color: rgba(20,20,20,0.90196);
     /* text-shadow: 0 1px 2px rgba(0,0,0,0.50); */
     font-weight: 700;
+    color: #ff2020;
   }
 .buy_btn_price .btn_price_old{
     font-size: 1rem;
