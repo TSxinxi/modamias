@@ -562,9 +562,9 @@ function SettleAccounts(selectedVar, params, setErrorText, setIsSubmit) {
   params.shop = getShopAddress()
   params.source = source_name ? source_name : null
   if (LText.type === 'HUF') {
-    params.tags = LText.type
     params.area = params.area + ' ' + params.building
   }
+  params.tags = LText.type
   setIsSubmit(true)
 
   fetch.post(`${getDomain()}/account-service/media_orders/create/pass`, params).then(res => {
