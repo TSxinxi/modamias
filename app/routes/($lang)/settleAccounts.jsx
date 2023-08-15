@@ -199,7 +199,7 @@ export function Information({ selectedVar }) {
   const [area, setArea] = useState('');
   const [building, setBuilding] = useState('');
   const [street, setStreet] = useState('');
-  const [streetList, setStreetList] = useState([{ name: LText.type === 'HUF' ? 'Utca' : '', value: '' }]);
+  const [streetList, setStreetList] = useState([{ name: LText.type === 'HUF' ? 'Utca' : LText.type === 'CZK' ? 'Vyberte obec' : '', value: '' }]);
   const [nearest, setNearest] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -301,6 +301,56 @@ export function Information({ selectedVar }) {
                 <p></p>
               </div>
               <input type="text" placeholder='ex: Strada, numar, bloc, scara, etaj, apartament' value={area} onChange={(e) => { setArea(e.target.value) }} />
+            </div>
+          </> : LText.type === 'CZK' ? <>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.governor} <i>*</i></span>
+                <p></p>
+              </div>
+              <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode, setCity); setState(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+                {
+                  addressList.map((item, index) => {
+                    return (
+                      <option value={item.value} key={index}>{item.name}</option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.city} <i>*</i></span>
+                <p></p>
+              </div>
+              <select name="city" value={city} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+                {
+                  streetList.map((item, index) => {
+                    return (
+                      <option value={item.value} key={index}>{item.name}</option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.postalCode} <i>*</i></span>
+                <p></p>
+              </div>
+              {/* <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} /> */}
+              <input type="number" placeholder={LText.postalCode} value={postcode} onChange={(e) => {
+                if (e.target.value.length > 5) {
+                  setPostcode(e.target.value.slice(0, 5))
+                } else { setPostcode(e.target.value) }
+              }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.address} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder='Ulice + číslo dveří: např. (Pod Pivovarem 265)' value={area} onChange={(e) => { setArea(e.target.value) }} />
             </div>
           </> : <>
             {
@@ -421,42 +471,42 @@ export function Information({ selectedVar }) {
           </Text> */}
           {
             selectedVar.availableForSale ? <div className='submit_btn'>
-            {
-              isSubmit ? <div className='loading_box'>
-                <img src="https://platform.antdiy.vip/static/image/hydrogen_loading.gif" />
-              </div> : null
-            }
-            <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast paddingT5' onClick={() => {
-              SettleAccounts(
-                selectedVar,
-                {
-                  name: name,
-                  email: email,
-                  phone: phone,
-                  // whatsapp: whatsapp,
-                  country: LText.country,
-                  country_code: LText.type,
-                  state: state,
-                  city: city,
-                  area: area,
-                  postcode: postcode,
-                  building: building,
-                  // street: street,
-                  // nearest_land_mark: nearest,
-                  // message: message,
-                },
-                setErrorText,
-                setIsSubmit
-              )
-            }}>
-              <Text
-                as="span"
-                className="flex items-center justify-center gap-2 py-3 px-6 font_weight_b buy_text"
-              >
-                <span>{LText.apply}</span>
-              </Text>
-            </button>
-          </div> : <button className='inline-block rounded font-medium text-center w-full border border-primary/10 bg-contrast text-primary'>{LText.sold}</button>
+              {
+                isSubmit ? <div className='loading_box'>
+                  <img src="https://platform.antdiy.vip/static/image/hydrogen_loading.gif" />
+                </div> : null
+              }
+              <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast paddingT5' onClick={() => {
+                SettleAccounts(
+                  selectedVar,
+                  {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    // whatsapp: whatsapp,
+                    country: LText.country,
+                    country_code: LText.type,
+                    state: state,
+                    city: city,
+                    area: area,
+                    postcode: postcode,
+                    building: building,
+                    // street: street,
+                    // nearest_land_mark: nearest,
+                    // message: message,
+                  },
+                  setErrorText,
+                  setIsSubmit
+                )
+              }}>
+                <Text
+                  as="span"
+                  className="flex items-center justify-center gap-2 py-3 px-6 font_weight_b buy_text"
+                >
+                  <span>{LText.apply}</span>
+                </Text>
+              </button>
+            </div> : <button className='inline-block rounded font-medium text-center w-full border border-primary/10 bg-contrast text-primary'>{LText.sold}</button>
           }
         </div>
       </div>
@@ -474,6 +524,11 @@ function changeArea(value, streetList, setPostcode) {
 }
 
 function changeCity(value, setStreetList, setPostcode, setArea) {
+  if (!value && LText.type === 'CZK') {
+    setArea('')
+    setPostcode('')
+    setStreetList([{ name: 'Vyberte obec', value: '' }])
+  }
   fetch.get(`${getDomain()}/account-service/media_orders/pass/street?value=${value}`).then(res => {
     if (res && res.data && res.data.success && res.data[value]) {
       let list = JSON.parse(res.data[value])
@@ -486,6 +541,9 @@ function changeCity(value, setStreetList, setPostcode, setArea) {
         })
       }
       if (streetData && streetData.length > 0) {
+        if (LText.type === 'CZK') {
+          streetData.unshift({ name: 'Vyberte obec', code: '', value: '' })
+        }
         setStreetList(streetData)
         setPostcode(streetData[0].code)
         setArea(streetData[0].value)

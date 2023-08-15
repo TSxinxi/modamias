@@ -5,6 +5,9 @@ if (canUseDOM) {
   if (href && href.indexOf('-huf') > -1) {
     currencyCode = 'HUF'
   }
+  if (href && href.indexOf('-czk') > -1) {
+    currencyCode = 'CZK'
+  }
   if (localStorage.getItem('currencyCode')) {
     currencyCode = localStorage.getItem('currencyCode')
   }
@@ -5459,7 +5462,168 @@ export function getLanguage() {
           "Zebecke": {}
         }
       },
-    }
+    },
+    // 捷克
+    CZK: {
+      type: 'CZK',
+      country: 'Czech Republic',
+      country_code: 'CZK',
+      deliveryProcess: 'deliveryProcess5.png',
+      whatsAppText: 'Klikněte prosím odeslat přímo, nemažte odkaz níže, nejpřesnější odpovědi získáte od našeho zákaznického servisu',
+      notFoundTit: 'Ztratil jsem tuto stránku',
+      notFoundText: 'Nelze najít stránku, kterou hledáte.',
+      buy: 'Koupit na dobírku',
+      comTit: 'Zákaznické recenze',
+      write: 'zrušit hodnocení',
+      sold: 'sold',
+      addComment: 'Napsat recenzi',
+      rating: 'Hodnocení',
+      reviewTitle: 'Název recenze',
+      reviewTiPle: 'Napište název pro vaši recenzi',
+      review: 'recenze',
+      reviewPle: 'Sem napište svou recenzi',
+      error: 'Toto pole je povinné.',
+      picture: 'fotka/video (volitelné)',
+      selectName: 'Název (obecně zobrazen jako )',
+      namePle: '(zadejte jméno (veřejné)',
+      emailN: 'e-mail',
+      emailPle: 'Zadejte svou e-mailovou adresu (soukromou)',
+      cancelRe: 'Zrušit hodnocení',
+      submitRe: 'Odeslat recenzi',
+      screenCreate: 'nejnovější první',
+      screenDesc: 'Nejlépe hodnocené',
+      screenAsc: 'nejnižší hodnocení',
+      screenWith: 'Pouze obrázky',
+      screenPic: 'Obrázky jako první',
+      screenVideo: 'Videos First',
+      screenMost: 'Nejužitečnější',
+      subReview: 'Recenze odeslána',
+      subComtent: 'Děkuji! Chcete-li zobrazit svou recenzi, za chvíli stránku obnovte',
+
+      commentResult: 'Zatím bez hodnocení',
+      based1: 'based on ',
+      based2: 'hodnocení',
+      seeAll: 'zobrazit všechny recenze',
+      image5: 'Je nám líto, ke kontrole můžeme přijmout pouze 5 obrázků.',
+      rightEmail: 'Zadejte prosím platný e-mail',
+      unknown: 'neznámý',
+      acticleList: ['Platební metody', 'Doručení', 'O nás', 'Smluvní podmínky', 'Vrácení a výměna', 'Zásady ochrany osobních údajů', 'Kontaktujte nás'],
+      discountZone: 'obchodní slevová zóna',
+      free7: 'Služba bezplatné výměny a vrácení peněz do sedmi dnů',
+      deliver: 'Doručení zdarma',
+      paying: 'Platba na dobírku',
+      orders: 'objednávky',
+      thank: 'děkuji!',
+      request: 'Vaše žádost byla potvrzena',
+      receive: 'Brzy obdržíte potvrzovací e-mail s číslem vaší objednávky',
+      updateOrder: 'Aktualizovat objednávku',
+      information: 'Aktualizované informace o doručení a distribuci obdržíte e-mailem.',
+      customer: 'informace o zákazníkovi',
+      contactInfo: 'kontaktní informace',
+      delivery: 'adresa pro doručení',
+      payment: 'způsob platby',
+      payReceipt: 'Platba při příjmu',
+      invoice: 'Faktura',
+      keeyshop: 'Pokračovat v nákupu',
+      confirRequest: 'Potvrdit žádost',
+      recipientInfo: 'Informace o příjemci',
+      yourName: 'Celé jméno',
+      fullName: 'Celé jméno',
+      semail: 'E-mailem',
+      governor: 'Kraj',
+      telephone: 'Telefon',
+
+      district: 'Vyberte svůj okres',
+      city: 'Obec',
+      selectCity: 'Vyberte prosím své město',
+      zone: 'Region',
+      zonePle: 'Příklad: Olaya, Rijád',
+      building: 'Budova',
+      buildingPle: 'příklad: vila 2 patro 3',
+      street: 'Ulice',
+      streetPle: 'Příklad: King Fahd Street',
+      closest: 'Nejbližší orientační bod',
+      closestPle: 'Příklad: Kingdom Tower',
+      phonepl1: 'číslo mobilu: 5xxxxxxxx',
+      phonepl2: 'Číslo WhatsApp: 5xxxxxxxx',
+      comments: 'Zpráva',
+      apply: 'Dokončit nákup',
+      method: 'Platební metoda',
+      recieving: 'Platba při příjmu',
+      onlinePayment: 'Snížený transakční poplatek ve výši 30 riyalů za online platbu.',
+      Website: 'Doprava zdarma + Dobírka + Důvěryhodný web',
+      homepage: 'Snažíme se vám poskytovat vysoce kvalitní produkty a vynikající služby, obdržíte upozornění, když bude produkt doručen. Máte-li jakékoli dotazy, klikněte na "ikonu WhatsApp" na domovské stránce',
+      empty: 'pole nemohou být prázdná',
+      correct: 'Zadejte prosím správný formulář',
+      validnum: 'Zadejte platné telefonní číslo',
+      noOpinion: 'Žádný názor',
+      writeReview: 'Napsat recenzi',
+      address: 'Podrobná adresa',
+      postalCode: 'PSČ',
+      orderError: 'Nákup se nezdařil',
+      addressList: [
+        {
+          "name": "Vyberte kraj",
+          "value": ""
+        },
+        {
+          "name": "Hlavní město Praha",
+          "value": "Hlavní město Praha"
+        },
+        {
+          "name": "Jihomoravský kraj",
+          "value": "Jihomoravský kraj"
+        },
+        {
+          "name": "Jihočeský kraj",
+          "value": "Jihočeský kraj"
+        },
+        {
+          "name": "Karlovarský kraj",
+          "value": "Karlovarský kraj"
+        },
+        {
+          "name": "Kraj Vysočina",
+          "value": "Kraj Vysočina"
+        },
+        {
+          "name": "Královéhradecký kraj",
+          "value": "Královéhradecký kraj"
+        },
+        {
+          "name": "Liberecký kraj",
+          "value": "Liberecký kraj"
+        },
+        {
+          "name": "Moravskoslezský kraj",
+          "value": "Moravskoslezský kraj"
+        },
+        {
+          "name": "Olomoucký kraj",
+          "value": "Olomoucký kraj"
+        },
+        {
+          "name": "Pardubický kraj",
+          "value": "Pardubický kraj"
+        },
+        {
+          "name": "Plzeňský kraj",
+          "value": "Plzeňský kraj"
+        },
+        {
+          "name": "Středočeský kraj",
+          "value": "Středočeský kraj"
+        },
+        {
+          "name": "Zlínský kraj",
+          "value": "Zlínský kraj"
+        },
+        {
+          "name": "Ústecký kraj",
+          "value": "Ústecký kraj"
+        }
+      ]
+    },
   }
   return language[LType];
 }

@@ -483,6 +483,10 @@ export default function Product() {
         currencyCode = 'HUF'
         localStorage.setItem('currencyCode', currencyCode)
         setCurrency(currencyCode)
+      } else if (href && href.indexOf('-czk') > -1) {
+        currencyCode = 'CZK'
+        localStorage.setItem('currencyCode', currencyCode)
+        setCurrency(currencyCode)
       } else {
         localStorage.removeItem('currencyCode')
         setCurrency(selectedVariant?.price?.currencyCode)
