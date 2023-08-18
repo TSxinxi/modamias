@@ -1979,7 +1979,7 @@ export function getLanguage() {
       orderError: 'Achiziție eșuată',
       addressList: [
         {
-          "name": "Județ",
+          "name": "Vă rugăm să selectați Județ",
           "value": ""
         },
         {

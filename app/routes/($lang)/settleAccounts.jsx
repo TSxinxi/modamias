@@ -199,7 +199,7 @@ export function Information({ selectedVar }) {
   const [area, setArea] = useState('');
   const [building, setBuilding] = useState('');
   const [street, setStreet] = useState('');
-  const [streetList, setStreetList] = useState([{ name: LText.type === 'HUF' ? 'Utca' : LText.type === 'CZK' ? 'Vyberte obec' : '', value: '' }]);
+  const [streetList, setStreetList] = useState([{ name: LText.type === 'HUF' ? 'Utca' : LText.type === 'CZK' ? 'Vyberte obec' : 'Vă rugăm să selectați Localitate', value: '' }]);
   const [nearest, setNearest] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -293,7 +293,12 @@ export function Information({ selectedVar }) {
                 <span>{LText.postalCode} <i>*</i></span>
                 <p></p>
               </div>
-              <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
+              {/* <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} /> */}
+              <input type="number" placeholder={LText.postalCode} value={postcode} onChange={(e) => {
+                if (e.target.value.length > 6) {
+                  setPostcode(e.target.value.slice(0, 6))
+                } else { setPostcode(e.target.value) }
+              }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
@@ -524,10 +529,11 @@ function changeArea(value, streetList, setPostcode) {
 }
 
 function changeCity(value, setStreetList, setPostcode, setArea) {
-  if (!value && LText.type === 'CZK') {
+  let default_name = LText.type === 'HUF' ? 'Utca' : LText.type === 'CZK' ? 'Vyberte obec' : 'Vă rugăm să selectați Localitate'
+  if (!value && LText.type !== 'HUF') {
     setArea('')
     setPostcode('')
-    setStreetList([{ name: 'Vyberte obec', value: '' }])
+    setStreetList([{ name: default_name, value: '' }])
   }
   fetch.get(`${getDomain()}/account-service/media_orders/pass/street?value=${value}`).then(res => {
     if (res && res.data && res.data.success && res.data[value]) {
@@ -541,8 +547,8 @@ function changeCity(value, setStreetList, setPostcode, setArea) {
         })
       }
       if (streetData && streetData.length > 0) {
-        if (LText.type === 'CZK') {
-          streetData.unshift({ name: 'Vyberte obec', code: '', value: '' })
+        if (LText.type !== 'HUF') {
+          streetData.unshift({ name: default_name, code: '', value: '' })
         }
         setStreetList(streetData)
         setPostcode(streetData[0].code)
