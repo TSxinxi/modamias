@@ -451,8 +451,7 @@ export default function Product() {
   const selectedVariant = product.selectedVariant ?? firstVariant;
   const isOnSale =
     selectedVariant?.price?.amount &&
-    selectedVariant?.compareAtPrice?.amount &&
-    selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
+    selectedVariant?.compareAtPrice?.amount;
   const isOutOfStock = !selectedVariant?.availableForSale;
   const strProductId = product.id.lastIndexOf("/");
   let product_id = strProductId ? product.id.slice(strProductId + 1) : '';
@@ -835,8 +834,7 @@ export function ProductForm() {
 
   const isOnSale =
     selectedVariant?.price?.amount &&
-    selectedVariant?.compareAtPrice?.amount &&
-    selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
+    selectedVariant?.compareAtPrice?.amount;
 
   const productAnalytics = {
     ...analytics.products[0],
