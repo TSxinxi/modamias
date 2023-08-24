@@ -1950,7 +1950,7 @@ export function getLanguage() {
       telephone: 'Telefon',
 
       district: 'Vă rugăm să selectați districtul dvs.',
-      city: 'Localitate',
+      city: 'Oraș',
       selectCity: 'Vă rugăm să vă selectați orașul',
       zone: 'Regiune',
       zonePle: 'Exemplu: Olaya, Riyadh',
