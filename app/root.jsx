@@ -110,22 +110,9 @@ export default function App() {
         s.parentNode.insertBefore(t, s)
       }(window, document, 'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '895173741588158');
+      fbq('init', location.host === 'loramodas.com' ? '1528379187566003' : '895173741588158');
       fbq('track', 'PageView');
 
-      // !function (f, b, e, v, n, t, s) {
-      //   if (f.fbq) return; n = f.fbq = function () {
-      //     n.callMethod ?
-      //       n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-      //   };
-      //   if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-      //   n.queue = []; t = b.createElement(e); t.async = !0;
-      //   t.src = v; s = b.getElementsByTagName(e)[0];
-      //   s.parentNode.insertBefore(t, s)
-      // }(window, document, 'script',
-      //   'https://connect.facebook.net/en_US/fbevents.js');
-      // fbq('init', '1528379187566003');
-      // fbq('track', 'PageView');
     }, []);
   }
   return (
@@ -135,7 +122,7 @@ export default function App() {
         <Meta />
         <Links />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-X12GDSEKQ1"></script>
-        <noscript><img height="1" width="1" style={{ display: "none" }} src="https://www.facebook.com/tr?id=895173741588158&ev=PageView&noscript=1" /></noscript>
+        {/* <noscript><img height="1" width="1" style={{ display: "none" }} src="https://www.facebook.com/tr?id=895173741588158&ev=PageView&noscript=1" /></noscript> */}
       </head>
       <body>
         <Layout
