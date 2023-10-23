@@ -139,6 +139,8 @@ export function getLanguage() {
       correct: 'Please enter the correct form',
       validnum: 'Enter a valid phone number',
       orderError: 'Failed purchase',
+      chooseMore: 'choose one more',
+      noSelect: 'Please select product specifications',
       addressList: [
         {
           name: '(province) select',
@@ -1056,6 +1058,8 @@ export function getLanguage() {
       correct: 'الرجاء إدخال النموذج الصحيح',
       validnum: 'أدخل رقم هاتف صالح',
       orderError: 'الشراء الفاشل',
+      chooseMore: 'اختر واحدًا آخر',
+      noSelect: 'الرجاء تحديد مواصفات المنتج',
       addressList: [
         {
           name: '（المحافظة）إختر',
@@ -1977,6 +1981,8 @@ export function getLanguage() {
       address: 'Adresa exacta',
       postalCode: 'Cod postal',
       orderError: 'Achiziție eșuată',
+      chooseMore: 'mai alege unul',
+      noSelect: 'Vă rugăm să selectați specificațiile produsului',
       addressList: [
         {
           "name": "Vă rugăm să selectați Județ",
@@ -2250,6 +2256,8 @@ export function getLanguage() {
       address: "Utca",
       postalCode: 'Irányítószám',
       orderError: 'Sikertelen vásárlás',
+      chooseMore: 'válassz még egyet',
+      noSelect: 'Kérjük, válassza ki a termék specifikációit',
       addressList: {
         "Megye": "",
         "Bács-Kiskun": {
@@ -5561,6 +5569,8 @@ export function getLanguage() {
       address: 'Podrobná adresa',
       postalCode: 'PSČ',
       orderError: 'Nákup se nezdařil',
+      chooseMore: 'vyberte si ještě jednu',
+      noSelect: 'Vyberte prosím specifikace produktu',
       addressList: [
         {
           "name": "Vyberte kraj",
