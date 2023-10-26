@@ -486,6 +486,10 @@ export default function Product() {
         currencyCode = 'CZK'
         localStorage.setItem('currencyCode', currencyCode)
         setCurrency(currencyCode)
+      } else if (href && href.indexOf('-pln') > -1) {
+        currencyCode = 'zł'
+        localStorage.setItem('currencyCode', currencyCode)
+        setCurrency(currencyCode)
       } else {
         localStorage.removeItem('currencyCode')
         setCurrency(selectedVariant?.price?.currencyCode)
@@ -790,7 +794,7 @@ function goSettleAccounts() {
 
 // FBQ
 function sendFbq(a, b, c) {
-  if ("function" == typeof window.fbq){
+  if ("function" == typeof window.fbq) {
     window.fbq("track", a, b, c)
   }
 }

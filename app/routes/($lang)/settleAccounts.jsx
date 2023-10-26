@@ -246,7 +246,10 @@ export function Information({ selectedVar }) {
           </div>
           {/* <div className='tele'>
             <span>+40</span> */}
-          <input type="text" placeholder={LText.telephone} value={phone} onChange={(e) => { setPhone(e.target.value) }} />
+          <input type="text" placeholder={LText.telephone} value={phone} onChange={(e) => {
+            const regex = /[^0-9]/g;
+            setPhone(e.target.value.replace(regex, ''))
+          }} />
           {/* </div> */}
         </div>
         {/* <div className='in_list'>
@@ -359,7 +362,7 @@ export function Information({ selectedVar }) {
               </div>
               <input type="text" placeholder='Ulice + číslo dveří: např. (Pod Pivovarem 265)' value={area} onChange={(e) => { setArea(e.target.value) }} />
             </div>
-          </> : <>
+          </> : LText.type === 'HUF' ? <>
             {
               province && province.length > 0 ? <div className='in_list'>
                 <div className='in_list_title'>
@@ -428,7 +431,36 @@ export function Information({ selectedVar }) {
               </div>
               <input type="text" placeholder='Utca+házszám: Például (KBocskai utca 18)' value={building} onChange={(e) => { setBuilding(e.target.value) }} />
             </div>
-          </>
+          </> : LText.type === 'zł' ? <>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.address} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.addressPle} value={area} onChange={(e) => { setArea(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.governor} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.governor} value={state} onChange={(e) => { setState(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.city} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.city} value={city} onChange={(e) => { setCity(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.postalCode} <i></i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
+            </div>
+          </> : <></>
         }
         <div className='in_list'>
           <div className='in_list_title'>
