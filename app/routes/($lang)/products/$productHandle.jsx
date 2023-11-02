@@ -165,7 +165,8 @@ function GetJudge(product_id, page, sortBy, rating) {
                 })
               }
               if (commentTime && commentTime.getAttribute("data-content")) {
-                commentTime.innerHTML = new Date(commentTime.getAttribute("data-content")).toLocaleDateString()
+                // commentTime.innerHTML = new Date(commentTime.getAttribute("data-content")).toLocaleDateString()
+                commentTime.innerHTML = commentTime.getAttribute("data-content").slice(0, 10)
               }
               if (commentIcon) {
                 let img = '<img src="https://platform.antdiy.vip/static/image/userIcon.svg" alt="" />'
@@ -588,14 +589,16 @@ export default function Product() {
               className="dark:prose-invert comment_box_content"
               dangerouslySetInnerHTML={{ __html: commentHeader }}
               onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}
-            /> : <div className="jdgm-rev-widg__header comment_box_content">
-              <div className="jdgm-rev-widg__summary">
-                <div className="jdgm-rev-widg__summary-text">{LText.noOpinion}</div>
-              </div>
-              {/* <div className="jdgm-rev-widg__sort-wrapper">
-                <button className="add_comment" onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}>{LText.writeReview}</button>
-              </div> */}
-            </div>}
+            /> : null
+              // <div className="jdgm-rev-widg__header comment_box_content">
+              //   <div className="jdgm-rev-widg__summary">
+              //     <div className="jdgm-rev-widg__summary-text">{LText.noOpinion}</div>
+              //   </div>
+              //   <div className="jdgm-rev-widg__sort-wrapper">
+              //     <button className="add_comment" onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}>{LText.writeReview}</button>
+              //   </div>
+              // </div>
+            }
             <div className='jq_slow'>
               <div className='write_review'>
                 <div className='write_review_title'>{LText.addComment}</div>
