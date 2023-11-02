@@ -130,6 +130,24 @@ export default function App() {
       fbq('init', location.host === 'loramodas.com' ? '1528379187566003' : '895173741588158');
       fbq('track', 'PageView');
 
+      !(function (c, b, d, a) {
+        c[a] || (c[a] = {}); c[a].config =
+        {
+          pid: "gr6w69wpuh@db34193c9e236f8",
+          appType: "web",
+          imgUrl: "https://arms-retcode.aliyuncs.com/r.png?",
+          sendResource: true,
+          enableLinkTrace: true,
+          behavior: true,
+          enableSPA: true,
+          useFmp: true,
+          enableConsole: true
+        };
+        let newScript = document.createElement("script")
+        newScript.src = d
+        newScript.setAttribute("crossorigin", "")
+        document.body.insertBefore(newScript, document.body.firstChild);
+      })(window, document, "https://sdk.rum.aliyuncs.com/v1/bl.js", "__bl");
     }, []);
   }
   return (
