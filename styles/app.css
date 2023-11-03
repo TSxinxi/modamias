@@ -375,14 +375,14 @@ shop-pay-button {
     margin: 0 10px;
   }
   .pricex_box{
-    margin-top: .8rem;
+    margin-top: .5rem;
   }
   .service {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     margin-top: .5rem;
-    row-gap: .8rem;
+    row-gap: .5rem;
     column-gap: 1.5rem
   }
   .service .service_li{
