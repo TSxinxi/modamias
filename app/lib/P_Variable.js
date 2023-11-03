@@ -1986,6 +1986,8 @@ export function getLanguage() {
       orderError: 'Achiziție eșuată',
       chooseMore: 'mai alege unul',
       noSelect: 'Vă rugăm să selectați specificațiile produsului',
+      policyList: ['Certificare UE', 'Plata la livrare', 'Retur în 30 de zile', 'Transport gratuit'],
+      divisionText: 'Detalii',
       addressList: [
         {
           "name": "Vă rugăm să selectați Județ",
@@ -2261,6 +2263,8 @@ export function getLanguage() {
       orderError: 'Sikertelen vásárlás',
       chooseMore: 'válassz még egyet',
       noSelect: 'Kérjük, válassza ki a termék specifikációit',
+      policyList: ['EU minősítés', 'Fizetés kézbesítéskor', '30 napon belül visszaküldeni', 'Ingyenes szállítás'],
+      divisionText: 'Részletek',
       addressList: {
         "Megye": "",
         "Bács-Kiskun": {
@@ -5574,6 +5578,8 @@ export function getLanguage() {
       orderError: 'Nákup se nezdařil',
       chooseMore: 'vyberte si ještě jednu',
       noSelect: 'Vyberte prosím specifikace produktu',
+      policyList: ['certifikace EU', 'Platba na dobírku', 'Vrácení do 30 dnů', 'Doprava zdarma'],
+      divisionText: 'Podrobnosti',
       addressList: [
         {
           "name": "Vyberte kraj",
@@ -5738,6 +5744,8 @@ export function getLanguage() {
       orderError: 'Nieudany zakup',
       chooseMore: 'wybierz jeszcze jeden',
       noSelect: 'Proszę wybrać specyfikację produktu',
+      policyList: ['Certyfikat UE', 'Płatność przy odbiorze', 'Zwrot w ciągu 30 dni', 'Darmowa dostawa'],
+      divisionText: 'Detale',
     },
   }
   return language[LType];

@@ -867,11 +867,11 @@ export function ProductForm() {
   }, []);
 
   return (
-    <div className="grid gap-10 pricex_box">
+    <div className="grid pricex_box">
       <div className="grid gap-4">
         <Text
           as="span"
-          className="flex items-center"
+          className="flex items-baseline"
         >
           {/* <Money
             withoutTrailingZeros
@@ -946,6 +946,19 @@ export function ProductForm() {
           </div>
         )} */}
       </div>
+      <div className='service'>
+        {
+          LText.policyList && LText.policyList.length > 0 ? LText.policyList.map((item, index) => {
+            return <div className='service_li' key={index}>
+              <img className='service_icon' src="https://platform.antdiy.vip/static/image/cod_success.svg" alt="" />
+              {
+                index === 0 ? <span>{item}<img src="https://platform.antdiy.vip/static/image/CErenzheng.svg" alt="" /></span> : <span>{item}</span>
+              }
+            </div>
+          }) : null
+        }
+      </div>
+      <div className='division_box'>{LText.divisionText}</div>
     </div>
   );
 }

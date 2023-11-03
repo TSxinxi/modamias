@@ -1388,7 +1388,7 @@ select{
     font-weight: bold;
   }
 .current_price_new{
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #ff2020;
   }
@@ -1400,7 +1400,44 @@ select{
     margin: 0 10px;
   }
 .pricex_box{
-    margin: 2rem 0;
+    margin-top: .8rem;
+  }
+.service {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: .5rem;
+    row-gap: .8rem;
+    -moz-column-gap: 1.5rem;
+         column-gap: 1.5rem
+  }
+.service .service_li{
+    display: flex;
+    align-items: center;
+  }
+.service .service_icon{
+    width: 16px;
+    margin-right: 3px;
+  }
+.service .service_li span{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+.service .service_li span img{
+    width: 24px;
+  }
+.division_box{
+    height: 37px;
+    text-align: center;
+    line-height: 37px;
+    font-weight: bold;
+    color: #fff;
+    margin: 1.5rem 0 1rem 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('https://platform.antdiy.vip/static/image/cod_detail_bg.png');
+    text-shadow: 2px 2px 5px rgba(163, 145, 108, 52);
   }
 .current_price i{
     font-style: normal;
@@ -2569,9 +2606,6 @@ select {
 }
 .justify-items-start{
   justify-items: start;
-}
-.gap-10{
-  gap: 2.5rem;
 }
 .gap-2{
   gap: 0.5rem;
