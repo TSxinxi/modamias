@@ -101,7 +101,7 @@ export default function App() {
         replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
         replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
       });
-      
+
       (function (h, o, t, j, a, r) {
         h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
         h._hjSettings = { hjid: 3527157, hjsv: 6 };
@@ -148,6 +148,15 @@ export default function App() {
         newScript.setAttribute("crossorigin", "")
         document.body.insertBefore(newScript, document.body.firstChild);
       })(window, document, "https://sdk.rum.aliyuncs.com/v1/bl.js", "__bl");
+
+      (function () {
+        window.__insp = window.__insp || [];
+        __insp.push(['wid', 1998814885]);
+        var ldinsp = function () {
+          if (typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=1998814885&r=' + Math.floor(new Date().getTime() / 3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x);
+        };
+        setTimeout(ldinsp, 0);
+      })();
     }, []);
   }
   return (
