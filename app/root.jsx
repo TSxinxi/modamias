@@ -102,14 +102,14 @@ export default function App() {
         replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
       });
 
-      (function (h, o, t, j, a, r) {
-        h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
-        h._hjSettings = { hjid: 3527157, hjsv: 6 };
-        a = o.getElementsByTagName('head')[0];
-        r = o.createElement('script'); r.async = 1;
-        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-        a.appendChild(r);
-      })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+      // (function (h, o, t, j, a, r) {
+      //   h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+      //   h._hjSettings = { hjid: 3527157, hjsv: 6 };
+      //   a = o.getElementsByTagName('head')[0];
+      //   r = o.createElement('script'); r.async = 1;
+      //   r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+      //   a.appendChild(r);
+      // })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
 
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
@@ -151,9 +151,9 @@ export default function App() {
 
       (function () {
         window.__insp = window.__insp || [];
-        __insp.push(['wid', 1998814885]);
+        __insp.push(['wid', 958754140]);
         var ldinsp = function () {
-          if (typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=1998814885&r=' + Math.floor(new Date().getTime() / 3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x);
+          if (typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=958754140&r=' + Math.floor(new Date().getTime() / 3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x);
         };
         setTimeout(ldinsp, 0);
       })();
