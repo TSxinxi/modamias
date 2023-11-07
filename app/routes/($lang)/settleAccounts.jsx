@@ -229,7 +229,7 @@ export function Information({ selectedVar }) {
     }
   }
   return (
-    <div className='information_in'>
+    <div className='information_in' id='cod_form'>
       <div className='information_in_title padding16'>{LText.recipientInfo}</div>
       <div className='information_in_list padding16'>
         <div className='in_list'>
