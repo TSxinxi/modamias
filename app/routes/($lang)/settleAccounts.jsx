@@ -228,8 +228,21 @@ export function Information({ selectedVar }) {
       province.push(obj)
     }
   }
+  const [isForm, setIsForm] = useState(false);
+  useEffect(() => {
+    var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.localStorage !== "undefined");
+    if (canUseDOM) {
+      if(localStorage.getItem('FormId')){
+        setIsForm(true)
+      }
+    }
+  }, []);
   return (
-    <div className='information_in' id='cod_form'>
+    <div className='information_in' id='cod_form' spectlet-form-analytics="formnamehere">
+      {isForm ? <form action="test-form" id='test-form' spectlet-form-analytics="formnamehere">
+        测试字段: <input insp-form-input-id="inputname" id='test-form-input-name' type="text" name="FirstName" value={name} onChange={(e) => { setName(e.target.value) }} /><br />
+        <input type="submit" value="提交" />
+      </form> : null }
       <div className='information_in_title padding16'>{LText.recipientInfo}</div>
       <div className='information_in_list padding16'>
         <div className='in_list'>
