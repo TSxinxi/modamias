@@ -203,6 +203,7 @@ export function Information({ selectedVar }) {
   const [nearest, setNearest] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [house_number, setHouseNumber] = useState('');
   const [errorText, setErrorText] = useState('');
   const [postcode, setPostcode] = useState('');
   const [isSubmit, setIsSubmit] = useState(false);
@@ -312,6 +313,13 @@ export function Information({ selectedVar }) {
                 <p></p>
               </div>
               <input type="text" placeholder='ex: Strada, numar, bloc, scara, etaj, apartament' value={area} onChange={(e) => { setArea(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>Numărul casei <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder='Numărul casei' value={house_number} onChange={(e) => { setHouseNumber(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
@@ -543,6 +551,7 @@ export function Information({ selectedVar }) {
                     area: area,
                     postcode: postcode,
                     building: building,
+                    house_number: house_number,
                     // street: street,
                     // nearest_land_mark: nearest,
                     // message: message,
@@ -645,6 +654,9 @@ function SettleAccounts(selectedVar, params, setErrorText, setIsSubmit) {
     return setErrorText(LText.empty)
   }
   if (LText.type === 'HUF' && !params.building) {
+    return setErrorText(LText.empty)
+  }
+  if (LText.type === 'RON' && !params.house_number) {
     return setErrorText(LText.empty)
   }
   // var emailRegExp = /^[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;

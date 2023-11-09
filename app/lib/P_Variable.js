@@ -144,6 +144,8 @@ export function getLanguage() {
       orderError: 'Failed purchase',
       chooseMore: 'choose one more',
       noSelect: 'Please select product specifications',
+      quantityText: 'quantity',
+      errorQuantity: 'Please enter product quantity',
       addressList: [
         {
           name: '(province) select',
@@ -1063,6 +1065,8 @@ export function getLanguage() {
       orderError: 'الشراء الفاشل',
       chooseMore: 'اختر واحدًا آخر',
       noSelect: 'الرجاء تحديد مواصفات المنتج',
+      quantityText: 'كمية',
+      errorQuantity: 'الرجاء إدخال كمية المنتج',
       addressList: [
         {
           name: '（المحافظة）إختر',
@@ -1988,6 +1992,8 @@ export function getLanguage() {
       noSelect: 'Vă rugăm să selectați specificațiile produsului',
       policyList: ['Certificare UE', 'Plata la livrare', 'Retur în 30 de zile', 'Transport gratuit'],
       divisionText: 'Detalii',
+      quantityText: 'cantitate',
+      errorQuantity: 'Vă rugăm să introduceți cantitatea produsului',
       addressList: [
         {
           "name": "Vă rugăm să selectați Județ",
@@ -2265,6 +2271,8 @@ export function getLanguage() {
       noSelect: 'Kérjük, válassza ki a termék specifikációit',
       policyList: ['EU minősítés', 'Fizetés kézbesítéskor', '30 napon belül visszaküldeni', 'Ingyenes szállítás'],
       divisionText: 'Részletek',
+      quantityText: 'Mennyiség',
+      errorQuantity: 'Kérjük, adja meg a termék mennyiségét',
       addressList: {
         "Megye": "",
         "Bács-Kiskun": {
@@ -5580,6 +5588,8 @@ export function getLanguage() {
       noSelect: 'Vyberte prosím specifikace produktu',
       policyList: ['certifikace EU', 'Platba na dobírku', 'Vrácení do 30 dnů', 'Doprava zdarma'],
       divisionText: 'Podrobnosti',
+      quantityText: 'Množství',
+      errorQuantity: 'Zadejte prosím množství produktu',
       addressList: [
         {
           "name": "Vyberte kraj",
@@ -5746,6 +5756,8 @@ export function getLanguage() {
       noSelect: 'Proszę wybrać specyfikację produktu',
       policyList: ['Certyfikat UE', 'Płatność przy odbiorze', 'Zwrot w ciągu 30 dni', 'Darmowa dostawa'],
       divisionText: 'Detale',
+      quantityText: 'Kwota',
+      errorQuantity: 'Proszę podać ilość produktu',
     },
   }
   return language[LType];
