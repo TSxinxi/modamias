@@ -871,6 +871,9 @@ shop-pay-button {
     align-items: center;
     position: relative;
   }
+  .out_of_btn {
+    background: #E7E7E7 !important;
+  }
   .submit_btn .loading_box{
     position: absolute;
     width: 100%;

@@ -4,6 +4,7 @@ import { Money } from '@shopify/hydrogen';
 import { Text } from '~/components';
 import fetch from '~/fetch/axios';
 import { getShopAddress, getLanguage, getDirection, getDomain } from '~/lib/P_Variable';
+import { add, subtract, multiply } from '~/lib/floatObj';
 const LText = getLanguage()
 const addressList = LText.addressList
 let productData = ''
@@ -11,6 +12,7 @@ let productData = ''
 export default function settleAccounts() {
   const [hasMounted, setHasMounted] = useState(false);
   const [selectedVar, setSelectVar] = useState('');
+  const [quantity, setQuantity] = useState(1);
   useEffect(() => {
     setHasMounted(true);
     var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.localStorage !== "undefined");
@@ -45,17 +47,17 @@ export default function settleAccounts() {
           <i></i>
         </div>
       </div>
-      <ProductBox selectedVar={selectedVar} />
+      <ProductBox selectedVar={selectedVar} quantity={quantity} />
       <div className='order_content'>
-        <Variant selectedVar={selectedVar} setSelectVar={setSelectVar} />
-        <Information selectedVar={selectedVar} />
+        <Variant selectedVar={selectedVar} setSelectVar={setSelectVar} quantity={quantity} setQuantity={setQuantity} />
+        <Information selectedVar={selectedVar} quantity={quantity} />
         <PaymentMethod />
       </div>
     </div>
   )
 }
 
-export function ProductBox({ selectedVar }) {
+export function ProductBox({ selectedVar, quantity }) {
   const [isPreview, setIsPreview] = useState(false);
   return (
     <div className='product_box shadow_box' >
@@ -87,14 +89,14 @@ export function ProductBox({ selectedVar }) {
             data={selectedVar.price}
             as="span"
           /> */}
-          <span className='font_weight_b'>{selectedVar.price.currencyCode} {parseFloat(selectedVar?.price?.amount)}</span>
+          <span className='font_weight_b'>{selectedVar.price.currencyCode} {parseFloat(multiply(quantity, selectedVar?.price?.amount))}</span>
         </Text>
       </div>
     </div >
   );
 }
 
-export function Variant({ selectedVar, setSelectVar }) {
+export function Variant({ selectedVar, setSelectVar, quantity, setQuantity }) {
   const [options, setOptions] = useState([]);
   useEffect(() => {
     let newoptions = productData.options.map(item => {
@@ -133,14 +135,29 @@ export function Variant({ selectedVar, setSelectVar }) {
                 }
               </select>
             ) : ( */}
-              <div className='flex_center variant_li_sku'>{option.values.map((item, index) => {
-                return (
-                  <div className={item.active ? 'active_sku bord_sku' : 'bord_sku'} key={index} onClick={() => { changeVariant(setSelectVar, setOptions, options, item.value, option.name) }}>{item.value}</div>
-                )
-              })}</div>
+            <div className='flex_center variant_li_sku'>{option.values.map((item, index) => {
+              return (
+                <div className={item.active ? 'active_sku bord_sku' : 'bord_sku'} key={index} onClick={() => { changeVariant(setSelectVar, setOptions, options, item.value, option.name) }}>{item.value}</div>
+              )
+            })}</div>
             {/* )} */}
           </div>
         ))}
+      <div className='variant_li' key='quantity_li'>
+        <div className='title'>{LText.quantityText}</div>
+        <div className='quantity_li'>
+          <button onClick={() => { if (quantity > 1) setQuantity(subtract(quantity, 1)) }}>-</button>
+          <input type="text" value={quantity} onChange={(e) => {
+            const regex = /[^0-9]/g;
+            if (e.target.value > 10000) {
+              setQuantity(10000)
+            } else {
+              setQuantity(e.target.value.replace(regex, ''))
+            }
+          }} />
+          <button onClick={() => { setQuantity(add(quantity, 1)) }}>+</button>
+        </div>
+      </div>
     </div >
   );
 }
@@ -190,7 +207,7 @@ function changeVariant(setSelectVar, setOptions, options, value, option) {
   }
 }
 
-export function Information({ selectedVar }) {
+export function Information({ selectedVar, quantity }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
@@ -229,21 +246,8 @@ export function Information({ selectedVar }) {
       province.push(obj)
     }
   }
-  const [isForm, setIsForm] = useState(false);
-  useEffect(() => {
-    var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.localStorage !== "undefined");
-    if (canUseDOM) {
-      if(localStorage.getItem('FormId')){
-        setIsForm(true)
-      }
-    }
-  }, []);
   return (
     <div className='information_in'>
-      {isForm ? <form action="test-form" className='form-horizontal' id='form-horizontal test-form' spectlet-form-analytics="formnamehere">
-        测试字段: <input insp-form-input-id="inputname" id='form test-form-input-name' type="text" name="FirstName" value={name} onChange={(e) => { setName(e.target.value) }} /><br />
-        <input type="submit" value="提交" />
-      </form> : null }
       <div className='information_in_title padding16'>{LText.recipientInfo}</div>
       <div className='information_in_list padding16'>
         <div className='in_list'>
@@ -538,6 +542,7 @@ export function Information({ selectedVar }) {
               }
               <button className='inline-block rounded font-medium text-center w-full bg-primary text-contrast paddingT5' onClick={() => {
                 SettleAccounts(
+                  quantity,
                   selectedVar,
                   {
                     name: name,
@@ -567,7 +572,16 @@ export function Information({ selectedVar }) {
                   <span>{LText.apply}</span>
                 </Text>
               </button>
-            </div> : <button className='inline-block rounded font-medium text-center w-full border border-primary/10 bg-contrast text-primary'>{LText.sold}</button>
+            </div> : <div className='submit_btn'>
+              <button className='inline-block rounded font-medium text-center w-full bg-primary paddingT5 out_of_btn'>
+                <Text
+                  as="span"
+                  className="flex items-center justify-center gap-2 py-3 px-6 font_weight_b buy_text"
+                >
+                  <span>{LText.sold}</span>
+                </Text>
+              </button>
+            </div>
           }
         </div>
       </div>
@@ -649,7 +663,10 @@ export function PaymentMethod() {
   )
 }
 
-function SettleAccounts(selectedVar, params, setErrorText, setIsSubmit) {
+function SettleAccounts(quantity, selectedVar, params, setErrorText, setIsSubmit) {
+  if (!quantity || quantity < 1) {
+    return setErrorText(LText.errorQuantity)
+  }
   if (!params.name || !params.phone || !params.state || !params.city || !params.area) {
     return setErrorText(LText.empty)
   }
@@ -676,7 +693,7 @@ function SettleAccounts(selectedVar, params, setErrorText, setIsSubmit) {
   // }
   let line_items = [{
     product_id: setSplit(productData.id),
-    quantity: 1,
+    quantity: quantity,
     variant_id: setSplit(selectedVar.id),
   }]
   let source_name = window.localStorage.getItem('sourceName')
