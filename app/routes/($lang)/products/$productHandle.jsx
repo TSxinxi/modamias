@@ -589,15 +589,14 @@ export default function Product() {
               className="dark:prose-invert comment_box_content"
               dangerouslySetInnerHTML={{ __html: commentHeader }}
               onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}
-            /> : null
-              // <div className="jdgm-rev-widg__header comment_box_content">
-              //   <div className="jdgm-rev-widg__summary">
-              //     <div className="jdgm-rev-widg__summary-text">{LText.noOpinion}</div>
-              //   </div>
-              //   <div className="jdgm-rev-widg__sort-wrapper">
-              //     <button className="add_comment" onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}>{LText.writeReview}</button>
-              //   </div>
-              // </div>
+            /> : <div className="jdgm-rev-widg__header comment_box_content">
+                {/* <div className="jdgm-rev-widg__summary">
+                  <div className="jdgm-rev-widg__summary-text">{LText.noOpinion}</div>
+                </div> */}
+                <div className="jdgm-rev-widg__sort-wrapper" onClick={(e) => { clickComment(e, setFiltRat, product_id, sortBy, setComment) }}>
+                  <button className="add_comment">{LText.writeReview}</button>
+                </div>
+              </div>
             }
             <div className='jq_slow'>
               <div className='write_review'>
