@@ -26,7 +26,7 @@ Disallow: /account
 Disallow: /settleAccounts
 Disallow: /thank_you
 Disallow: /newsSettleAccounts
-Disallow: /new_thank_you
+
 ${sitemapUrl ? `Sitemap: ${sitemapUrl}` : ''}
 
 # Google adsbot ignores robots.txt unless specifically named!
@@ -38,7 +38,7 @@ Disallow: /settleAccounts
 Disallow: /orders
 Disallow: /thank_you
 Disallow: /newsSettleAccounts
-Disallow: /new_thank_you
+
 
 User-agent: Pinterest
 Crawl-delay: 1

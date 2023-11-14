@@ -66,7 +66,7 @@ export function ProductBox({ selectedVar, quantity }) {
           <img src={selectedVar.image.url} />
         </div> : null
       }
-      {selectedVar.image ? <img src={selectedVar.image.url} onClick={() => { setIsPreview(true) }} /> : null}
+      {selectedVar.image ? <div className='product_img'><img src={selectedVar.image.url} onClick={() => { setIsPreview(true) }} /></div> : null}
       <div className='product_title'>
         <span>{selectedVar.product.title}</span>
         <span>{selectedVar.title}</span>
@@ -706,33 +706,40 @@ function SettleAccounts(quantity, selectedVar, params, setErrorText, setIsSubmit
   }
   params.tags = LText.type
   params.route = 2
-  setIsSubmit(true)
+  let price = multiply(quantity, selectedVar?.price?.amount)
+  params.product_list = [{
+    img_url: selectedVar?.image?.url,
+    title: selectedVar?.product?.title,
+    variantTitle: selectedVar?.title,
+    price: price,
+    product_id: setSplit(productData.id),
+    quantity: quantity,
+    variant_id: setSplit(selectedVar.id),
+  }]
 
-  fetch.post(`${getDomain()}/account-service/media_orders/create/pass`, params).then(res => {
+  setIsSubmit(true)
+  fetch.post(`${getDomain()}/account-service/media_orders/create/async/pass`, params).then(res => {
     if (res && res.data) {
-      if (res.data.success && res.data.data && res.data.data.oid) {
-        let orderData = res.data?.data?.detail?.order
-        if (orderData) {
-          let contents = line_items.map(item => {
-            return {
-              id: item.variant_id,
-              quantity: item.quantity,
-            }
-          })
-          sendFbq(
-            'Purchase',
-            {
-              content_type: 'product',
-              contents: contents,
-              value: orderData?.total_price,
-              currency: orderData?.currency,
-            },
-            {
-              eventID: orderData?.token || (new Date).getTime() + ""
-            }
-          )
-        }
-        window.open(`/thank_you?id=${res.data.data.oid}`, '_self')
+      if (res.data.success && res.data?.data?.order?.id) {
+        let contents = line_items.map(item => {
+          return {
+            id: item.variant_id,
+            quantity: item.quantity,
+          }
+        })
+        sendFbq(
+          'Purchase',
+          {
+            content_type: 'product',
+            contents: contents,
+            value: price,
+            currency: selectedVar.price.currencyCode,
+          },
+          {
+            eventID: (new Date).getTime() + ""
+          }
+        )
+        window.open(`/thank_you?id=${res.data?.data?.order?.id}`, '_self')
       } else {
         setIsSubmit(false)
         return setErrorText(res && res.data.msg || LText.orderError)
@@ -741,6 +748,40 @@ function SettleAccounts(quantity, selectedVar, params, setErrorText, setIsSubmit
       setIsSubmit(false)
     }
   })
+
+  // fetch.post(`${getDomain()}/account-service/media_orders/create/pass`, params).then(res => {
+  //   if (res && res.data) {
+  //     if (res.data.success && res.data.data && res.data.data.oid) {
+  //       let orderData = res.data?.data?.detail?.order
+  //       if (orderData) {
+  //         let contents = line_items.map(item => {
+  //           return {
+  //             id: item.variant_id,
+  //             quantity: item.quantity,
+  //           }
+  //         })
+  //         sendFbq(
+  //           'Purchase',
+  //           {
+  //             content_type: 'product',
+  //             contents: contents,
+  //             value: orderData?.total_price,
+  //             currency: orderData?.currency,
+  //           },
+  //           {
+  //             eventID: orderData?.token || (new Date).getTime() + ""
+  //           }
+  //         )
+  //       }
+  //       window.open(`/thank_you?id=${res.data.data.oid}`, '_self')
+  //     } else {
+  //       setIsSubmit(false)
+  //       return setErrorText(res && res.data.msg || LText.orderError)
+  //     }
+  //   } else {
+  //     setIsSubmit(false)
+  //   }
+  // })
 }
 
 function setSplit(data) {
