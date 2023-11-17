@@ -343,7 +343,8 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.governor} <i>*</i></span>
                 <p></p>
               </div>
-              <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode, setCity); setState(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              <input type="text" placeholder={LText.governor} value={state} onChange={(e) => { setState(e.target.value) }} />
+              {/* <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode, setCity); setState(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   addressList.map((item, index) => {
                     return (
@@ -351,14 +352,15 @@ export function Information({ selectedVar, quantity }) {
                     )
                   })
                 }
-              </select>
+              </select> */}
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>{LText.city} <i>*</i></span>
                 <p></p>
               </div>
-              <select name="city" value={city} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              <input type="text" placeholder={LText.city} value={city} onChange={(e) => { setCity(e.target.value) }} />
+              {/* <select name="city" value={city} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   streetList.map((item, index) => {
                     return (
@@ -366,7 +368,7 @@ export function Information({ selectedVar, quantity }) {
                     )
                   })
                 }
-              </select>
+              </select> */}
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
@@ -388,30 +390,30 @@ export function Information({ selectedVar, quantity }) {
               <input type="text" placeholder='Ulice + číslo dveří: např. (Pod Pivovarem 265)' value={area} onChange={(e) => { setArea(e.target.value) }} />
             </div>
           </> : LText.type === 'HUF' ? <>
-            {
-              province && province.length > 0 ? <div className='in_list'>
-                <div className='in_list_title'>
-                  <span>Megye <i>*</i></span>
-                  <p></p>
-                </div>
-                <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); setStreetList([{ name: 'Utca', value: '' }]); setCity(""); setPostcode(""); }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
-                  {
-                    province.map((item, index) => {
-                      return (
-                        <option value={item.value} key={index}>{item.name}</option>
-                      )
-                    })
-                  }
-                </select>
-              </div> : null
-            }
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>Megye <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.governor} value={state} onChange={(e) => { setState(e.target.value) }} />
+              {/* <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); setStreetList([{ name: 'Utca', value: '' }]); setCity(""); setPostcode(""); }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
+                {
+                  province.map((item, index) => {
+                    return (
+                      <option value={item.value} key={index}>{item.name}</option>
+                    )
+                  })
+                }
+              </select> */}
+            </div>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>Település/Kerület <i>*</i></span>
                 <p></p>
               </div>
+              <input type="text" placeholder='Település/Kerület' value={city} onChange={(e) => { setCity(e.target.value) }} />
               {/* changeCity(e.target.value, setStreetList, setPostcode, setArea);  */}
-              <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              {/* <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   province.filter(i => i.value === state)[0].children.map((item, index) => {
                     return (
@@ -419,7 +421,7 @@ export function Information({ selectedVar, quantity }) {
                     )
                   })
                 }
-              </select>
+              </select> */}
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
