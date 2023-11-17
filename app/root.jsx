@@ -116,6 +116,20 @@ export default function App() {
       gtag('js', new Date());
       gtag('config', 'G-X12GDSEKQ1');
 
+      // !function (f, b, e, v, n, t, s) {
+      //   if (f.fbq) return; n = f.fbq = function () {
+      //     n.callMethod ?
+      //       n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      //   };
+      //   if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      //   n.queue = []; t = b.createElement(e); t.async = !0;
+      //   t.src = v; s = b.getElementsByTagName(e)[0];
+      //   s.parentNode.insertBefore(t, s)
+      // }(window, document, 'script',
+      //   'https://connect.facebook.net/en_US/fbevents.js');
+      // fbq('init', location.host === 'loramodas.com' ? '1528379187566003' : '895173741588158');
+      // fbq('track', 'PageView');
+
       !function (f, b, e, v, n, t, s) {
         if (f.fbq) return; n = f.fbq = function () {
           n.callMethod ?
@@ -128,7 +142,30 @@ export default function App() {
       }(window, document, 'script',
         'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', location.host === 'loramodas.com' ? '1528379187566003' : '895173741588158');
-      fbq('track', 'PageView');
+      async function generateRandomHash() {
+        // 生成一个随机字符串
+        const randomString = Math.random().toString(36).substring(2);
+
+        // 转换字符串为 Uint8Array
+        const encoder = new TextEncoder();
+        const data = encoder.encode(randomString);
+
+        // 使用 Web Crypto API 生成 SHA-256 哈希
+        const buffer = await crypto.subtle.digest('SHA-256', data);
+
+        // 转换为十六进制字符串
+        const hashedString = Array.from(new Uint8Array(buffer))
+          .map(byte => byte.toString(16).padStart(2, '0'))
+          .join('');
+
+        return hashedString;
+      }
+      generateRandomHash().then(
+        key => {
+          fbq('track', 'PageView', {}, { eventID: key });
+        }
+      )
+      fbq('track', 'ViewContent', { content_name: 'Homepage' });
 
       !(function (c, b, d, a) {
         c[a] || (c[a] = {}); c[a].config =
