@@ -67,7 +67,7 @@ export function Layout({ children, layout }) {
 
 function goWhatsApp(phone) {
   var whatsapp_url = `https://wa.me/${phone}?text=${getLanguage().whatsAppText}`;
-  window.open(whatsapp_url + window.location.href);
+  window.open(whatsapp_url + ' ' + window.location.href);
 }
 
 function Header({ title, menu }) {
