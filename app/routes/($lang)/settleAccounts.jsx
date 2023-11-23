@@ -266,7 +266,9 @@ export function Information({ selectedVar, quantity }) {
             <span>+40</span> */}
           <input type="text" placeholder={LText.telephone} value={phone} onChange={(e) => {
             const regex = /[^0-9]/g;
-            setPhone(e.target.value.replace(regex, ''))
+            if (e.target.value.length > 10 && LText.type === 'RON') {
+              setPhone(e.target.value.slice(0, 10))
+            } else { setPhone(e.target.value.replace(regex, '')) }
           }} />
           {/* </div> */}
         </div>
