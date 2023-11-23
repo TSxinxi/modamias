@@ -266,9 +266,7 @@ export function Information({ selectedVar, quantity }) {
             <span>+40</span> */}
           <input type="text" placeholder={LText.telephone} value={phone} onChange={(e) => {
             const regex = /[^0-9]/g;
-            if (e.target.value.length > 10 && LText.type === 'RON') {
-              setPhone(e.target.value.slice(0, 10))
-            } else { setPhone(e.target.value.replace(regex, '')) }
+            setPhone(e.target.value.replace(regex, ''))
           }} />
           {/* </div> */}
         </div>
@@ -679,6 +677,9 @@ function SettleAccounts(quantity, selectedVar, params, setErrorText, setIsSubmit
   }
   if (LText.type === 'RON' && !params.house_number) {
     return setErrorText(LText.empty)
+  }
+  if (LText.type === 'RON' && params.phone.length < 10) {
+    return setErrorText(LText.validnum)
   }
   // var emailRegExp = /^[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;
   // if (!emailRegExp.test(params.email)) {
