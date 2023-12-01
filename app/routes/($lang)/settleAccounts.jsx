@@ -552,7 +552,7 @@ export function Information({ selectedVar, quantity }) {
                     phone: phone,
                     // whatsapp: whatsapp,
                     country: LText.country,
-                    country_code: LText.type,
+                    country_code: LText.type == 'zł' ? 'PLN' : LText.type,
                     state: state,
                     city: city,
                     area: area,
