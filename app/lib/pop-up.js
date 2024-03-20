@@ -1,3 +1,4 @@
+var commonCurrency;
 (function () {
   let result = new URLSearchParams(window.location.search);
   let source = result.get('source');
@@ -139,57 +140,9 @@
     "ZAR": "R",
     "ZMW": "ZMK"
   }
-  // 不同国家语言文字
-  let languageData = {
-    RON: {
-      lType: 'RON',
-      buyBtnText: 'Cumpărați cu Ramburs la Livrare',
-      layoutStyle: 'initial',
-      popUpHeader: 'Comanda cu Ramburs la Livrare',
-      deliveryText: 'Metodă de livrare',
-      freeTranText: 'Transport gratuit',
-      freeText: 'Gratuit',
-      addressText: 'Introdu adresa ta de livrare',
-      fullNameText: 'Numele complet',
-      errorText: 'Acest câmp este obligatoriu.',
-      emailError: 'Introduceți o adresă de email validă.',
-      teleText: 'Telefon',
-      exactText: 'Adresa exacta',
-      exactPleText: 'ex: Strada, numar, bloc, scara, etaj, apartament',
-      buildText: 'Numărul casei',
-      countyText: 'Județ',
-      townText: 'Oraș',
-      postalText: 'Cod postal',
-      emailText: 'E-mail',
-      orderBtn: 'Finalizați achiziția',
-      orderError: 'Order failure',
-      phoneErrorText: 'Introduceți un număr de telefon valid',
-    },
-    SAR: {
-      lType: 'SAR',
-      buyBtnText: 'اشتر الآن（الدفع عند الاستلام ）',
-      layoutStyle: 'rtl',
-      popUpHeader: "الطلب نقدًا عند التسليم",
-      deliveryText: 'طريقة التوصيل',
-      freeTranText: 'النقل مجاني',
-      freeText: 'حر',
-      addressText: 'أدخل عنوان التسليم الخاص بك',
-      fullNameText: 'الاسم الكامل',
-      errorText: 'هذه الخانة مطلوبه.',
-      emailError: 'أدخل عنوان بريد إلكتروني صالح.',
-      teleText: 'هاتف',
-      exactText: 'العنوان التفصيلي',
-      exactPleText: '3القطعة/الشارع/المنزل: قطعة 5 شارع 2منزل',
-      buildText: 'رقم الدار',
-      countyText: 'المحافظة',
-      townText: 'المدينة',
-      postalText: 'الرمز البريدي',
-      emailText: 'بريد إلكتروني',
-      orderBtn: 'أكمل عملية الشراء',
-      orderError: 'فشل الطلب',
-    }
-  }
   let currencyValue = Shopify?.currency?.active
+
+  commonCurrency = currencyList[currencyValue] ? currencyList[currencyValue] : currencyValue
   let LText = languageData[currencyValue] || languageData.RON
 
   let xhr = new window.XMLHttpRequest();
@@ -198,9 +151,6 @@
       xhr = new window.ActiveXObject("Microsoft.XMLHTTP");
     } catch (e) { }
   }
-  // if (Shopify.shop === 'newsmartdeal.myshopify.com') {
-  //   return false
-  // }
 
   // 产品数据
   let productList = []
@@ -208,19 +158,6 @@
   // 购买按钮
   let buyBtn = document.querySelector('.cod_checkout_btn');
   let buyBottomBtn = document.querySelector('.cod_bottom_button');
-  // let buyBtn = document.createElement('div');
-  // buyBtn.innerHTML = `<button class="cod_checkout_btn">${LText.buyBtnText}<div class="cod_loading_icon"><img src="https://platform.antdiy.vip/static/image/hydrogen_loading.gif" /></div></button>`
-  // if (window.location.pathname.indexOf('/cart') > -1) {
-  //   let productForm = document.querySelector(".cart__footer").querySelector(".cart__ctas");
-  //   if (productForm) {
-  //     productForm.appendChild(buyBtn)
-  //   }
-  // } else {
-  //   let productForm = document.querySelector(".product-form");
-  //   if (productForm) {
-  //     productForm.parentNode.insertBefore(buyBtn, productForm)
-  //   }
-  // }
 
   // 下单按钮点击事件
   buyBtn.addEventListener('click', (e) => {
@@ -232,6 +169,10 @@
 
   // 添加下单弹窗
   function clickBuyBtn() {
+    // 变体数据
+    let variantRadios = document.getElementsByTagName('variant-radios')[0]
+    let variantData = JSON.parse(variantRadios.querySelector('[type="application/json"]').textContent) || [];
+
     if (buyBtn.className.indexOf('loading_btn') > 0 || buyBottomBtn.className.indexOf('loading_btn') > 0) {
       return false
     }
@@ -268,10 +209,15 @@
         }
       }
       if (variant_id) {
+        let isAvailable = variantData.find(i => i.id == variant_id)?.available
+        if (!isAvailable) {
+          // timer('售空')
+          closeLoading('1')
+        }
         let quantityNum = document.querySelector('.quantity__input')?.value || '1'
         Promise.all([clearCart(variant_id, quantityNum)]).then(res => {
           let [data] = res;
-          if (data && data.items && data.items.length > 0){
+          if (data && data.items && data.items.length > 0) {
             data.items = data.items.filter(i => i.id == variant_id)
           }
           getProductList(data)
@@ -293,7 +239,9 @@
     } else {
       dom.querySelector('.cod_loading_icon').style.display = 'none'
     }
-    document.querySelector('.pop_up_checkout_btn').className = 'pop_up_checkout_btn'
+    if (document.querySelector('.pop_up_checkout_btn')) {
+      document.querySelector('.pop_up_checkout_btn').className = 'pop_up_checkout_btn'
+    }
   }
 
   // 获取产品数据列表
@@ -392,7 +340,7 @@
               <span>${LText.teleText}</span>
               <i>*</i>
             </div>
-            <input id="cod_phone" type="number" placeholder="${LText.teleText}">
+            <input id="cod_phone" type="text" placeholder="${LText.teleText}">
             <div id="phone_error" class="error_text">${LText.errorText}</div>
           </div>
           <div class="pop_up_from_item">
@@ -432,7 +380,7 @@
               <span>${LText.postalText}</span>
               <i></i>
             </div>
-            <input id="cod_postcode" type="number" placeholder="${LText.postalText}">
+            <input id="cod_postcode" type="text" placeholder="${LText.postalText}">
           </div>
           <div class="pop_up_from_item">
             <div class="item_title">
@@ -453,20 +401,15 @@
     closePopUp.addEventListener('click', () => {
       codPopUp.remove()
     })
-    
+
     // 控制输入数字
     let codPostCode = document.querySelector(`#cod_postcode`)
     let codPhone = document.querySelector(`#cod_phone`)
     const regex = /[^0-9]/g;
-    codPostCode.addEventListener('input', function(event) {
+    codPostCode.addEventListener('input', function (event) {
       codPostCode.value = codPostCode.value.replace(regex, '');
     });
-    codPhone.addEventListener('input', function(event) {
-      // if (codPhone.value.length > 10) {
-      //   codPhone.value = codPhone.value.slice(0, 10)
-      // } else {
-      //   codPhone.value = codPhone.value.replace(regex, '');
-      // }
+    codPhone.addEventListener('input', function (event) {
       codPhone.value = codPhone.value.replace(regex, '');
     });
 
@@ -493,7 +436,7 @@
         state: document.getElementById('cod_state').value,
         city: document.getElementById('cod_city').value,
         postcode: document.getElementById('cod_postcode').value,
-        email: document.getElementById('cod_email').value.replace(/^\s*|\s*$/g,''),
+        email: document.getElementById('cod_email').value.replace(/^\s*|\s*$/g, ''),
       }
       if (LText.lType === 'RON') {
         params.house_number = document.getElementById('cod_house_number').value
@@ -501,66 +444,68 @@
       let isPass = true
 
       for (let key in params) {
-        // if (key == 'email' && params.email) {
-        //   var emailRegExp = /^[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;
-        //   if (!emailRegExp.test(params.email)) {
-        //     verifyForm(key)
-        //     isPass = false
-        //     closeLoading(checkoutBtn)
-        //   }
-        // }
         if (key != 'postcode' && key != 'email' && !params[key]) {
           verifyForm(key)
           isPass = false
           closeLoading(checkoutBtn)
         }
       }
-      if (params.phone && params.phone.length < 10){
-        verifyForm('phone', true)
-        isPass = false
-        closeLoading(checkoutBtn)
-      }
+      // if (params.phone && params.phone.length < 10){
+      //   verifyForm('phone', true)
+      //   isPass = false
+      //   closeLoading(checkoutBtn)
+      // }
       if (isPass) {
         let line_items = []
+        let product_list = []
         productList.forEach(item => {
           line_items.push({
             product_id: item.product_id,
             quantity: item.quantity,
             variant_id: item.variant_id,
           })
+          product_list.push({
+            img_url: item.img,
+            title: item.title,
+            variantTitle: item.variant_title,
+            price: item.price,
+            product_id: item.product_id,
+            quantity: item.quantity,
+            variant_id: item.variant_id,
+          })
         })
         params.line_items = line_items
+        params.product_list = product_list
         params.source = source
+        params.tags = LText.lType
+        params.route = 2
 
-        xhr.open("post", `https://gateway.antdiy.vip/account-service/media_orders/create/pass`);
+        xhr.open("post", `https://gateway.antdiy.vip/account-service/media_orders/create/async/pass`);
         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         xhr.onreadystatechange = () => {
           if (xhr.readyState === 4) {
             if (xhr.response) {
               let res = JSON.parse(xhr.response)
-              if (res.success) {
-                let orderData = res?.data?.detail?.order
-                if (orderData) {
-                  let contents = line_items.map(item=>{
-                    return {
-                      id: item.variant_id,
-                      quantity: item.quantity,
-                    }
-                  })
-                  sendFbq(
-                    'Purchase',
-                    { 
-                      content_type: 'product',
-                      contents: contents,
-                      value: orderData?.total_price,
-                      currency: orderData?.currency,
-                    },
-                    {
-                      eventID: orderData?.token || (new Date).getTime() + ""
-                    }
-                  )
-                  window.open(orderData?.order_status_url, '_self')
-                }
+              if (res.success && res?.data?.order?.id) {
+                let contents = line_items.map(item => {
+                  return {
+                    id: item.variant_id,
+                    quantity: item.quantity,
+                  }
+                })
+                sendFbq(
+                  'Purchase',
+                  {
+                    content_type: 'product',
+                    contents: contents,
+                    value: product_list[0].price,
+                    currency: currencyValue,
+                  },
+                  {
+                    eventID: (new Date).getTime() + ""
+                  }
+                )
+                window.open(`/pages/thank_you?id=${res?.data?.order?.id}`, '_self')
               } else {
                 timer(res.msg || LText.orderError)
               }
@@ -578,7 +523,7 @@
     let errorBox = document.getElementById(`${key}_error`)
     let errorInp = document.getElementById(`cod_${key}`)
     if (errorBox) {
-      if (value){
+      if (value) {
         errorBox.innerHTML = LText.phoneErrorText
       } else {
         errorBox.innerHTML = LText.errorText
@@ -721,7 +666,7 @@
 
   // FBQ
   function sendFbq(a, b, c) {
-    if ("function" == typeof window.fbq){
+    if ("function" == typeof window.fbq) {
       window.fbq("track", a, b, c)
     }
   }
