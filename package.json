@@ -10,8 +10,7 @@
     "preview": "npm run build && shopify hydrogen preview",
     "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx .",
     "format": "prettier --write --ignore-unknown .",
-    "format:check": "prettier --check --ignore-unknown .",
-    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org tianshixinxi --project cod-homeromo app/root.jsx && sentry-cli sourcemaps upload --org tianshixinxi --project cod-homeromo app/root.jsx"
+    "format:check": "prettier --check --ignore-unknown ."
   },
   "prettier": "@shopify/prettier-config",
   "dependencies": {
@@ -23,7 +22,6 @@
     "@shopify/cli-hydrogen": "^4.0.8",
     "@shopify/hydrogen": "^2023.1.5",
     "@shopify/remix-oxygen": "^1.0.3",
-    "antd": "^5.8.4",
     "axios": "^0.19.0",
     "clsx": "^1.2.1",
     "concurrently": "^7.5.0",
