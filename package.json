@@ -10,7 +10,8 @@
     "preview": "npm run build && shopify hydrogen preview",
     "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx .",
     "format": "prettier --write --ignore-unknown .",
-    "format:check": "prettier --check --ignore-unknown ."
+    "format:check": "prettier --check --ignore-unknown .",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org tianshixinxi --project cod-homeromo app/root.jsx && sentry-cli sourcemaps upload --org tianshixinxi --project cod-homeromo app/root.jsx"
   },
   "prettier": "@shopify/prettier-config",
   "dependencies": {
