@@ -1,6 +1,8 @@
 var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.localStorage !== "undefined");
 var currencyCode = ''
 if (canUseDOM) {
+  let result = new URLSearchParams(window.location.search);
+  let site = result.get('site')
   let href = window.location.href
   if (href && href.indexOf('-huf') > -1) {
     currencyCode = 'HUF'
@@ -9,6 +11,9 @@ if (canUseDOM) {
     currencyCode = 'CZK'
   }
   if (href && href.indexOf('-pln') > -1) {
+    currencyCode = 'zł'
+  }
+  if (site === 'POL') {
     currencyCode = 'zł'
   }
   if (localStorage.getItem('currencyCode')) {

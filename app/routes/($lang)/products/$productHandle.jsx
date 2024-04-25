@@ -481,6 +481,9 @@ export default function Product() {
     setHasMounted(true);
     if (canUseDOM) {
       let href = window.location.href
+      let result = new URLSearchParams(window.location.search);
+      let param = result.get('source');
+      let site = result.get('site');
       if (href && href.indexOf('-huf') > -1) {
         currencyCode = 'HUF'
         localStorage.setItem('currencyCode', currencyCode)
@@ -497,8 +500,11 @@ export default function Product() {
         localStorage.removeItem('currencyCode')
         setCurrency(selectedVariant?.price?.currencyCode)
       }
-      let result = new URLSearchParams(window.location.search);
-      let param = result.get('source');
+      if (site === 'POL') {
+        currencyCode = 'zł'
+        localStorage.setItem('currencyCode', currencyCode)
+        setCurrency(currencyCode)
+      }
       if (localStorage.getItem('refererName')) {
         localStorage.setItem('sourceProductId', product.id)
       }
