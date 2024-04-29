@@ -505,6 +505,11 @@ export default function Product() {
         localStorage.setItem('currencyCode', currencyCode)
         setCurrency(currencyCode)
       }
+      if (site === 'EUR') {
+        currencyCode = 'EUR'
+        localStorage.setItem('currencyCode', currencyCode)
+        setCurrency(currencyCode)
+      }
       if (localStorage.getItem('refererName')) {
         localStorage.setItem('sourceProductId', product.id)
       }

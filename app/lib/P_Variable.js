@@ -16,6 +16,9 @@ if (canUseDOM) {
   if (site === 'POL') {
     currencyCode = 'zł'
   }
+  if (site === 'EUR') {
+    currencyCode = 'EUR'
+  }
   if (localStorage.getItem('currencyCode')) {
     currencyCode = localStorage.getItem('currencyCode')
   }
@@ -24,14 +27,14 @@ if (canUseDOM) {
 export function getShopAddress() {
   // return 'uniquehzts.myshopify.com';
   // return 'newsmartdeal.myshopify.com';
-  return 'modafallonei.myshopify.com';
+  return 'homebeautylife.myshopify.com';
   // return 'hz-ts-10-21-new-addev-01.myshopify.com';
   // return 'shop-salesdish.myshopify.com';
 }
 
 export function getDomain() {
-  return 'https://gateway.antdiy.vip';
-  // return 'https://gateway.di79.com';
+  // return 'https://gateway.antdiy.vip';
+  return 'https://gateway.di79.com';
 }
 
 export function openWhatsApp() {
@@ -59,6 +62,7 @@ export function getLanguage() {
     EN: {
       type: 'EN',
       country: 'United States',
+      currency: "US",
       country_code: 'USA',
       deliveryProcess: 'deliveryProcess1.jpg',
       whatsAppText: 'Vă rugăm să faceți clic pe trimite direct, nu ștergeți linkul de mai jos, veți primi cele mai precise răspunsuri de la serviciul nostru pentru clienți',
@@ -978,6 +982,7 @@ export function getLanguage() {
     SA: {
       type: 'SA',
       country: 'Saudi Arabia',
+      currency: "SAR",
       country_code: 'SAU',
       deliveryProcess: 'deliveryProcess2.png',
       whatsAppText: 'يرجى نقر الإرسال مباشرة، لا تحذف الرابط أدناه، ستحصل على  الإجابات الأكثر دقة من خدمة العملاء',
@@ -1899,6 +1904,7 @@ export function getLanguage() {
     RON: {
       type: 'RON',
       country: 'Romania',
+      currency: "RON",
       country_code: 'ROU',
       deliveryProcess: 'deliveryProcess1.jpg',
       whatsAppText: 'Vă rugăm să faceți clic pe trimite direct, nu ștergeți linkul de mai jos, veți primi cele mai precise răspunsuri de la serviciul nostru pentru clienți',
@@ -2178,6 +2184,7 @@ export function getLanguage() {
     HUF: {
       type: "HUF",
       country: "Magyarország",
+      currency: "HUF",
       country_code: 'HUN',
       deliveryProcess: 'deliveryProcess3.jpg',
       whatsAppText: 'Kérjük, kattintson közvetlenül a küldés gombra, ne törölje az alábbi linket, ügyfélszolgálatunktól a legpontosabb válaszokat kapja',
@@ -5495,6 +5502,7 @@ export function getLanguage() {
     CZK: {
       type: 'CZK',
       country: 'Czech Republic',
+      currency: "CZK",
       country_code: 'CZK',
       deliveryProcess: 'deliveryProcess5.png',
       whatsAppText: 'Klikněte prosím odeslat přímo, nemažte odkaz níže, nejpřesnější odpovědi získáte od našeho zákaznického servisu',
@@ -5662,6 +5670,7 @@ export function getLanguage() {
     zł: {
       type: "zł",
       country: "Polska",
+      currency: "PLN",
       country_code: 'PL',
       deliveryProcess: 'deliveryProcess6.png',
       whatsAppText: "Proszę kliknąć bezpośrednio przycisk wysyłania, nie usuwać poniższego linku, najdokładniejsze odpowiedzi otrzymasz od naszego działu obsługi klienta",
@@ -5763,6 +5772,113 @@ export function getLanguage() {
       divisionText: 'Detale',
       quantityText: 'Kwota',
       errorQuantity: 'Proszę podać ilość produktu',
+    },
+    // 希腊
+    EUR: {
+      type: "EUR",
+      country: "Greece",
+      currency: "EUR",
+      country_code: 'GR',
+      deliveryProcess: 'deliveryProcess8.png',
+      whatsAppText: "Παρακαλώ κάντε κλικ στο κουμπί αποστολής απευθείας, μην διαγράψετε τον παρακάτω σύνδεσμο, θα λάβετε τις πιο ακριβείς απαντήσεις από την εξυπηρέτηση πελατών μας",
+      notFoundTit: "Αυτή η σελίδα έχει χαθεί",
+      notFoundText: 'Η σελίδα που ψάχνετε δεν βρέθηκε.',
+      buy: "Πληρωμή κατά την παράδοση",
+      comTit: 'Απόψεις πελατών',
+      write: "αφαίρεση βαθμολογίας",
+      sold: "επί του παρόντος εκτός αποθέματος",
+      addComment: "Γράψε ένα σχόλιο",
+      rating: 'βαθμολόγηση αξιολόγησης',
+      reviewTitle: 'Τίτλος κριτικής',
+      reviewTiPle: "Εισαγάγετε τον τίτλο της κριτικής σας",
+      review: 'κριτική',
+      reviewPle: "Εισαγάγετε την κριτική σας εδώ",
+      error: 'Αυτό το πεδίο είναι υποχρεωτικό.',
+      picture: "φωτογραφία/βίντεο (προαιρετικό)",
+      selectName: 'Όνομα (συνήθως)',
+      namePle: '(εισάγετε (δημόσιο) όνομα',
+      emailN: 'email',
+      emailPle: "Εισαγάγετε τη διεύθυνση email σας (ιδιωτική)",
+      cancelRe: 'Ακύρωση αξιολόγησης',
+      submitRe: 'Υποβολή κριτικής',
+      screenCreate: "πρώτα τα τελευταία",
+      screenDesc: 'Κορυφαία βαθμολογία',
+      screenAsc: "χαμηλότερη βαθμολογία",
+      screenWith: "Μόνο εικόνες",
+      screenPic: "Πρώτα οι εικόνες",
+      screenVideo: "Πρώτα τα βίντεο",
+      screenMost: "Πιο χρήσιμο",
+      subReview: 'Η κριτική εστάλη',
+      subComtent: 'Ευχαριστώ! Για να δείτε την κριτική σας, ανανεώστε τη σελίδα σε λίγα λεπτά.',
+
+      commentResult: "Δεν υπάρχουν ακόμη κριτικές",
+      based1: 'βασισμένο σε',
+      based2: "αξιολογήσεις",
+      seeAll: 'δείτε όλες τις κριτικές',
+      image5: 'Συγγνώμη, μπορούμε να δεχτούμε μόνο 5 φωτογραφίες για έλεγχο.',
+      rightEmail: "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση email",
+      unknown: "άγνωστο",
+      acticleList: ['Τρόποι πληρωμής', 'Αποστολή', 'Σχετικά με εμάς', 'Όροι και Προϋποθέσεις', 'Επιστροφές και Ανταλλαγές', 'Πολιτική Απορρήτου', 'Επικοινωνήστε μαζί μας'],
+      discountZone: "business discount zone",
+      free7: "Δωρεάν ανταλλαγή και επιστροφή χρημάτων εντός επτά ημερών",
+      deliver: "Δωρεάν παράδοση",
+      paying: "Πληρωμή με μετρητά κατά την παράδοση",
+      orders: "παραγγελίες",
+      thank: 'ευχαριστώ!',
+      request: "Το αίτημά σας επιβεβαιώθηκε",
+      receive: "Σύντομα θα λάβετε ένα email επιβεβαίωσης που θα περιέχει τον αριθμό της παραγγελίας σας",
+      updateOrder: 'Ενημέρωση παραγγελίας',
+      information: "Θα λάβετε τις τρέχουσες πληροφορίες αποστολής και διανομής μέσω e-mail.",
+      customer: "πληροφορίες πελατών",
+      contactInfo: 'στοιχεία επικοινωνίας',
+      delivery: "διεύθυνση παράδοσης",
+      payment: "Τρόπος πληρωμής",
+      payReceipt: "Πληρωμή κατά την παράδοση",
+      invoice: "Τιμολόγιο",
+      keeyshop: 'Συνεχίστε τις αγορές',
+      confirRequest: 'Επιβεβαίωση αιτήματος',
+      recipientInfo: 'Στοιχεία παραλήπτη',
+      yourName: 'Όνομα και επώνυμο',
+      fullName: 'Όνομα και επώνυμο',
+      semail: 'Email',
+      governor: "Επαρχία",
+      telephone: "Αριθμός τηλεφώνου",
+
+      district: "Παρακαλώ επιλέξτε την περιοχή σας",
+      city: "Δήμος",
+      selectCity: 'Παρακαλώ επιλέξτε την πόλη σας',
+      zone: "Περιοχή",
+      zonePle: 'Παράδειγμα: Olaya, Riyad',
+      building: "Κτίριο",
+      buildingPle: 'παράδειγμα: βίλα 2ος όροφος 3',
+      street: 'οδός',
+      streetPle: 'Παράδειγμα: Οδός King Fahd',
+      closest: "Κοντινότερο ορόσημο",
+      closestPle: 'Παράδειγμα: Kingdom Tower',
+      phonepl1: 'αριθμός κινητού τηλεφώνου: 5xxxxxxx',
+      phonepl2: "Αριθμός Whatsapp: 5xxxxxxx",
+      comments: 'Μήνυμα',
+      apply: "ΤΕΛΟΣ ΠΑΡΑΓΓΕΛΙΑΣ",
+      method: "Τρόπος πληρωμής",
+      recieving: "Πληρωμή κατά την παράδοση",
+      onlinePayment: "Μειωμένη χρέωση συναλλαγής 30 ριάλ για ηλεκτρονική πληρωμή.",
+      Website: "Δωρεάν αποστολή + αντικαταβολή + αξιόπιστος ιστότοπος",
+      homepage: "Προσπαθούμε να σας παρέχουμε προϊόντα υψηλής ποιότητας και άριστη εξυπηρέτηση, θα ειδοποιηθείτε όταν το προϊόν έχει αποσταλεί. Εάν έχετε οποιεσδήποτε ερωτήσεις, κάντε κλικ στο εικονίδιο Whatsapp στην αρχική σελίδα",
+      empty: "τα πεδία δεν μπορούν να είναι άδεια",
+      correct: "Παρακαλώ εισάγετε μια έγκυρη φόρμα",
+      validnum: 'Εισαγάγετε έναν έγκυρο αριθμό τηλεφώνου',
+      noOpinion: "Δεν έχω άποψη",
+      writeReview: 'Γράψε μια κριτική',
+      address: "Διεύθυνση αποστολής",
+      addressPle: "Ακριβής οδός, αριθμός σπιτιού, αριθμός δωματίου",
+      postalCode: "Ταχυδρομικός κώδικας",
+      orderError: 'Η αγορά απέτυχε',
+      chooseMore: 'επιλέξτε ένα ακόμη',
+      noSelect: 'Παρακαλώ επιλέξτε τις προδιαγραφές προϊόντος',
+      policyList: ['Πιστοποιητικό ΕΕ', 'Αντικαταβολή', 'Επιστροφή εντός 30 ημερών', 'Δωρεάν παράδοση'],
+      divisionText: 'Λεπτομέρειες',
+      quantityText: 'Ποσό',
+      errorQuantity: 'Παρακαλώ εισάγετε την ποσότητα του προϊόντος',
     },
   }
   return language[LType];

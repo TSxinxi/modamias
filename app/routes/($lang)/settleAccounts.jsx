@@ -487,6 +487,35 @@ export function Information({ selectedVar, quantity }) {
               </div>
               <input type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
             </div>
+          </> : LText.type === 'EUR' ? <>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.address} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.addressPle} value={area} onChange={(e) => { setArea(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.governor} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.governor} value={state} onChange={(e) => { setState(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.city} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.city} value={city} onChange={(e) => { setCity(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.postalCode} <i></i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
+            </div>
           </> : <></>
         }
         <div className='in_list'>
