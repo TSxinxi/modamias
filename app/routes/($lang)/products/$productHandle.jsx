@@ -538,6 +538,9 @@ export default function Product() {
   }
   productData = product
   productVariants = product.variants.nodes
+  if (productData) {
+    sendGtag({ event_name: "PageView" });
+  }
 
   return (
     <>
@@ -781,7 +784,21 @@ export default function Product() {
   );
 }
 
+function sendGtag(data) {
+  let obj = {
+    time_stamp: new Date().getTime() + "",
+    cl: currencyCode || "",
+    procudt_id: productData.id || "",
+    user_ID: localStorage.getItem("uid") || "",
+    UA: navigator.userAgent,
+    url: location.href,
+  };
+  const params = { ...data, ...obj };
+  fetch.get(`https://www.xgoodspic.com/`, { params }).then(() => { });
+}
+
 function goSettleAccounts() {
+  sendGtag({ event_name: "AddCart" });
   // const firstVariant = productData.variants.nodes[0];
   // const selectedVariant = productData.selectedVariant ?? firstVariant;
   // if (currencyCode) {

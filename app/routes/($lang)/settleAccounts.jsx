@@ -205,6 +205,11 @@ function changeVariant(setSelectVar, setOptions, options, value, option) {
       setOptions(copyOpt)
     }
   }
+  sendGtag({
+    event_name: "SelectProduct",
+    event_label: "pay_spec",
+    event_value: value,
+  });
 }
 
 export function Information({ selectedVar, quantity }) {
@@ -255,7 +260,7 @@ export function Information({ selectedVar, quantity }) {
             <span>{LText.yourName} <i>*</i></span>
             <p></p>
           </div>
-          <input type="text" placeholder={LText.fullName} value={name} onChange={(e) => { setName(e.target.value) }} />
+          <input type="text" placeholder={LText.fullName} value={name} onBlur={(e) => blur(e)} onChange={(e) => { setName(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
@@ -264,7 +269,7 @@ export function Information({ selectedVar, quantity }) {
           </div>
           {/* <div className='tele'>
             <span>+40</span> */}
-          <input type="text" placeholder={LText.telephone} value={phone} onChange={(e) => {
+          <input type="text" placeholder={LText.telephone} value={phone} onBlur={(e) => blur(e)} onChange={(e) => {
             const regex = /[^0-9]/g;
             setPhone(e.target.value.replace(regex, ''))
           }} />
@@ -275,7 +280,7 @@ export function Information({ selectedVar, quantity }) {
             <span></span>
             <p></p>
           </div>
-          <input type="text" placeholder={LText.phonepl2} value={whatsapp} onChange={(e) => { setWhatsapp(e.target.value) }} />
+          <input type="text" placeholder={LText.phonepl2} value={whatsapp} onBlur={(e) => blur(e)} onChange={(e) => { setWhatsapp(e.target.value) }} />
         </div> */}
         {
           LText.type === 'RON' ? <>
@@ -284,8 +289,8 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.governor} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.governor} value={state} onChange={(e) => { setState(e.target.value) }} />
-              {/* <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode, setCity); setState(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              <input type="text" placeholder={LText.governor} value={state} onBlur={(e) => blur(e)} onChange={(e) => { setState(e.target.value) }} />
+              {/* <select name="state" nullmsg={LText.district} value={state} onBlur={(e) => blur(e)} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode, setCity); setState(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   addressList.map((item, index) => {
                     return (
@@ -300,8 +305,8 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.city} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.city} value={city} onChange={(e) => { setCity(e.target.value) }} />
-              {/* <select name="city" value={city} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              <input type="text" placeholder={LText.city} value={city} onBlur={(e) => blur(e)} onChange={(e) => { setCity(e.target.value) }} />
+              {/* <select name="city" value={city} onBlur={(e) => blur(e)} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   streetList.map((item, index) => {
                     return (
@@ -316,22 +321,22 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.address} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder='ex: Strada, numar, bloc, scara, etaj, apartament' value={area} onChange={(e) => { setArea(e.target.value) }} />
+              <input type="text" placeholder='ex: Strada, numar, bloc, scara, etaj, apartament' value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>Numărul casei <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder='Numărul casei' value={house_number} onChange={(e) => { setHouseNumber(e.target.value) }} />
+              <input type="text" placeholder='Numărul casei' value={house_number} onBlur={(e) => blur(e)} onChange={(e) => { setHouseNumber(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>{LText.postalCode} <i></i></span>
                 <p></p>
               </div>
-              {/* <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} /> */}
-              <input type="number" placeholder={LText.postalCode} value={postcode} onChange={(e) => {
+              {/* <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onBlur={(e) => blur(e)} onChange={(e) => { setPostcode(e.target.value) }} /> */}
+              <input type="number" placeholder={LText.postalCode} value={postcode} onBlur={(e) => blur(e)} onChange={(e) => {
                 if (e.target.value.length > 6) {
                   setPostcode(e.target.value.slice(0, 6))
                 } else { setPostcode(e.target.value) }
@@ -343,8 +348,8 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.governor} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.governor} value={state} onChange={(e) => { setState(e.target.value) }} />
-              {/* <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode, setCity); setState(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              <input type="text" placeholder={LText.governor} value={state} onBlur={(e) => blur(e)} onChange={(e) => { setState(e.target.value) }} />
+              {/* <select name="state" nullmsg={LText.district} value={state} onBlur={(e) => blur(e)} onChange={(e) => { changeCity(e.target.value, setStreetList, setPostcode, setCity); setState(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   addressList.map((item, index) => {
                     return (
@@ -359,8 +364,8 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.city} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.city} value={city} onChange={(e) => { setCity(e.target.value) }} />
-              {/* <select name="city" value={city} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              <input type="text" placeholder={LText.city} value={city} onBlur={(e) => blur(e)} onChange={(e) => { setCity(e.target.value) }} />
+              {/* <select name="city" value={city} onBlur={(e) => blur(e)} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   streetList.map((item, index) => {
                     return (
@@ -375,8 +380,8 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.postalCode} <i>*</i></span>
                 <p></p>
               </div>
-              {/* <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} /> */}
-              <input type="number" placeholder={LText.postalCode} value={postcode} onChange={(e) => {
+              {/* <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onBlur={(e) => blur(e)} onChange={(e) => { setPostcode(e.target.value) }} /> */}
+              <input type="number" placeholder={LText.postalCode} value={postcode} onBlur={(e) => blur(e)} onChange={(e) => {
                 if (e.target.value.length > 5) {
                   setPostcode(e.target.value.slice(0, 5))
                 } else { setPostcode(e.target.value) }
@@ -387,7 +392,7 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.address} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder='Ulice + číslo dveří: např. (Pod Pivovarem 265)' value={area} onChange={(e) => { setArea(e.target.value) }} />
+              <input type="text" placeholder='Ulice + číslo dveří: např. (Pod Pivovarem 265)' value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
             </div>
           </> : LText.type === 'HUF' ? <>
             <div className='in_list'>
@@ -395,8 +400,8 @@ export function Information({ selectedVar, quantity }) {
                 <span>Megye <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.governor} value={state} onChange={(e) => { setState(e.target.value) }} />
-              {/* <select name="state" nullmsg={LText.district} value={state} onChange={(e) => { setState(e.target.value); setStreetList([{ name: 'Utca', value: '' }]); setCity(""); setPostcode(""); }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
+              <input type="text" placeholder={LText.governor} value={state} onBlur={(e) => blur(e)} onChange={(e) => { setState(e.target.value) }} />
+              {/* <select name="state" nullmsg={LText.district} value={state} onBlur={(e) => blur(e)} onChange={(e) => { setState(e.target.value); setStreetList([{ name: 'Utca', value: '' }]); setCity(""); setPostcode(""); }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }} >
                 {
                   province.map((item, index) => {
                     return (
@@ -411,9 +416,9 @@ export function Information({ selectedVar, quantity }) {
                 <span>Település/Kerület <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder='Település/Kerület' value={city} onChange={(e) => { setCity(e.target.value) }} />
+              <input type="text" placeholder='Település/Kerület' value={city} onBlur={(e) => blur(e)} onChange={(e) => { setCity(e.target.value) }} />
               {/* changeCity(e.target.value, setStreetList, setPostcode, setArea);  */}
-              {/* <select name="city" nullmsg={LText.selectCity} value={city} onChange={(e) => { setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              {/* <select name="city" nullmsg={LText.selectCity} value={city} onBlur={(e) => blur(e)} onChange={(e) => { setCity(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   province.filter(i => i.value === state)[0].children.map((item, index) => {
                     return (
@@ -428,7 +433,7 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.address} <i>*</i></span>
                 <p></p>
               </div>
-              {/* <select name="city" value={area} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setArea(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
+              {/* <select name="city" value={area} onBlur={(e) => blur(e)} onChange={(e) => { changeArea(e.target.value, streetList, setPostcode); setArea(e.target.value) }} style={{ backgroundPosition: getDirection() === 'rtl' ? 'left .5rem center' : 'right .5rem center' }}>
                 {
                   streetList.map((item, index) => {
                     return (
@@ -437,15 +442,15 @@ export function Information({ selectedVar, quantity }) {
                   })
                 }
               </select> */}
-              <input type="text" placeholder={LText.address} value={area} onChange={(e) => { setArea(e.target.value) }} />
+              <input type="text" placeholder={LText.address} value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>{LText.postalCode}</span>
                 <p></p>
               </div>
-              {/* <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} /> */}
-              <input type="number" placeholder={LText.postalCode} value={postcode} onChange={(e) => {
+              {/* <input disabled="disabled" type="text" placeholder={LText.postalCode} value={postcode} onBlur={(e) => blur(e)} onChange={(e) => { setPostcode(e.target.value) }} /> */}
+              <input type="number" placeholder={LText.postalCode} value={postcode} onBlur={(e) => blur(e)} onChange={(e) => {
                 if (e.target.value.length > 4) {
                   setPostcode(e.target.value.slice(0, 4))
                 } else { setPostcode(e.target.value) }
@@ -456,7 +461,7 @@ export function Information({ selectedVar, quantity }) {
                 <span>házszám <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder='Utca+házszám: Például (KBocskai utca 18)' value={building} onChange={(e) => { setBuilding(e.target.value) }} />
+              <input type="text" placeholder='Utca+házszám: Például (KBocskai utca 18)' value={building} onBlur={(e) => blur(e)} onChange={(e) => { setBuilding(e.target.value) }} />
             </div>
           </> : LText.type === 'zł' ? <>
             <div className='in_list'>
@@ -464,28 +469,28 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.address} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.addressPle} value={area} onChange={(e) => { setArea(e.target.value) }} />
+              <input type="text" placeholder={LText.addressPle} value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>{LText.governor} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.governor} value={state} onChange={(e) => { setState(e.target.value) }} />
+              <input type="text" placeholder={LText.governor} value={state} onBlur={(e) => blur(e)} onChange={(e) => { setState(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>{LText.city} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.city} value={city} onChange={(e) => { setCity(e.target.value) }} />
+              <input type="text" placeholder={LText.city} value={city} onBlur={(e) => blur(e)} onChange={(e) => { setCity(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>{LText.postalCode} <i></i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
+              <input type="text" placeholder={LText.postalCode} value={postcode} onBlur={(e) => blur(e)} onChange={(e) => { setPostcode(e.target.value) }} />
             </div>
           </> : LText.type === 'EUR' ? <>
             <div className='in_list'>
@@ -493,28 +498,28 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.address} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.addressPle} value={area} onChange={(e) => { setArea(e.target.value) }} />
+              <input type="text" placeholder={LText.addressPle} value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>{LText.governor} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.governor} value={state} onChange={(e) => { setState(e.target.value) }} />
+              <input type="text" placeholder={LText.governor} value={state} onBlur={(e) => blur(e)} onChange={(e) => { setState(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>{LText.city} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.city} value={city} onChange={(e) => { setCity(e.target.value) }} />
+              <input type="text" placeholder={LText.city} value={city} onBlur={(e) => blur(e)} onChange={(e) => { setCity(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
                 <span>{LText.postalCode} <i></i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.postalCode} value={postcode} onChange={(e) => { setPostcode(e.target.value) }} />
+              <input type="text" placeholder={LText.postalCode} value={postcode} onBlur={(e) => blur(e)} onChange={(e) => { setPostcode(e.target.value) }} />
             </div>
           </> : <></>
         }
@@ -523,7 +528,7 @@ export function Information({ selectedVar, quantity }) {
             <span>{LText.semail}</span>
             <p></p>
           </div>
-          <input name="email" type="text" placeholder={LText.semail} value={email} onChange={(e) => { setEmail(e.target.value) }} />
+          <input name="email" type="text" placeholder={LText.semail} value={email} onBlur={(e) => blur(e)} onChange={(e) => { setEmail(e.target.value) }} />
         </div>
         {/*
         <div className='in_list'>
@@ -531,28 +536,28 @@ export function Information({ selectedVar, quantity }) {
             <span>{LText.building} <i>*</i></span>
             <p></p>
           </div>
-          <input type="text" placeholder={LText.buildingPle} value={building} onChange={(e) => { setBuilding(e.target.value) }} />
+          <input type="text" placeholder={LText.buildingPle} value={building} onBlur={(e) => blur(e)} onChange={(e) => { setBuilding(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
             <span>{LText.street} <i>*</i></span>
             <p></p>
           </div>
-          <input type="text" placeholder={LText.streetPle} value={street} onChange={(e) => { setStreet(e.target.value) }} />
+          <input type="text" placeholder={LText.streetPle} value={street} onBlur={(e) => blur(e)} onChange={(e) => { setStreet(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
             <span>{LText.closest} <i>*</i></span>
             <p></p>
           </div>
-          <input type="text" placeholder={LText.closestPle} value={nearest} onChange={(e) => { setNearest(e.target.value) }} />
+          <input type="text" placeholder={LText.closestPle} value={nearest} onBlur={(e) => blur(e)} onChange={(e) => { setNearest(e.target.value) }} />
         </div>
         <div className='in_list'>
           <div className='in_list_title'>
             <span>{LText.comments} <i>*</i></span>
             <p></p>
           </div>
-          <textarea type="text" placeholder='' value={message} onChange={(e) => { setMessage(e.target.value) }} />
+          <textarea type="text" placeholder='' value={message} onBlur={(e) => blur(e)} onChange={(e) => { setMessage(e.target.value) }} />
         </div> */}
       </div>
       <div className='settle_accounts_foot'>
@@ -621,6 +626,15 @@ export function Information({ selectedVar, quantity }) {
       </div> : null}
     </div>
   )
+}
+function blur(e) {
+  if (e.target.value) {
+    sendGtag({
+      event_name: "formInput",
+      event_label: e.target?.previousElementSibling?.querySelector('span')?.innerHTML,
+      event_value: e.target.value
+    })
+  }
 }
 
 function changeArea(value, streetList, setPostcode) {
@@ -696,18 +710,43 @@ export function PaymentMethod() {
 
 function SettleAccounts(quantity, selectedVar, params, setErrorText, setIsSubmit) {
   if (!quantity || quantity < 1) {
+    sendGtag({
+      event_name: "clickPay",
+      event_label: "no_pass",
+      event_value: JSON.stringify(params),
+    });
     return setErrorText(LText.errorQuantity)
   }
   if (!params.name || !params.phone || !params.state || !params.city || !params.area) {
+    sendGtag({
+      event_name: "clickPay",
+      event_label: "no_pass",
+      event_value: JSON.stringify(params),
+    });
     return setErrorText(LText.empty)
   }
   if (LText.type === 'HUF' && !params.building) {
+    sendGtag({
+      event_name: "clickPay",
+      event_label: "no_pass",
+      event_value: JSON.stringify(params),
+    });
     return setErrorText(LText.empty)
   }
   if (LText.type === 'RON' && !params.house_number) {
+    sendGtag({
+      event_name: "clickPay",
+      event_label: "no_pass",
+      event_value: JSON.stringify(params),
+    });
     return setErrorText(LText.empty)
   }
   if (LText.type === 'RON' && params.phone.length < 10) {
+    sendGtag({
+      event_name: "clickPay",
+      event_label: "no_pass",
+      event_value: JSON.stringify(params),
+    });
     return setErrorText(LText.validnum)
   }
   // var emailRegExp = /^[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;
@@ -750,6 +789,11 @@ function SettleAccounts(quantity, selectedVar, params, setErrorText, setIsSubmit
     quantity: quantity,
     variant_id: setSplit(selectedVar.id),
   }]
+  sendGtag({
+    event_name: "clickPay",
+    event_label: "pass",
+    event_value: JSON.stringify(params),
+  });
 
   setIsSubmit(true)
   fetch.post(`${getDomain()}/account-service/media_orders/create/async/pass`, params).then(res => {
@@ -773,6 +817,10 @@ function SettleAccounts(quantity, selectedVar, params, setErrorText, setIsSubmit
             eventID: (new Date).getTime() + ""
           }
         )
+        sendGtag({
+          event_name: "PlaceOrder",
+          event_value: res.data?.data?.order?.id
+        })
         window.open(`/thank_you?id=${res.data?.data?.order?.id}`, '_self')
       } else {
         setIsSubmit(false)
@@ -832,4 +880,17 @@ function sendFbq(a, b, c) {
   if ("function" == typeof window.fbq) {
     window.fbq("track", a, b, c)
   }
+}
+
+function sendGtag(data) {
+  let obj = {
+    time_stamp: new Date().getTime() + "",
+    cl: localStorage.getItem('currencyCode') || "",
+    procudt_id: setSplit(productData.id) || "",
+    user_ID: localStorage.getItem("uid") || "",
+    UA: navigator.userAgent,
+    url: location.href,
+  };
+  const params = { ...data, ...obj };
+  fetch.get(`https://www.xgoodspic.com/`, { params }).then(() => { });
 }
