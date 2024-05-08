@@ -143,7 +143,7 @@ export function Variant({ selectedVar, setSelectVar, quantity, setQuantity }) {
             {/* )} */}
           </div>
         ))}
-      <div className='variant_li' key='quantity_li'>
+      {/* <div className='variant_li' key='quantity_li'>
         <div className='title'>{LText.quantityText}</div>
         <div className='quantity_li'>
           <button onClick={() => { if (quantity > 1) setQuantity(subtract(quantity, 1)) }}>-</button>
@@ -157,7 +157,7 @@ export function Variant({ selectedVar, setSelectVar, quantity, setQuantity }) {
           }} />
           <button onClick={() => { setQuantity(add(quantity, 1)) }}>+</button>
         </div>
-      </div>
+      </div> */}
     </div >
   );
 }
