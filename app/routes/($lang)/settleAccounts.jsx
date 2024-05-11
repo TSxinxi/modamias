@@ -210,6 +210,7 @@ function changeVariant(setSelectVar, setOptions, options, value, option) {
     event_label: "pay_spec",
     event_value: value,
   });
+  saveXgood(["SelectProduct"]);
 }
 
 export function Information({ selectedVar, quantity }) {
@@ -634,6 +635,7 @@ function blur(e) {
       event_label: e.target?.previousElementSibling?.querySelector('span')?.innerHTML,
       event_value: e.target.value
     })
+    saveXgood(["formInput"])
   }
 }
 
@@ -794,7 +796,7 @@ function SettleAccounts(quantity, selectedVar, params, setErrorText, setIsSubmit
     event_label: "pass",
     event_value: JSON.stringify(params),
   });
-
+  saveXgood(["Purchase"])
   setIsSubmit(true)
   fetch.post(`${getDomain()}/account-service/media_orders/create/async/pass`, params).then(res => {
     if (res && res.data) {
@@ -893,4 +895,44 @@ function sendGtag(data) {
   };
   const params = { ...data, ...obj };
   fetch.get(`https://www.xgoodspic.com/`, { params }).then(() => { });
+}
+function saveXgood(list) {
+  return
+  let pixelId = ''
+  if (window.fbq.getState && window.fbq.getState()) {
+    pixelId = window.fbq.getState()?.pixels[0]?.id
+  }
+  if (!pixelId) return
+  const price = productData?.variants?.nodes[0]?.price?.amount || '';
+  let params = {
+    userId: localStorage.getItem("uid") || "",
+    events: [],
+  };
+  list.forEach((item) => {
+    params.events.push({
+      eventName: item,
+      eventTime: Math.floor(Date.now() / 1000) + "",
+      actionSource: "website",
+      eventSourceUrl: location.href,
+      userData: {
+        fbc: getCookie('_fbc'),
+        fbp: getCookie('_fbp'),
+      },
+      customData: {
+        currency: currencyCode === 'zł' ? 'POL' : currencyCode,
+        value: price,
+      },
+    });
+  });
+  fetch.post(`https://cod.xgoodspic.com/product-manage/event/${pixelId}`, params).then(() => { });
+}
+function getCookie(name) {
+  var cookies = document.cookie.split(';');
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i].trim();
+    if (cookie.indexOf(name + '=') === 0) {
+      return cookie.substring(name.length + 1);
+    }
+  }
+  return null;
 }

@@ -19,6 +19,9 @@ if (canUseDOM) {
   if (site === 'EUR') {
     currencyCode = 'EUR'
   }
+  if (site === 'HUF') {
+    currencyCode = 'HUF'
+  }
   if (localStorage.getItem('currencyCode')) {
     currencyCode = localStorage.getItem('currencyCode')
   }

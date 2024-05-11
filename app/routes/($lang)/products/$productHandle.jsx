@@ -510,6 +510,11 @@ export default function Product() {
         localStorage.setItem('currencyCode', currencyCode)
         setCurrency(currencyCode)
       }
+      if (site === 'HUF') {
+        currencyCode = 'HUF'
+        localStorage.setItem('currencyCode', currencyCode)
+        setCurrency(currencyCode)
+      }
       if (localStorage.getItem('refererName')) {
         localStorage.setItem('sourceProductId', product.id)
       }
@@ -540,6 +545,7 @@ export default function Product() {
   productVariants = product.variants.nodes
   if (productData) {
     sendGtag({ event_name: "PageView" });
+    saveXgood(["ViewContent", "PageView"]);
   }
 
   return (
@@ -783,6 +789,36 @@ export default function Product() {
     </>
   );
 }
+function saveXgood(list) {
+  return
+  let pixelId = ''
+  if (window.fbq.getState && window.fbq.getState()) {
+    pixelId = window.fbq.getState()?.pixels[0]?.id
+  }
+  if (!pixelId) return
+  const price = productData?.variants?.nodes[0]?.price?.amount || '';
+  let params = {
+    userId: localStorage.getItem("uid") || "",
+    events: [],
+  };
+  list.forEach((item) => {
+    params.events.push({
+      eventName: item,
+      eventTime: Math.floor(Date.now() / 1000) + "",
+      actionSource: "website",
+      eventSourceUrl: location.href,
+      userData: {
+        fbc: getCookie('_fbc'),
+        fbp: getCookie('_fbp'),
+      },
+      customData: {
+        currency: currencyCode === 'zł' ? 'POL' : currencyCode,
+        value: price,
+      },
+    });
+  });
+  fetch.post(`https://cod.xgoodspic.com/product-manage/event/${pixelId}`, params).then(() => { });
+}
 
 function sendGtag(data) {
   let obj = {
@@ -799,6 +835,7 @@ function sendGtag(data) {
 
 function goSettleAccounts() {
   sendGtag({ event_name: "AddCart" });
+  saveXgood(["AddToCart", "SubscribedButtonClick", "InitiateCheckout"]);
   // const firstVariant = productData.variants.nodes[0];
   // const selectedVariant = productData.selectedVariant ?? firstVariant;
   // if (currencyCode) {
@@ -822,6 +859,16 @@ function goSettleAccounts() {
   } else {
     window.open(`/settleAccounts?id=${productData.id}`, '_self')
   }
+}
+function getCookie(name) {
+  var cookies = document.cookie.split(';');
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i].trim();
+    if (cookie.indexOf(name + '=') === 0) {
+      return cookie.substring(name.length + 1);
+    }
+  }
+  return null;
 }
 
 // FBQ
