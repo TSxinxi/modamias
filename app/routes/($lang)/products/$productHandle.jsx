@@ -519,6 +519,8 @@ export default function Product() {
         localStorage.setItem('sourceProductId', product.id)
       }
       if (param) {
+        let qs = location.search.length > 0 ? location.search.substring(1) : ""
+        window.localStorage.setItem('sourceObj', qs)
         window.localStorage.setItem('sourceName', param)
         window.localStorage.setItem('sourceProductId', product.id)
       }
@@ -821,13 +823,15 @@ function saveXgood(list) {
 }
 
 function sendGtag(data) {
+  let sym = location.search.indexOf('?') > -1 ? "&" : "?"
+  let url = location.search.indexOf('source') > -1 ? location.href : location.href + sym + window.localStorage.getItem("sourceObj")
   let obj = {
     time_stamp: new Date().getTime() + "",
     cl: currencyCode || "",
     procudt_id: productData.id || "",
     user_ID: localStorage.getItem("uid") || "",
     UA: navigator.userAgent,
-    url: location.href,
+    url: url,
   };
   const params = { ...data, ...obj };
   fetch.get(`https://www.xgoodspic.com/`, { params }).then(() => { });

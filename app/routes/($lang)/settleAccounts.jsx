@@ -885,13 +885,15 @@ function sendFbq(a, b, c) {
 }
 
 function sendGtag(data) {
+  let sym = location.search.indexOf('?') > -1 ? "&" : "?"
+  let url = location.search.indexOf('source') > -1 ? location.href : location.href + sym + window.localStorage.getItem("sourceObj")
   let obj = {
     time_stamp: new Date().getTime() + "",
     cl: localStorage.getItem('currencyCode') || "",
     procudt_id: setSplit(productData.id) || "",
     user_ID: localStorage.getItem("uid") || "",
     UA: navigator.userAgent,
-    url: location.href,
+    url: url,
   };
   const params = { ...data, ...obj };
   fetch.get(`https://www.xgoodspic.com/`, { params }).then(() => { });
