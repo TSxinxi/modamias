@@ -393,7 +393,14 @@ export function Information({ selectedVar, quantity }) {
                 <span>{LText.address} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder='Ulice + číslo dveří: např. (Pod Pivovarem 265)' value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
+              <input type="text" placeholder={LText.addressPle} value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.h0u31n} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.h0u31Pl1} value={house_number} onBlur={(e) => blur(e)} onChange={(e) => { setHouseNumber(e.target.value) }} />
             </div>
           </> : LText.type === 'HUF' ? <>
             <div className='in_list'>
@@ -443,7 +450,21 @@ export function Information({ selectedVar, quantity }) {
                   })
                 }
               </select> */}
-              <input type="text" placeholder={LText.address} value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
+              <input type="text" placeholder={LText.addressPle} value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
+            </div>
+            {/* <div className='in_list'>
+              <div className='in_list_title'>
+                <span>házszám <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder='Utca+házszám: Például (KBocskai utca 18)' value={building} onBlur={(e) => blur(e)} onChange={(e) => { setBuilding(e.target.value) }} />
+            </div> */}
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.h0u31n} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.h0u31Pl1} value={house_number} onBlur={(e) => blur(e)} onChange={(e) => { setHouseNumber(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
@@ -457,20 +478,13 @@ export function Information({ selectedVar, quantity }) {
                 } else { setPostcode(e.target.value) }
               }} />
             </div>
-            <div className='in_list'>
-              <div className='in_list_title'>
-                <span>házszám <i>*</i></span>
-                <p></p>
-              </div>
-              <input type="text" placeholder='Utca+házszám: Például (KBocskai utca 18)' value={building} onBlur={(e) => blur(e)} onChange={(e) => { setBuilding(e.target.value) }} />
-            </div>
           </> : LText.type === 'zł' ? <>
             <div className='in_list'>
               <div className='in_list_title'>
-                <span>{LText.address} <i>*</i></span>
+                <span>{LText.city} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.addressPle} value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
+              <input type="text" placeholder={LText.city} value={city} onBlur={(e) => blur(e)} onChange={(e) => { setCity(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
@@ -481,10 +495,17 @@ export function Information({ selectedVar, quantity }) {
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
-                <span>{LText.city} <i>*</i></span>
+                <span>{LText.address} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.city} value={city} onBlur={(e) => blur(e)} onChange={(e) => { setCity(e.target.value) }} />
+              <input type="text" placeholder={LText.addressPle} value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.h0u31n} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.h0u31Pl1} value={house_number} onBlur={(e) => blur(e)} onChange={(e) => { setHouseNumber(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
@@ -496,10 +517,10 @@ export function Information({ selectedVar, quantity }) {
           </> : LText.type === 'EUR' ? <>
             <div className='in_list'>
               <div className='in_list_title'>
-                <span>{LText.address} <i>*</i></span>
+                <span>{LText.city} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.addressPle} value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
+              <input type="text" placeholder={LText.city} value={city} onBlur={(e) => blur(e)} onChange={(e) => { setCity(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
@@ -510,10 +531,17 @@ export function Information({ selectedVar, quantity }) {
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
-                <span>{LText.city} <i>*</i></span>
+                <span>{LText.address} <i>*</i></span>
                 <p></p>
               </div>
-              <input type="text" placeholder={LText.city} value={city} onBlur={(e) => blur(e)} onChange={(e) => { setCity(e.target.value) }} />
+              <input type="text" placeholder={LText.addressPle} value={area} onBlur={(e) => blur(e)} onChange={(e) => { setArea(e.target.value) }} />
+            </div>
+            <div className='in_list'>
+              <div className='in_list_title'>
+                <span>{LText.h0u31n} <i>*</i></span>
+                <p></p>
+              </div>
+              <input type="text" placeholder={LText.h0u31Pl1} value={house_number} onBlur={(e) => blur(e)} onChange={(e) => { setHouseNumber(e.target.value) }} />
             </div>
             <div className='in_list'>
               <div className='in_list_title'>
@@ -727,15 +755,15 @@ function SettleAccounts(quantity, selectedVar, params, setErrorText, setIsSubmit
     });
     return setErrorText(LText.empty)
   }
-  if (LText.type === 'HUF' && !params.building) {
-    sendGtag({
-      event_name: "clickPay",
-      event_label: "no_pass",
-      event_value: JSON.stringify(params),
-    });
-    return setErrorText(LText.empty)
-  }
-  if (LText.type === 'RON' && !params.house_number) {
+  // if (LText.type === 'HUF' && !params.building) {
+  //   sendGtag({
+  //     event_name: "clickPay",
+  //     event_label: "no_pass",
+  //     event_value: JSON.stringify(params),
+  //   });
+  //   return setErrorText(LText.empty)
+  // }
+  if (LText.type != "SA" && !params.house_number) {
     sendGtag({
       event_name: "clickPay",
       event_label: "no_pass",
